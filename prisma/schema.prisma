@@ -9,7 +9,7 @@ datasource db {
 
 model UserApiLimit {
   id           String   @id @default(uuid())
-  userEmail    String   @unique @map(name: "user_email")
+  userEmail    String   @map(name: "user_email")
   userPassword String   @map(name: "user_password")
   count        Int      @default(0)
   createdAt    DateTime @default(now())
