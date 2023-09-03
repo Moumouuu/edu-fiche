@@ -1,6 +1,7 @@
 "use client";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   Sheet,
   SheetContent,
@@ -67,6 +68,10 @@ export default function NavbarMobile() {
             ))}
           </div>
           <div className="flex flex-col">
+            <div className="flex flex-col my-3">
+              <span>0/3 free generation</span>
+              <Progress value={50} className="border" />
+            </div>
             <Button variant={"premium"}>Upgrade to Premium</Button>
             <div className="flex w-full justify-between items-center">
               <UserButton afterSignOutUrl="/" />

@@ -1,3 +1,9 @@
+import SheetPage from "../components/SheetPage";
+
 export default function Home() {
-  return <div>Hello world!</div>;
+  return (
+    <div className="w-full">
+      <SheetPage />
+    </div>
+  );
 }

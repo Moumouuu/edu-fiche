@@ -1,14 +1,13 @@
 "use client";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function NavbarDesk() {
-  // TODO : premium check
-  // TODO : add premium icon
   // TODO : icon color change in function of theme
   const path = usePathname();
   const itemsMenu = [
@@ -47,7 +46,7 @@ export default function NavbarDesk() {
             <Link href={item.href} key={item.name} className="my-3">
               <div
                 className={cn(
-                  "flex items-center w-full hover:bg-white/10 p-1 py-4 rounded",
+                  "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
                   item.isActive && "bg-white/10"
                 )}
               >
@@ -63,6 +62,10 @@ export default function NavbarDesk() {
           ))}
         </div>
         <div className="flex flex-col">
+          <div className="flex flex-col my-3">
+            <span>0/3 free generation</span>
+            <Progress value={50} className="border" />
+          </div>
           <Button variant={"premium"}>Upgrade to Premium</Button>
           <div className="flex w-full justify-between items-center">
             <UserButton afterSignOutUrl="/" />
