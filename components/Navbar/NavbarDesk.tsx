@@ -3,7 +3,6 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -68,7 +67,7 @@ export default function NavbarDesk() {
           </div>
           <Button variant={"premium"}>Upgrade to Premium</Button>
           <div className="flex w-full justify-between items-center">
-            <UserButton afterSignOutUrl="/" />
+            <span>User</span>
             <ModeToggle />
           </div>
         </div>

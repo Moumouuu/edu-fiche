@@ -9,7 +9,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
 
@@ -74,7 +73,7 @@ export default function NavbarMobile() {
             </div>
             <Button variant={"premium"}>Upgrade to Premium</Button>
             <div className="flex w-full justify-between items-center">
-              <UserButton afterSignOutUrl="/" />
+              <span>user</span>
               <ModeToggle />
             </div>
           </div>

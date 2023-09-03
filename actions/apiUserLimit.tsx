@@ -1,11 +1,10 @@
 import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs";
 
 export const apiUserLimit = 3;
 
 export async function getApiUserLimit() {
-  const { userId }: { userId: string | null } = auth();
-
+  // todo :
+  let userId = "1";
   if (!userId) {
     // User not logged in
     return new Error("User not logged in");
@@ -13,7 +12,7 @@ export async function getApiUserLimit() {
 
   const UserApiLimit = await prismadb.userApiLimit.findUnique({
     where: {
-      id: userId,
+      userId: userId,
     },
   });
 
@@ -32,7 +31,8 @@ export async function getApiUserLimit() {
 }
 
 export async function incrementApiUserLimit() {
-  const { userId }: { userId: string | null } = auth();
+  // todo :
+  let userId = "1";
 
   if (!userId) {
     // User not logged in

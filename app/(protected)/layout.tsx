@@ -1,4 +1,3 @@
-import { getApiUserLimit } from "@/actions/apiUserLimit";
 import Navbar from "../../components/Navbar/Navbar";
 
 export default async function ProtectedLayout({
@@ -6,8 +5,8 @@ export default async function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const apiUserLimit = await getApiUserLimit();
-  console.log(apiUserLimit);
+  //const apiUserLimit = await getApiUserLimit();
+  //console.log(apiUserLimit);
   return (
     <html lang="en">
       <body>
