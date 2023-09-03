@@ -1,9 +1,9 @@
-import SheetPage from "@/components/pages/SheetPage";
+import ExercicesPage from "@/components/pages/ExercicesPage";
 
 export default function Home() {
   return (
     <div className="w-full">
-      <SheetPage />
+      <ExercicesPage />
     </div>
   );
 }

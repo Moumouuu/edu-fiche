@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
-import "tailwindcss/tailwind.css";
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: "EduFiche | Votre générateur de fiche de révision",
