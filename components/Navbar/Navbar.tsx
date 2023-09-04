@@ -2,14 +2,14 @@
 import NavbarDesk from "./NavbarDesk";
 import NavbarMobile from "./NavbarMobile";
 
-export default function Navbar() {
+export default function Navbar({ userLimit }: { userLimit: number }) {
   return (
     <>
       <div className="block md:hidden">
-        <NavbarMobile />
+        <NavbarMobile userLimit={userLimit} />
       </div>
       <div className="hidden md:block">
-        <NavbarDesk />
+        <NavbarDesk userLimit={userLimit}/>
       </div>
     </>
   );

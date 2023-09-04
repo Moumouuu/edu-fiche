@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import AuthContext from "./context/auth-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,20 +16,21 @@ export const metadata: Metadata = {
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  session,
 }: {
   children: React.ReactNode;
-  session: any;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <>
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-          </ThemeProvider>
+          <AuthContext session={session}>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              {children}
+            </ThemeProvider>
+          </AuthContext>
         </body>
       </html>
       <Script src="https://cdn.lordicon.com/bhenfmcm.js" />

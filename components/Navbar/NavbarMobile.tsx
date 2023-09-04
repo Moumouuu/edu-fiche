@@ -1,6 +1,5 @@
 "use client";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
   Sheet,
@@ -9,13 +8,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
+import { PremiumButton } from "../premium-button";
+import { UserProfile } from "../user-profile";
 
-export default function NavbarMobile() {
+export default function NavbarMobile({ userLimit }: { userLimit: number }) {
   // TODO : premium check
   // TODO : add premium icon
   // TODO : icon color change in function of theme
+  const { data: session } = useSession();
   const itemsMenu = [
     {
       name: "Fiche de révision",
@@ -68,12 +71,12 @@ export default function NavbarMobile() {
           </div>
           <div className="flex flex-col">
             <div className="flex flex-col my-3">
-              <span>0/3 free generation</span>
-              <Progress value={50} className="border" />
+              <span>{userLimit}/3 free generation</span>
+              <Progress value={userLimit * 10 * 3.33} className="border" />
             </div>
-            <Button variant={"premium"}>Upgrade to Premium</Button>
+            <PremiumButton />
             <div className="flex w-full justify-between items-center">
-              <span>user</span>
+              <UserProfile />
               <ModeToggle />
             </div>
           </div>

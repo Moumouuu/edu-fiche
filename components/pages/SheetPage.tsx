@@ -50,7 +50,7 @@ export default function SheetPage() {
       <Title text="Fiche de révision" />
       <SubTitle text="Générez votre fiche de révision en un instant ! Sélectionnez votre niveau d'études, la matière et les mots-clés de votre cours." />
 
-      <form className="flex flex-col">
+      <form className="flex flex-col w-[90%] md:w-auto">
         <div className="flex ">
           {/* select for level */}
           <Select>
