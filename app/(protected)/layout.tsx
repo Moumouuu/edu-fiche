@@ -1,5 +1,5 @@
 import { apiUserLimit } from "@/actions/apiUserLimit";
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 
 export default async function ProtectedLayout({
   children,
