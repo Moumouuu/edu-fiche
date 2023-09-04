@@ -8,7 +8,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
 import { PremiumButton } from "../premium-button";
@@ -18,7 +17,6 @@ export default function NavbarMobile({ userLimit }: { userLimit: number }) {
   // TODO : premium check
   // TODO : add premium icon
   // TODO : icon color change in function of theme
-  const { data: session } = useSession();
   const itemsMenu = [
     {
       name: "Fiche de révision",

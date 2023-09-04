@@ -2,7 +2,6 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PremiumButton } from "../premium-button";
@@ -11,7 +10,6 @@ import { UserProfile } from "../user-profile";
 export default function NavbarDesk({ userLimit }: { userLimit: number }) {
   // TODO : icon color change in function of theme
   const path = usePathname();
-  const { data: session } = useSession();
 
   const itemsMenu = [
     {

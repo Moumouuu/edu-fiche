@@ -1,5 +1,5 @@
 import { apiUserLimit } from "@/actions/apiUserLimit";
-import Navbar from "@/components/navbar/Sidebar";
+import Nav from "@/components/nav";
 
 export default async function ProtectedLayout({
   children,
@@ -11,7 +11,7 @@ export default async function ProtectedLayout({
     <html lang="en">
       <body>
         <main className="flex h-[100vh]">
-          <Navbar userLimit={userLimit} />
+          <Nav userLimit={userLimit} />
           {children}
         </main>
       </body>
