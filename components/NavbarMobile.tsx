@@ -15,11 +15,12 @@ import { UserProfile } from "./user-profile";
 
 export default function NavbarMobile({
   userLimit,
+  isPro,
 }: {
   userLimit: number | undefined;
+  isPro: boolean;
 }) {
   // TODO : premium check
-  // TODO : add premium icon
   // TODO : icon color change in function of theme
   const itemsMenu = [
     {
@@ -36,7 +37,7 @@ export default function NavbarMobile({
     },
     {
       name: "Améliore ton anglais",
-      href: "/qcm",
+      href: "/tchat",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: true,
     },
@@ -72,14 +73,17 @@ export default function NavbarMobile({
             ))}
           </div>
           <div className="flex flex-col">
-            <div className="flex flex-col my-3">
-              <span>{userLimit ?? 0}/3 free generation</span>
-              <Progress
-                value={userLimit ? userLimit * 10 * 3.33 : 0}
-                className="border"
-              />
-            </div>
-            <PremiumButton />
+            {!isPro && (
+              <div className="flex flex-col my-3">
+                <span>{userLimit ?? 0}/3 free generation</span>
+                <Progress
+                  value={userLimit ? userLimit * 10 * 3.33 : 0}
+                  className="border"
+                />
+              </div>
+            )}
+
+            <PremiumButton isPro={isPro} />
             <div className="flex w-full justify-between items-center">
               <UserProfile />
               <ModeToggle />

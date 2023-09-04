@@ -17,7 +17,6 @@ import Link from "next/link";
 
 export function UserProfile() {
   const { data: session } = useSession();
-  console.log(session);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,9 +38,11 @@ export function UserProfile() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            <Link href="/settings" className="flex justify-between items-center w-full">
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

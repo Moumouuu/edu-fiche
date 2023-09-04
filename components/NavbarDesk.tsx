@@ -9,8 +9,10 @@ import { UserProfile } from "./user-profile";
 
 export default function NavbarDesk({
   userLimit,
+  isPro,
 }: {
   userLimit: number | undefined;
+  isPro: boolean;
 }) {
   // TODO : icon color change in function of theme
   const path = usePathname();
@@ -32,7 +34,7 @@ export default function NavbarDesk({
     },
     {
       name: "Améliore ton anglais",
-      href: "/qcm",
+      href: "/tchat",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: true,
       isActive: "/tchat" === path,
@@ -67,11 +69,16 @@ export default function NavbarDesk({
           ))}
         </div>
         <div className="flex flex-col">
-          <div className="flex flex-col my-3">
-            <span>{userLimit ?? 0}/3 free generation</span>
-            <Progress value={userLimit ? (userLimit * 10 * 3.33) : 0} className="border" />
-          </div>
-          <PremiumButton />
+        {!isPro && (
+              <div className="flex flex-col my-3">
+                <span>{userLimit ?? 0}/3 free generation</span>
+                <Progress
+                  value={userLimit ? userLimit * 10 * 3.33 : 0}
+                  className="border"
+                />
+              </div>
+            )}
+          <PremiumButton isPro={isPro} />
           <div className="flex w-full justify-between items-center">
             <UserProfile />
             <ModeToggle />

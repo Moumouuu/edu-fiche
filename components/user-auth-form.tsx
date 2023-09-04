@@ -86,7 +86,7 @@ export default function UserAuthForm() {
   };
 
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="sign-in" className="w-[400px]" >
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="sign-in">Sign-in</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
@@ -115,7 +115,7 @@ export default function UserAuthForm() {
                   </span>
                 )}
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 mt-3">
                 <Label htmlFor="password">Mot de passe</Label>
                 <Input
                   id="password"
@@ -178,7 +178,7 @@ export default function UserAuthForm() {
                   </span>
                 )}
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 mt-3">
                 <Label htmlFor="passwordRegister">Mot de passe</Label>
                 <Input
                   id="passwordRegister"

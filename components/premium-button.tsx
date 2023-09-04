@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,16 +9,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import axios from "axios";
+import { useState } from "react";
+import { Separator } from "./ui/separator";
 
-export function PremiumButton() {
+export function PremiumButton({ isPro }: { isPro: boolean }) {
+  const [loading, setLoading] = useState(false);
+
+  const onSubscribe = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url;
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (isPro) {
+    return (
+      <Button variant="premium" disabled>
+        You have a premium account
+      </Button>
+    );
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="premium">Passer Premium</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle className="flex items-center">
+          <DialogTitle className="flex items-center justify-center">
             <span className="mr-4 text-xl md:text-3xl">
               Passer{" "}
               <span className="font-extrabold text-transparent uppercase bg-clip-text bg-gradient-to-r from-green-400 to-blue-600">
@@ -33,16 +59,55 @@ export function PremiumButton() {
               style={{ width: "50px", height: "50px" }}
             />
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-center">
             Vous souhaitez passer Premium ? C&apos;est par ici ! Vous
             béneficirez d&apos;un accès illimité à toutes les fonctionnalités.
           </DialogDescription>
         </DialogHeader>
+
+        <Separator />
+
         <div className="flex flex-col">
-          
+          <div className="flex items-center justify-between mb-4">
+            <ul>
+              <li className="flex items-center mb-3">
+                <span className="mr-2 text-2xl">
+                  {/* @ts-ignore */}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/hiqmdfkt.json"
+                    trigger="loop"
+                    delay="2000"
+                    colors="primary:#4ade80,secondary:#2563eb"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                </span>{" "}
+                Accès illimité à
+                <span className="ml-2 font-bold text-transparent text-lg md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
+                  toutes les fonctionnalités
+                </span>
+              </li>
+              <li className="flex items-center mb-3">
+                <span className="mr-2 text-2xl">
+                  {/* @ts-ignore */}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/hursldrn.json"
+                    trigger="loop"
+                    colors="primary:#4ade80,secondary:#2563eb"
+                    state="loop"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                </span>{" "}
+                Accès à des
+                <span className="ml-2 font-bold text-transparent text-lg md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
+                  fonctionnalités exclusives
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
+
         <DialogFooter>
-          <Button type="submit" variant={"premium"}>
+          <Button type="submit" variant={"premium"} onClick={onSubscribe}>
             Passer Premium
           </Button>
         </DialogFooter>
