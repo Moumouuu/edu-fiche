@@ -2,7 +2,7 @@
 import NavbarDesk from "./NavbarDesk";
 import NavbarMobile from "./NavbarMobile";
 
-export default function Nav({ userLimit }: { userLimit: number }) {
+export default function Nav({ userLimit }: { userLimit: number | undefined }) {
   return (
     <>
       <div className="block md:hidden">

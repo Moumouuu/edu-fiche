@@ -17,7 +17,6 @@ import Link from "next/link";
 
 export function UserProfile() {
   const { data: session } = useSession();
-  console.log(session)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

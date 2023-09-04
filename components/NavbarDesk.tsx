@@ -7,7 +7,11 @@ import { usePathname } from "next/navigation";
 import { PremiumButton } from "./premium-button";
 import { UserProfile } from "./user-profile";
 
-export default function NavbarDesk({ userLimit }: { userLimit: number }) {
+export default function NavbarDesk({
+  userLimit,
+}: {
+  userLimit: number | undefined;
+}) {
   // TODO : icon color change in function of theme
   const path = usePathname();
 
@@ -65,7 +69,7 @@ export default function NavbarDesk({ userLimit }: { userLimit: number }) {
         <div className="flex flex-col">
           <div className="flex flex-col my-3">
             <span>{userLimit ?? 0}/3 free generation</span>
-            <Progress value={userLimit * 10 * 3.33} className="border" />
+            <Progress value={userLimit ? (userLimit * 10 * 3.33) : 0} className="border" />
           </div>
           <PremiumButton />
           <div className="flex w-full justify-between items-center">
