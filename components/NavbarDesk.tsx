@@ -64,7 +64,7 @@ export default function NavbarDesk({ userLimit }: { userLimit: number }) {
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col my-3">
-            <span>{userLimit}/3 free generation</span>
+            <span>{userLimit ?? 0}/3 free generation</span>
             <Progress value={userLimit * 10 * 3.33} className="border" />
           </div>
           <PremiumButton />

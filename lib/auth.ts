@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/",
+    signIn: "/sign-in",
     signOut: "/sign-in",
   },
   providers: [
@@ -49,41 +49,25 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        return user;
+        return {
+          email: user.userEmail,
+          id: user.id,
+        };
       },
     }),
   ],
   debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("fire signin Callback");
-      return true;
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.email = token.email;
+      }
+      return session;
     },
-    async redirect({ url, baseUrl }) {
-      console.log("fire redirect Callback");
-      return baseUrl;
-    },
-    async session({ session, user, token }) {
-      console.log("fire SESSION Callback");
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          randomKey: token.randomKey,
-        },
-      };
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("fire jwt Callback");
+    async jwt({ token, user }) {
       if (user) {
-        const u = user as unknown as any;
-        return {
-          ...token,
-          id: u.id,
-          randomKey: u.randomKey,
-        };
+        token.user = user;
       }
       return token;
     },

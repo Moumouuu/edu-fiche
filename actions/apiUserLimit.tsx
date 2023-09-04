@@ -5,9 +5,11 @@ import { getServerSession } from "next-auth";
 export async function apiUserLimit() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) return -2;
+  if (!session) return;
 
-  const userEmail = session?.user?.email;
+  if (!session?.user?.email) return;
+
+  const userEmail = session.user.email;
 
   const userApiLimit = await prismadb.userApiLimit.findFirst({
     where: {
@@ -31,7 +33,7 @@ export async function apiUserLimit() {
 export async function apiUserLimitIncrement() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) return -2;
+  if (!session?.user?.email) return ;
 
   const userEmail = session?.user?.email;
 
@@ -41,7 +43,7 @@ export async function apiUserLimitIncrement() {
     },
   });
 
-  if (!userApiLimit) return -1;
+  if (!userApiLimit) return;
 
   if (userApiLimit?.count === 3) return Error("UserApiLimit reached");
 

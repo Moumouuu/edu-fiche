@@ -17,11 +17,12 @@ import Link from "next/link";
 
 export function UserProfile() {
   const { data: session } = useSession();
+  console.log(session)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Image
-          src={session?.user?.image!}
+          src={session?.user?.image ?? "/assets/images/default-profile.png"}
           alt="Picture of the author"
           width={40}
           height={40}
