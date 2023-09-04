@@ -59,10 +59,15 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("fire signin Callback");
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log("fire redirect Callback");
+      return baseUrl;
+    },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.email = token.email;
-      }
       return session;
     },
     async jwt({ token, user }) {
