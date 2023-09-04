@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
-import { PremiumButton } from "../premium-button";
-import { UserProfile } from "../user-profile";
+import { PremiumButton } from "./premium-button";
+import { UserProfile } from "./user-profile";
 
 export default function NavbarMobile({ userLimit }: { userLimit: number }) {
   // TODO : premium check

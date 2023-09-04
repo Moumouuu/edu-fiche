@@ -4,8 +4,8 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PremiumButton } from "../premium-button";
-import { UserProfile } from "../user-profile";
+import { PremiumButton } from "./premium-button";
+import { UserProfile } from "./user-profile";
 
 export default function NavbarDesk({ userLimit }: { userLimit: number }) {
   // TODO : icon color change in function of theme
