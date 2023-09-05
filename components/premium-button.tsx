@@ -1,4 +1,5 @@
 "use client";
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,11 +11,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 
 export function PremiumButton({ isPro }: { isPro: boolean }) {
   const [loading, setLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const { isOpen, open, close } = usePremiumModal();
 
   const onSubscribe = async () => {
     try {
@@ -28,6 +31,13 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
     }
   };
 
+  useEffect(() => {
+    setIsMounted(true);
+    console.log("button premiulm " + isOpen);
+  }, [isOpen]);
+
+  if (!isMounted) return null;
+
   if (isPro) {
     return (
       <Button variant="premium" disabled>
@@ -37,9 +47,11 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
   }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen}>
       <DialogTrigger asChild>
-        <Button variant="premium">Passer Premium</Button>
+        <Button onClick={open} variant="premium">
+          Passer Premium
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
@@ -107,7 +119,12 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
         </div>
 
         <DialogFooter>
-          <Button type="submit" variant={"premium"} onClick={onSubscribe}>
+          <Button
+            disabled={loading}
+            type="submit"
+            variant={"premium"}
+            onClick={onSubscribe}
+          >
             Passer Premium
           </Button>
         </DialogFooter>

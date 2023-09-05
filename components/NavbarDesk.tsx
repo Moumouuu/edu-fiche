@@ -1,9 +1,11 @@
 "use client";
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { PremiumButton } from "./premium-button";
 import { UserProfile } from "./user-profile";
 
@@ -16,6 +18,11 @@ export default function NavbarDesk({
 }) {
   // TODO : icon color change in function of theme
   const path = usePathname();
+  const { open, isOpen } = usePremiumModal();
+
+  useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen]);
 
   const itemsMenu = [
     {
@@ -49,35 +56,58 @@ export default function NavbarDesk({
       </div>
       <div className="h-[90%] flex flex-col justify-between">
         <div className="flex flex-col">
-          {itemsMenu.map((item) => (
-            <Link href={item.href} key={item.name} className="my-3">
+          {itemsMenu.map((item) =>
+            item.premium && !isPro ? (
               <div
-                className={cn(
-                  "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
-                  item.isActive && "bg-white/10"
-                )}
+                key={item.name}
+                className="my- cursor-pointer"
+                onClick={open}
               >
-                {/* @ts-ignore */}
-                <lord-icon
-                  src={item.icon}
-                  trigger="hover"
-                  colors="primary:#fff"
-                />
-                <span className="ml-2"> {item.name}</span>
+                <div
+                  className={cn(
+                    "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
+                    item.isActive && "bg-white/10"
+                  )}
+                >
+                  {/* @ts-ignore */}
+                  <lord-icon
+                    src={item.icon}
+                    trigger="hover"
+                    colors="primary:#fff"
+                  />
+                  <span className="ml-2"> {item.name}</span>
+                </div>
               </div>
-            </Link>
-          ))}
+            ) : (
+              <Link href={item.href} key={item.name} className="my-3">
+                <div
+                  className={cn(
+                    "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
+                    item.isActive && "bg-white/10"
+                  )}
+                >
+                  {/* @ts-ignore */}
+                  <lord-icon
+                    src={item.icon}
+                    trigger="hover"
+                    colors="primary:#fff"
+                  />
+                  <span className="ml-2"> {item.name}</span>
+                </div>
+              </Link>
+            )
+          )}
         </div>
         <div className="flex flex-col">
-        {!isPro && (
-              <div className="flex flex-col my-3">
-                <span>{userLimit ?? 0}/3 free generation</span>
-                <Progress
-                  value={userLimit ? userLimit * 10 * 3.33 : 0}
-                  className="border"
-                />
-              </div>
-            )}
+          {!isPro && (
+            <div className="flex flex-col my-3">
+              <span>{userLimit ?? 0}/3 free generation</span>
+              <Progress
+                value={userLimit ? userLimit * 10 * 3.33 : 0}
+                className="border"
+              />
+            </div>
+          )}
           <PremiumButton isPro={isPro} />
           <div className="flex w-full justify-between items-center">
             <UserProfile />

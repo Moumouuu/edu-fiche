@@ -20,7 +20,6 @@ export default function NavbarMobile({
   userLimit: number | undefined;
   isPro: boolean;
 }) {
-  // TODO : premium check
   // TODO : icon color change in function of theme
   const itemsMenu = [
     {
