@@ -20,9 +20,6 @@ export default function NavbarDesk({
   const path = usePathname();
   const { open, isOpen } = usePremiumModal();
 
-  useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
 
   const itemsMenu = [
     {

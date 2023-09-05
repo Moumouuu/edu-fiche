@@ -82,8 +82,8 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
         <div className="flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <ul>
-              <li className="flex items-center mb-3">
-                <span className="mr-2 text-2xl">
+              <li className="flex items-center mb-3 ">
+                <span className="mr-2">
                   {/* @ts-ignore */}
                   <lord-icon
                     src="https://cdn.lordicon.com/hiqmdfkt.json"
@@ -94,7 +94,7 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
                   />
                 </span>{" "}
                 Accès illimité à
-                <span className="ml-2 font-bold text-transparent text-lg md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
+                <span className="ml-2 font-bold text-transparent text-md md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
                   toutes les fonctionnalités
                 </span>
               </li>
@@ -110,7 +110,7 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
                   />
                 </span>{" "}
                 Accès à des
-                <span className="ml-2 font-bold text-transparent text-lg md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
+                <span className="ml-2 font-bold text-transparent text-md md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
                   fonctionnalités exclusives
                 </span>
               </li>

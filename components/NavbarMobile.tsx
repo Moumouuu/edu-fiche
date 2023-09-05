@@ -1,4 +1,5 @@
 "use client";
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -20,7 +21,10 @@ export default function NavbarMobile({
   userLimit: number | undefined;
   isPro: boolean;
 }) {
+  const { open, isOpen } = usePremiumModal();
   // TODO : icon color change in function of theme
+
+  // ! todo : faire pareil que pour nav desk
   const itemsMenu = [
     {
       name: "Fiche de révision",
@@ -57,19 +61,45 @@ export default function NavbarMobile({
         </SheetHeader>
         <div className="h-[90%] flex flex-col justify-between">
           <div className="flex flex-col">
-            {itemsMenu.map((item) => (
-              <Link href={item.href} key={item.name} className="my-3">
-                <div className="flex items-center w-full py-4 hover:bg-white/10 p-1 rounded">
-                  {/* @ts-ignore */}
-                  <lord-icon
-                    src={item.icon}
-                    trigger="hover"
-                    colors="primary:#fff"
-                  />
-                  <span className="ml-2"> {item.name}</span>
+            {itemsMenu.map((item) =>
+              item.premium && !isPro ? (
+                <div
+                  key={item.name}
+                  className="my- cursor-pointer"
+                  onClick={open}
+                >
+                  <div
+                    className={
+                      "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded"
+                    }
+                  >
+                    {/* @ts-ignore */}
+                    <lord-icon
+                      src={item.icon}
+                      trigger="hover"
+                      colors="primary:#fff"
+                    />
+                    <span className="ml-2"> {item.name}</span>
+                  </div>
                 </div>
-              </Link>
-            ))}
+              ) : (
+                <Link href={item.href} key={item.name} className="my-3">
+                  <div
+                    className={
+                      "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded"
+                    }
+                  >
+                    {/* @ts-ignore */}
+                    <lord-icon
+                      src={item.icon}
+                      trigger="hover"
+                      colors="primary:#fff"
+                    />
+                    <span className="ml-2"> {item.name}</span>
+                  </div>
+                </Link>
+              )
+            )}
           </div>
           <div className="flex flex-col">
             {!isPro && (

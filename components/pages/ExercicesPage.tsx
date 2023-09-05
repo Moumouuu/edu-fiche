@@ -50,7 +50,7 @@ export default function ExercicesPage() {
       <Title text="Générateur d'exercices" />
       <SubTitle text="Vous avez besoin de réviser ? Générez vos exercices de math adapté à votre niveau en un clin d'oeil !" />
 
-      <form className="flex flex-col">
+      <form className="flex flex-col w-[90%] md:w-auto">
         <div className="flex ">
           {/* select for level */}
           <Select>
