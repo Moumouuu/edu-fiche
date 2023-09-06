@@ -24,16 +24,21 @@ export async function POST(req: NextRequest) {
   if (userApiLimit?.count === MAX_FREE_TRIAL && !isSubscribed)
     return Error("UserApiLimit reached");
 
-  const userApiLimitUpdated = await prismadb.userApiLimit.update({
-    where: {
-      id: userApiLimit.id,
-    },
-    data: {
-      count: {
-        increment: 1,
+  if (!isSubscribed) {
+    const userApiLimitUpdated = await prismadb.userApiLimit.update({
+      where: {
+        id: userApiLimit.id,
       },
-    },
-  });
+      data: {
+        count: {
+          increment: 1,
+        },
+      },
+    });
+
+    if (!userApiLimitUpdated)
+      throw new Error("[Free Trial] UserApiLimit not updated");
+  }
 
   return true;
 }

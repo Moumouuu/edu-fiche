@@ -44,12 +44,12 @@ export async function GET() {
       line_items: [
         {
           price_data: {
-            currency: "USD",
+            currency: "EUR",
             product_data: {
               name: "EduFiche Pro",
               description: "Unlimited Generations & Access all features",
             },
-            unit_amount: 699,
+            unit_amount: 599,
             recurring: {
               interval: "month",
             },
