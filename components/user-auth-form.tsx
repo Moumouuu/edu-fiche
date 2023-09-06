@@ -76,10 +76,8 @@ export default function UserAuthForm() {
   };
 
   const onSubmitRegister = async (data: FormValuesRegister) => {
-    console.log(data.email);
     try {
       const res = await axios.post("/api/account", data);
-      console.log(res);
     } catch (err) {
       console.log("[REGISTER_ERROR]" + err);
     }

@@ -33,7 +33,6 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
 
   useEffect(() => {
     setIsMounted(true);
-    console.log("button premiulm " + isOpen);
   }, [isOpen]);
 
   if (!isMounted) return null;

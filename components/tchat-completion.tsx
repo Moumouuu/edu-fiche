@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export default function TchatCompletion() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit  } = useChat();
   const { data: session } = useSession();
   return (
     <div className="h-full w-full flex flex-col">
