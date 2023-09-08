@@ -9,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Image from "next/image";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
 import { PremiumButton } from "./premium-button";
@@ -21,10 +22,8 @@ export default function NavbarMobile({
   userLimit: number | undefined;
   isPro: boolean;
 }) {
-  const { open, isOpen } = usePremiumModal();
-  // TODO : icon color change in function of theme
+  const { open } = usePremiumModal();
 
-  // ! todo : faire pareil que pour nav desk
   const itemsMenu = [
     {
       name: "Fiche de révision",
@@ -55,8 +54,17 @@ export default function NavbarMobile({
       </SheetTrigger>
       <SheetContent side={"left"}>
         <SheetHeader className="mb-8">
-          <SheetTitle className="flex ">
-            <span className="text-3xl">EduFiche</span>
+          <SheetTitle>
+            <span className="text-3xl flex items-center">
+              <Image
+                src="/assets/images/edu-fiche-logo.png"
+                width={50}
+                height={50}
+                alt="Logo edu-fiche"
+                className="mr-3"
+              />
+              EduFiche
+            </span>
           </SheetTitle>
         </SheetHeader>
         <div className="h-[90%] flex flex-col justify-between">

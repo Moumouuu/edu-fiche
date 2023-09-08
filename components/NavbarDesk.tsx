@@ -3,9 +3,9 @@ import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 import { PremiumButton } from "./premium-button";
 import { UserProfile } from "./user-profile";
 
@@ -19,7 +19,6 @@ export default function NavbarDesk({
   // TODO : icon color change in function of theme
   const path = usePathname();
   const { open, isOpen } = usePremiumModal();
-
 
   const itemsMenu = [
     {
@@ -48,7 +47,16 @@ export default function NavbarDesk({
     <div className="w-[300px] border-r h-[100vh] p-4">
       <div className="mb-8">
         <div className="flex ">
-          <span className="text-3xl">EduFiche</span>
+          <span className="text-3xl flex items-center">
+            <Image
+              src="/assets/images/edu-fiche-logo.png"
+              width={65}
+              height={65}
+              alt="Logo edu-fiche"
+              className="mr-3"
+            />
+            EduFiche
+          </span>
         </div>
       </div>
       <div className="h-[90%] flex flex-col justify-between">
