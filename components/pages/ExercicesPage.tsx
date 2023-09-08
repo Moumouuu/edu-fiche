@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
 
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
+import { useResponseModal } from "@/app/hooks/use-response-modal";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -12,8 +14,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useChat } from "ai/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ResponseModal } from "../response-modal";
 
-export default function ExercicesPage() {
+export default function ExercicesPage({
+  userLimit,
+  isSubscribed,
+}: {
+  userLimit: number | undefined;
+  isSubscribed: boolean;
+}) {
+  const [level, setLevel] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [keysWords, setKeysWords] = useState<string>("");
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat({
+      api: "/api/exercices",
+      body: {
+        level: level,
+        subject: subject,
+        keysWords: keysWords,
+        userLimit: userLimit,
+        isSubscribed: isSubscribed,
+      },
+    });
   const studentLevel = [
     { value: "1", label: "Collège | 6e" },
     { value: "2", label: "Collège | 5e" },
@@ -34,6 +60,28 @@ export default function ExercicesPage() {
     { value: "7", label: "Espagnol" },
   ];
 
+  const { open, isOpen } = useResponseModal();
+  const { open: openSubscriptionModal, isOpen: test } = usePremiumModal();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isSubscribed) {
+      openSubscriptionModal();
+      router.push("/");
+    }
+  }, [isSubscribed, openSubscriptionModal]);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      open();
+    }
+  }, [messages]);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e);
+    setKeysWords(e.target.value);
+  };
+
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <div>
@@ -50,10 +98,10 @@ export default function ExercicesPage() {
       <Title text="Générateur d'exercices" />
       <SubTitle text="Vous avez besoin de réviser ? Générez vos exercices de math adapté à votre niveau en un clin d'oeil !" />
 
-      <form className="flex flex-col w-[90%] md:w-auto">
+      <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
           {/* select for level */}
-          <Select>
+          <Select onValueChange={(e) => setLevel(e)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Niveau" />
             </SelectTrigger>
@@ -67,7 +115,7 @@ export default function ExercicesPage() {
           </Select>
 
           {/* select for subject */}
-          <Select>
+          <Select onValueChange={(e) => setSubject(e)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Matière" />
             </SelectTrigger>
@@ -86,12 +134,23 @@ export default function ExercicesPage() {
           className="mt-4"
           placeholder="Addition de matrice, équation différentielle ..."
           type="text"
+          value={input}
+          onChange={handleInput}
         />
         {/* submit button */}
         <Button className="mt-4" type="submit">
           Générer
         </Button>
       </form>
+
+      <ResponseModal
+        title={"Exercice"}
+        open={isOpen}
+        content={messages}
+        isLoading={isLoading}
+        isSubscribed={isSubscribed}
+        userLimit={userLimit}
+      />
     </div>
   );
 }

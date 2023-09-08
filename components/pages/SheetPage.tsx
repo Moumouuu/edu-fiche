@@ -43,7 +43,6 @@ export default function SheetPage({
       },
     });
 
-
   const { open, isOpen } = useResponseModal();
   const { open: openSubscriptionModal } = usePremiumModal();
   const router = useRouter();
@@ -160,8 +159,8 @@ export default function SheetPage({
         </Button>
       </form>
 
-      {/* ! todo : faire un state global pour la modal */}
       <ResponseModal
+        title={"Fiche de révision"}
         open={isOpen}
         content={messages}
         isLoading={isLoading}

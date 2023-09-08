@@ -16,15 +16,21 @@ export function ResponseModal({
   isLoading,
   isSubscribed,
   userLimit,
+  title,
 }: {
   open: boolean;
   content: Message[];
   isLoading: boolean;
   isSubscribed: boolean;
   userLimit: number | undefined;
+  title: string;
 }) {
   if (!isSubscribed && userLimit === MAX_FREE_TRIAL) {
-    return <span className="m-3">Vous avez atteint la limite gratuite autorisée. </span>;
+    return (
+      <span className="m-3">
+        Vous avez atteint la limite gratuite autorisée.{" "}
+      </span>
+    );
   }
 
   return (
@@ -34,7 +40,7 @@ export function ResponseModal({
           <DialogTitle className="text-lg md:text-2xl">
             Votre{" "}
             <span className="font-extrabold text-xl md:text-3xl text-transparent uppercase bg-clip-text bg-gradient-to-r from-green-400 to-blue-600 ease  ">
-              fiche
+              {title || "réponse"}
             </span>
           </DialogTitle>
           <DialogDescription>
