@@ -49,7 +49,7 @@ export async function GET() {
               name: "EduFiche Pro",
               description: "Unlimited Generations & Access all features",
             },
-            unit_amount: 599,
+            unit_amount: 499,
             recurring: {
               interval: "month",
             },
