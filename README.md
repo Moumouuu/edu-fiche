@@ -74,13 +74,21 @@ Use this space to show useful examples of how a project can be used. Additional 
 ## Roadmap
 
 - [x] Generate sheet
-- [x] Generate exercices
-- [X] Practices english
-- [ ] Add more level & subject
 - [ ] Save sheet & consultation (premium)
 - [ ] Sharing 
   - [ ] Share some example of sheet with the world
   - [ ] Share sheet with public url
+<br/>
+- [x] Generate exercices
+  - [ ] Allow users to choose between different types of exercices (QCM / Open question / Yes-No / ...)
+  - [ ] Show answers for exercices
+<br/>
+- [X] Practices english (soon this feature will be remove)
+- [ ] Add more level & subject
+- [ ] Auto login after register
+  <br/>
+- [ ] Make window page (allow to promote ur services) (optional)
+- [ ] Improving prompt (optional)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
