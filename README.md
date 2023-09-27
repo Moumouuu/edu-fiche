@@ -23,7 +23,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -34,7 +33,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">EduFiche generator revision sheet</h3>
+  <h3 align="center">EduFiche - Generator revision sheet</h3>
 
   <p align="center">
     An awesome utils to help student !!
@@ -52,12 +51,6 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -97,7 +90,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 * [![Next][Next.js]][Next-url]
 * [![Tailwind][Tailwind.com]][Tailwind-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![Postgresql]]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -159,8 +152,11 @@ Don't forget to give the project a star! Thanks again!
 ## Contact
 
 Project Link: [https://github.com/Moumouuu/edu-fiche](https://github.com/Moumouuu/edu-fiche)
+<br/>
 Mail : robin@pluviaux.fr
+<br/>
 Website : (https://pluviaux.fr)
+<br/>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -200,3 +196,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[Tailwind]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Postgresql]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
