@@ -119,7 +119,7 @@ Project Link: [https://github.com/Moumouuu/edu-fiche](https://github.com/Moumouu
 <br/>
 Mail : robin@pluviaux.fr
 <br/>
-Website : (https://pluviaux.fr)
+Website : https://pluviaux.fr
 <br/>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
