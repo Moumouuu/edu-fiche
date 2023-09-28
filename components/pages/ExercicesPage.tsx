@@ -30,6 +30,7 @@ export default function ExercicesPage({
   const [level, setLevel] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [keysWords, setKeysWords] = useState<string>("");
+  const [typeOfExercice, setTypeOfExercice] = useState<string>("");
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       api: "/api/exercices",
@@ -39,12 +40,13 @@ export default function ExercicesPage({
         keysWords: keysWords,
         userLimit: userLimit,
         isSubscribed: isSubscribed,
+        typeOfExercice: typeOfExercice,
       },
     });
 
 
   const { open, isOpen } = useResponseModal();
-  const { open: openSubscriptionModal, isOpen: test } = usePremiumModal();
+  const { open: openSubscriptionModal } = usePremiumModal();
   const router = useRouter();
 
   useEffect(() => {
@@ -110,6 +112,19 @@ export default function ExercicesPage({
               ))}
             </SelectContent>
           </Select>
+
+          {/* select for type of exercice */}
+          <Select onValueChange={(e) => setTypeOfExercice(e)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Type Question" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value={"QCM"}>QCM</SelectItem>
+                <SelectItem value={"Question ouverte"}>Question ouverte</SelectItem>
+                <SelectItem value={"YES/NO"}>Oui / Non </SelectItem>
+            </SelectContent>
+          </Select>
+
         </div>
 
         {/* keywords */}
