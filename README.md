@@ -84,8 +84,8 @@ Use this space to show useful examples of how a project can be used. Additional 
   - [ ] Show answers for exercices
       
 - [X] Practices english (soon this feature will be remove)
-- [ ] Add more level & subject
-- [ ] Auto login after register
+- [X] Add more level & subject
+- [X] Auto login after register
 - [ ] Form feedback
     
 - [ ] Make window page (allow to promote ur services) (optional)
