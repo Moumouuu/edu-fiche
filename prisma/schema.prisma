@@ -30,6 +30,9 @@ model Sheet {
   id             String       @id @default(uuid())
   title          String       @default("Untitled")
   text           String
+  level          String       
+  subject        String       
+  keywords       String       
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   userApiLimit   UserApiLimit @relation(fields: [userApiLimitId], references: [id])

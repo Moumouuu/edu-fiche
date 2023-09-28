@@ -20,7 +20,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ResponseModal } from "../response-modal";
-import {studentLevel, subjects} from "@/lib/utils";
+import { studentLevel, subjects } from "@/lib/utils";
 
 export default function SheetPage({
   userLimit,
@@ -34,7 +34,7 @@ export default function SheetPage({
   const [keysWords, setKeysWords] = useState<string>("");
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
     useChat({
-      api: "/api/sheet",
+      api: "/api/sheet/generate",
       body: {
         level: level,
         subject: subject,
@@ -59,17 +59,30 @@ export default function SheetPage({
       open();
       if (!error && !isLoading) {
         incrementFreeTrial();
+        createSheet();
         router.refresh();
       }
     }
   }, [messages, isLoading, error]);
 
   const incrementFreeTrial = async () => {
-    console.log("");
     try {
       await axios.post("/api/free-trial/increment");
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const createSheet = async () => {
+    try {
+      await axios.post("/api/sheet", {
+        level,
+        subject,
+        keysWords: keysWords,
+        messages,
+      });
+    } catch (err) {
+      console.log(`[ERROR_CREATE_SHEET] : ${err}`);
     }
   };
 
