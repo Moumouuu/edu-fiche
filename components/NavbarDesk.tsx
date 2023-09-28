@@ -36,11 +36,11 @@ export default function NavbarDesk({
       isActive: "/exercices" === path,
     },
     {
-      name: "Améliore ton anglais",
-      href: "/tchat",
+      name: "Mes fiches de révision",
+      href: "/fiches",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
-      premium: true,
-      isActive: "/tchat" === path,
+      premium: false,
+      isActive: "/fiches" === path,
     },
   ];
   return (

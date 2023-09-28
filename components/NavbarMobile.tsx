@@ -38,10 +38,10 @@ export default function NavbarMobile({
       premium: true,
     },
     {
-      name: "Améliore ton anglais",
-      href: "/tchat",
+      name: "Mes fiches de révision",
+      href: "/fiches",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
-      premium: true,
+      premium: false,
     },
   ];
 

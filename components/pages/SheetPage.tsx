@@ -20,6 +20,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ResponseModal } from "../response-modal";
+import {studentLevel, subjects} from "@/lib/utils";
 
 export default function SheetPage({
   userLimit,
@@ -71,26 +72,6 @@ export default function SheetPage({
       console.log(err);
     }
   };
-
-  const studentLevel = [
-    { value: "Collège | 6e", label: "Collège | 6e" },
-    { value: "Collège | 5e", label: "Collège | 5e" },
-    { value: "Collège | 4e", label: "Collège | 4e" },
-    { value: "Collège | 3e", label: "Collège | 3e" },
-    { value: "Lycée | 2nde", label: "Lycée | 2nde" },
-    { value: "Lycée | 1ère", label: "Lycée | 1ère" },
-    { value: "Lycée | Terminale", label: "Lycée | Terminale" },
-  ];
-
-  const subjects = [
-    { value: "Mathématiques", label: "Mathématiques" },
-    { value: "Physique-Chimie", label: "Physique-Chimie" },
-    { value: "SVT", label: "SVT" },
-    { value: "Français", label: "Français" },
-    { value: "Histoire-Géographie", label: "Histoire-Géographie" },
-    { value: "Anglais", label: "Anglais" },
-    { value: "Espagnol", label: "Espagnol" },
-  ];
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);

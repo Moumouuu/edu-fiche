@@ -18,6 +18,7 @@ import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ResponseModal } from "../response-modal";
+import { studentLevel, subjects } from "@/lib/utils";
 
 export default function ExercicesPage({
   userLimit,
@@ -40,25 +41,7 @@ export default function ExercicesPage({
         isSubscribed: isSubscribed,
       },
     });
-  const studentLevel = [
-    { value: "1", label: "Collège | 6e" },
-    { value: "2", label: "Collège | 5e" },
-    { value: "3", label: "Collège | 4e" },
-    { value: "4", label: "Collège | 3e" },
-    { value: "5", label: "Lycée | 2nde" },
-    { value: "6", label: "Lycée | 1ère" },
-    { value: "7", label: "Lycée | Terminale" },
-  ];
 
-  const subjects = [
-    { value: "1", label: "Mathématiques" },
-    { value: "2", label: "Physique-Chimie" },
-    { value: "3", label: "SVT" },
-    { value: "4", label: "Français" },
-    { value: "5", label: "Histoire-Géographie" },
-    { value: "6", label: "Anglais" },
-    { value: "7", label: "Espagnol" },
-  ];
 
   const { open, isOpen } = useResponseModal();
   const { open: openSubscriptionModal, isOpen: test } = usePremiumModal();
