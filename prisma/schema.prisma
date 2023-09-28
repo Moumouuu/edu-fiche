@@ -28,6 +28,7 @@ model UserSubscription {
 
 model Sheet {
   id             String       @id @default(uuid())
+  title          String       @default("Untitled")
   text           String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt

@@ -37,10 +37,10 @@ export default function NavbarDesk({
     },
     {
       name: "Mes fiches",
-      href: "/fiches",
+      href: "/sheets",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: false,
-      isActive: "/fiches" === path,
+      isActive: "/sheets" === path,
     },
   ];
   return (
@@ -70,8 +70,8 @@ export default function NavbarDesk({
               >
                 <div
                   className={cn(
-                    "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
-                    item.isActive && "bg-white/10"
+                    "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
+                    item.isActive && "bg-primary/10"
                   )}
                 >
                   {/* @ts-ignore */}
@@ -87,8 +87,8 @@ export default function NavbarDesk({
               <Link href={item.href} key={item.name} className="my-3">
                 <div
                   className={cn(
-                    "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded",
-                    item.isActive && "bg-white/10"
+                    "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
+                    item.isActive && "bg-primary/10"
                   )}
                 >
                   {/* @ts-ignore */}

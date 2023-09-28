@@ -39,7 +39,7 @@ export default function NavbarMobile({
     },
     {
       name: "Mes fiches",
-      href: "/fiches",
+      href: "/sheets",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: false,
     },
