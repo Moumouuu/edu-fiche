@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   if (!isSubscribed) throw new Error("User is not subscribed");
 
-  const prompt = `Tu es un expert en ${subject} et un professeur. Tu dois aider les élèves à réviser. Tu proposeras 3 questions type QCM et 1 exercices simple qui est en relation avec ${keysWords}. Tu garderas en contexte ce personnage et ne dois répondre qu'a des questions en ${subject}. Voici le niveau de l'élève : ${level} et les mots clés sur lequel l'élève veut s'exercer : ${keysWords}.`;
+  const prompt = `Tu es un expert en ${subject} et un professeur. Tu dois aider les élèves à réviser. Tu proposeras 3 questions type QCM et 1 exercices simple qui est en relation avec ${keysWords}. Tu garderas en contexte ce personnage et ne dois répondre qu'a des questions en ${subject}. Voici le niveau de l'élève : ${level} et les mots clés sur lequel l'élève veut s'exercer : ${keysWords}. A la fin tu donneras les réponses des exercices et les explications.`;
 
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
