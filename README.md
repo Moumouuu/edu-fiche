@@ -74,7 +74,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 ## Roadmap
 
 - [x] Generate sheet
-- [ ] Save sheet & consultation (premium)
+- [X] Save sheet & consultation
 - [ ] Sharing 
   - [ ] Share some example of sheet with the world (window page)
   - [ ] Share sheet with public url
