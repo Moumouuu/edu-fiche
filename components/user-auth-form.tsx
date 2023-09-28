@@ -19,9 +19,12 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export default function UserAuthForm() {
+  const [isLoading, setIsLloading] = useState(false);
   const router = useRouter();
   const schemaLogin = z.object({
     email: z
@@ -47,7 +50,7 @@ export default function UserAuthForm() {
   const {
     handleSubmit,
     register,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<FormValuesLogin>({
     resolver: zodResolver(schemaLogin),
   });
@@ -55,12 +58,13 @@ export default function UserAuthForm() {
   const {
     handleSubmit: handleSubmitRegister,
     register: registerRegister,
-    formState: { errors: errorsRegister, isLoading: isLoadingRegister },
+    formState: { errors: errorsRegister },
   } = useForm<FormValuesRegister>({
     resolver: zodResolver(schemaRegister),
   });
 
   const onSubmitLogin = async (data: FormValuesLogin) => {
+    setIsLloading(true);
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -70,17 +74,34 @@ export default function UserAuthForm() {
       if (res?.ok) {
         router.push("/");
       }
+      setIsLloading(false);
     } catch (err) {
       console.log("[LOGIN_ERROR]" + err);
     }
+    setIsLloading(false);
   };
 
   const onSubmitRegister = async (data: FormValuesRegister) => {
+    setIsLloading(true);
     try {
-      const res = await axios.post("/api/account", data);
+      const resRegister = await axios.post("/api/account", data);
+      try {
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: data.email,
+          password: data.password,
+        });
+        if (res?.ok) {
+          router.push("/");
+        }
+        setIsLloading(false);
+      } catch (err) {
+        console.log("[LOGIN_ERROR_AFTER_REGISTER]" + err);
+      }
     } catch (err) {
       console.log("[REGISTER_ERROR]" + err);
     }
+    setIsLloading(false);
   };
 
   return (
@@ -130,7 +151,7 @@ export default function UserAuthForm() {
               <Button
                 disabled={isLoading}
                 variant={"premium"}
-                className="w-full mt-4"
+                className={cn("w-full mt-4", isLoading && "opacity-50")}
               >
                 Connexion
               </Button>
@@ -192,7 +213,7 @@ export default function UserAuthForm() {
               </div>
               <Button
                 disabled={isLoading}
-                className="w-full mt-4"
+                className={cn("w-full mt-4", isLoading && "opacity-50")}
                 variant={"premium"}
               >
                 Inscription
