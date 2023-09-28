@@ -76,12 +76,12 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [x] Generate sheet
 - [ ] Save sheet & consultation (premium)
 - [ ] Sharing 
-  - [ ] Share some example of sheet with the world
+  - [ ] Share some example of sheet with the world (window page)
   - [ ] Share sheet with public url
   
 - [x] Generate exercices
-  - [ ] Allow users to choose between different types of exercices (QCM / Open question / Yes-No / ...)
-  - [ ] Show answers for exercices
+  - [X] Allow users to choose between different types of exercices (QCM / Open question / Yes-No / ...)
+  - [X] Show answers for exercices
       
 - [X] Practices english (soon this feature will be remove)
 - [X] Add more level & subject
