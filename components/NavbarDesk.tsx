@@ -36,7 +36,7 @@ export default function NavbarDesk({
       isActive: "/exercices" === path,
     },
     {
-      name: "Mes fiches de révision",
+      name: "Mes fiches",
       href: "/fiches",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: false,

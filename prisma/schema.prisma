@@ -14,6 +14,7 @@ model UserApiLimit {
   count        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  sheet        Sheet[]
 }
 
 model UserSubscription {
@@ -23,4 +24,13 @@ model UserSubscription {
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
   stripePriceId          String?   @map(name: "stripe_price_id")
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
+}
+
+model Sheet {
+  id             String       @id @default(uuid())
+  text           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  userApiLimit   UserApiLimit @relation(fields: [userApiLimitId], references: [id])
+  userApiLimitId String
 }

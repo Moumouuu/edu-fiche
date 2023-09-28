@@ -38,7 +38,7 @@ export default function NavbarMobile({
       premium: true,
     },
     {
-      name: "Mes fiches de révision",
+      name: "Mes fiches",
       href: "/fiches",
       icon: "https://cdn.lordicon.com/hpivxauj.json",
       premium: false,
