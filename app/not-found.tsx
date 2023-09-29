@@ -10,7 +10,7 @@ export default function NotFound() {
         </div>
 
         <div className="contant_box_404">
-          <h3 className="text-2xl">Look like you're lost</h3>
+          <h3 className="text-2xl">Look like you&apos;re lost</h3>
 
           <p className="text-xl">the page you are looking for not avaible!</p>
 
