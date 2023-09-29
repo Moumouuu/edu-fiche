@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import z from "zod";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 import { signIn } from "next-auth/react";
 import { AiFillGoogleCircle } from "react-icons/ai";

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { FaExchangeAlt } from "react-icons/fa";
 import { DialogClose } from "@radix-ui/react-dialog";
-import FormUpdateSheet from "../form-update-sheet";
+import FormUpdateSheet from "../form/form-update-sheet";
 import { Badge } from "../ui/badge";
 
 import { Sheet } from "@prisma/client";

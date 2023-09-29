@@ -29,11 +29,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { FaExchangeAlt } from "react-icons/fa";
 import { DialogClose } from "@radix-ui/react-dialog";
-import FormUpdateSheet from "../form-update-sheet";
+import FormUpdateSheet from "../form/form-update-sheet";
 import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
+  //todo scroll overflow
   const [sheets, setSheets] = useState(s);
   const router = useRouter();
 
@@ -77,7 +78,7 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
   };
 
   return (
-    <div className="w-full flex flex-col p-4 mt-14 md:mt-0">
+    <div className="w-full h-[100vh] overflow-y-scroll flex flex-col p-4 mt-14 md:mt-0">
       <Toaster />
       <Title text="Vos fiches de révisions" />
       <span className="text-md md:text-lg text-black dark:text-zinc-500 italic">
@@ -86,7 +87,7 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
       </span>
       <Separator className="my-4" />
 
-      <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4">
         {sheets.map((sheet: Sheet) => (
           <div
             key={sheet.id}

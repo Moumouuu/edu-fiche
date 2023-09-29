@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import UserAuthForm from "@/components/user-auth-form";
+import UserAuthForm from "@/components/form/form-auth-user";
 
 export const metadata: Metadata = {
   title: "EduFiche | Authentication",

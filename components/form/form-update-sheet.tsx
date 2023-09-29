@@ -1,7 +1,7 @@
 "use client";
 
 import { Sheet } from "@prisma/client";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import {
   Select,
@@ -13,10 +13,10 @@ import {
 import { studentLevel, subjects } from "@/lib/utils";
 import { useState } from "react";
 import axios from "axios";
-import { Label } from "./ui/label";
-import { DialogFooter } from "./ui/dialog";
+import { Label } from "../ui/label";
+import { DialogFooter } from "../ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function FormUpdateSheet({

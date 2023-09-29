@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://edu-fiche.fr">
-    <img src="git/logo.png" alt="Logo" width="80" height="80">
+    <img src="public/assets/images/edu-fiche-logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">EduFiche - Generator revision sheet</h3>
@@ -144,7 +144,7 @@ Website : https://pluviaux.fr
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: git/edufiche.png
+[product-screenshot]: public/assets/images//edufiche.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Tailwind]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white

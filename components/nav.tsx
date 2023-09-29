@@ -1,6 +1,6 @@
 "use client";
-import NavbarDesk from "./NavbarDesk";
-import NavbarMobile from "./NavbarMobile";
+import NavbarDesk from "./navbar-desk";
+import NavbarMobile from "./navbar-mobile";
 
 export default function Nav({
   userLimit,

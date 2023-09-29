@@ -92,7 +92,7 @@ export default function SheetPage({
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center">
+    <div className="h-[100vh] flex flex-col items-center justify-center">
       <div>
         {/* @ts-ignore */}
         <lord-icon
