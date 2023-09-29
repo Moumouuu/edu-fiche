@@ -11,42 +11,67 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { studentLevel, subjects } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Label } from "./ui/label";
 import { DialogFooter } from "./ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function FormUpdateSheet({ sheet }: { sheet: Sheet }) {
+export default function FormUpdateSheet({
+  sheet,
+  setSheets,
+}: {
+  sheet: Sheet;
+  setSheets: any;
+}) {
   // todo zod validation & keywords ??
-  const router = useRouter();
-  const [level, setLevel] = useState<string>("");
-  const [subject, setSubject] = useState<string>("");
+  // disable button saving update
+  // subject & level default old value
+
+  const [level, setLevel] = useState<string | undefined>(undefined);
+  const [subject, setSubject] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data: any) => {
-    console.log(sheet);
+    setIsLoading(true);
     try {
       await axios.post(`/api/sheet`, {
         title: data.title,
         idSheet: sheet.id,
-        level: level,
-        subject: subject,
+        level: level ?? sheet.level,
+        subject: subject ?? sheet.subject,
         messages: sheet.text,
-        keysWords: sheet.keywords,
+        keysWords: data.keywords,
       });
+      toast.success("Fiche mise à jour !");
     } catch (error) {
       console.log("[ERROR UPDATE SHEET] : ", error);
     } finally {
-      router.refresh();
-      window.location.reload();
+      setSheets((sheets: Sheet[]) =>
+        sheets.map((s: Sheet) =>
+          s.id === sheet.id
+            ? {
+                ...s,
+                title: data.title,
+                level: level ?? sheet.level,
+                subject: subject ?? sheet.subject,
+                keywords: data.keywords,
+              }
+            : s
+        )
+      );
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      <Toaster />
       <form onSubmit={handleSubmit(onSubmit)} className="p-4">
         <Label className="text-md" htmlFor="title">
           Titre de la fiche
@@ -56,6 +81,17 @@ export default function FormUpdateSheet({ sheet }: { sheet: Sheet }) {
           placeholder="Titre de la fiche"
           defaultValue={sheet.title}
           {...register("title")}
+          className="mb-3"
+        />
+
+        <Label className="text-md" htmlFor="title">
+          Mots clés de la fiche
+        </Label>
+        <Input
+          id="keywords"
+          placeholder="Mot clés de la fiche"
+          defaultValue={sheet.keywords}
+          {...register("keywords")}
           className="mb-3"
         />
 
@@ -78,6 +114,7 @@ export default function FormUpdateSheet({ sheet }: { sheet: Sheet }) {
               </SelectContent>
             </Select>
           </div>
+
           <div className="flex flex-col ">
             <Label className="text-md" htmlFor="subject">
               Matière de la fiche
@@ -97,13 +134,16 @@ export default function FormUpdateSheet({ sheet }: { sheet: Sheet }) {
             </Select>
           </div>
         </div>
+
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="secondary">Annuler</Button>
           </DialogClose>
-          <Button type="submit" variant="default">
-            Confirmer
-          </Button>
+          <DialogClose asChild>
+            <Button type="submit" variant="default" disabled={isLoading}>
+              Confirmer
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </form>
     </>

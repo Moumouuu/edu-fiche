@@ -44,7 +44,7 @@ export function ResponseModal({
             </span>
           </DialogTitle>
           <DialogDescription>
-            N&apos;oubliez pas de sauvegarder votre fiche !
+            Votre fiche est automatiquement sauvegardée ! Vous pouvez la consulter a tout moment.
           </DialogDescription>
         </DialogHeader>
         <div className="p-3 ">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../title";
 import { Separator } from "../ui/separator";
 import Link from "next/link";
@@ -30,9 +30,20 @@ import {
 import { FaExchangeAlt } from "react-icons/fa";
 import { DialogClose } from "@radix-ui/react-dialog";
 import FormUpdateSheet from "../form-update-sheet";
+import { useRouter } from "next/navigation";
+import { Badge } from "../ui/badge";
 
 export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
   const [sheets, setSheets] = useState(s);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
+
+  useEffect(() => {
+    setSheets(s);
+  }, [s]);
 
   const deleteSheet = async (sheetId: String) => {
     setSheets(sheets.filter((sheet: Sheet) => sheet.id !== sheetId));
@@ -41,6 +52,21 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
     } catch (error) {
       console.log("[ERROR DELETE SHEET] : ", error);
     }
+  };
+
+  const formatKeywords = (keywords: string) => {
+    // split keywords by space example : "maths physique" => ["maths", "physique"]
+    // and remove empty string
+    const keywordsArray = keywords.split(" ").filter((k) => k !== "");
+    return (
+      <div className="flex flex-wrap my-2">
+        {keywordsArray.map((k) => (
+          <Badge key={k} className="mr-2 ">
+            {k}
+          </Badge>
+        ))}
+      </div>
+    );
   };
 
   const copySharingLink = (sheet: Sheet) => {
@@ -66,20 +92,21 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
             key={sheet.id}
             className="flex flex-col justify-between p-4 m-3 bg-primary/10 hover:bg-primary/20 transition duration-200 ease-in-out  rounded max-h-[300px]"
           >
-            <Link href={`sheet/${sheet.id}`}>
-              <div className="flex w-full justify-between mb-3 items-center">
-                <span className="text-xl">{sheet.title}</span>
-                <span>{`${sheet.createdAt.getDate()}/${sheet.createdAt.getMonth()}/${sheet.createdAt.getFullYear()}`}</span>
-              </div>
-              <span>
-                {sheet.text.length > 150
-                  ? sheet.text.substring(0, 150) + "..."
-                  : sheet.text}
-              </span>
-            </Link>
+            <div className="flex w-full justify-between mb-3 items-center">
+              <span className="text-xl">{sheet.title}</span>
+              <span>{`${sheet.createdAt.getDate()}/${sheet.createdAt.getMonth()}/${sheet.createdAt.getFullYear()}`}</span>
+            </div>
+            <span>
+              {sheet.text.length > 150
+                ? sheet.text.substring(0, 150) + "..."
+                : sheet.text}
+            </span>
+            <div>{formatKeywords(sheet.keywords)}</div>
 
             <div className=" flex w-full justify-between items-center mt-4">
-              <Button variant={"premium"}>Consulter</Button>
+              <Link href={`/sheet/${sheet.id}`}>
+                <Button variant={"premium"}>Consulter</Button>
+              </Link>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -167,8 +194,10 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                             Vous pouvez modifier le titre, le sujet, le niveau
                             et les mots-clés de votre fiche de révision.
                           </DialogDescription>
-                          <FormUpdateSheet sheet={sheet}/>
-                          
+                          <FormUpdateSheet
+                            sheet={sheet}
+                            setSheets={setSheets}
+                          />
                         </DialogHeader>
                       </DialogContent>
                     </Dialog>
