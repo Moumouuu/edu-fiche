@@ -11,13 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { studentLevel, subjects } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Label } from "./ui/label";
 import { DialogFooter } from "./ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function FormUpdateSheet({
@@ -27,16 +26,14 @@ export default function FormUpdateSheet({
   sheet: Sheet;
   setSheets: any;
 }) {
-  // todo zod validation & keywords ??
-  // disable button saving update
-  // subject & level default old value
 
   const [level, setLevel] = useState<string | undefined>(undefined);
   const [subject, setSubject] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { register, handleSubmit } = useForm();
 
+  const { register, handleSubmit} = useForm();
+ 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
@@ -57,10 +54,10 @@ export default function FormUpdateSheet({
           s.id === sheet.id
             ? {
                 ...s,
-                title: data.title,
+                title: ((data.title == "" ? null : data.title) ?? sheet.title),
                 level: level ?? sheet.level,
                 subject: subject ?? sheet.subject,
-                keywords: data.keywords,
+                keywords: ((data.keywords == "" ? null : data.keywords) ?? sheet.keywords),
               }
             : s
         )
@@ -95,7 +92,7 @@ export default function FormUpdateSheet({
           className="mb-3"
         />
 
-        <div className="flex w-full justify-center my-5">
+        <div className="flex flex-col md:flex-row w-full justify-center my-5">
           <div className="flex flex-col">
             <Label className="text-md" htmlFor="level">
               Niveau scolaire
@@ -137,13 +134,13 @@ export default function FormUpdateSheet({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="secondary">Annuler</Button>
+            <Button variant="secondary" className="my-2">Annuler</Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button type="submit" variant="default" disabled={isLoading}>
+            <Button type="submit" variant="default" className="my-2" disabled={isLoading}>
               Confirmer
             </Button>
-          </DialogClose>
+            </DialogClose>
         </DialogFooter>
       </form>
     </>

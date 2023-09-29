@@ -90,7 +90,7 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
         {sheets.map((sheet: Sheet) => (
           <div
             key={sheet.id}
-            className="flex flex-col justify-between p-4 m-3 bg-primary/10 hover:bg-primary/20 transition duration-200 ease-in-out  rounded max-h-[300px]"
+            className="flex flex-col justify-between p-4 m-3 bg-primary/10 hover:bg-primary/20 transition duration-200 ease-in-out  rounded"
           >
             <div className="flex w-full justify-between mb-3 items-center">
               <span className="text-xl">{sheet.title}</span>

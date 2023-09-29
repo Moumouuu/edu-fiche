@@ -1,5 +1,5 @@
 import { apiUserLimit } from "@/actions/apiUserLimit";
-import SheetPage from "@/components/pages/SheetPage";
+import SheetPage from "@/components/pages/SheetGenerationPage";
 import { checkSubscription } from "@/lib/subscription";
 
 export default async function Home() {

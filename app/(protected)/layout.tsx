@@ -19,7 +19,7 @@ export default async function ProtectedLayout({
   return (
     <html lang="en">
       <body>
-        <main className="flex h-[100vh]">
+        <main className="flex ">
           <Nav userLimit={userLimit} isPro={isPro} />
           {children}
         </main>

@@ -44,6 +44,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
     messagesFormated = Object.values(messagesFormated).pop();
   }
 
+  let oldSheet;
+
+  //update case
+  if (idSheet) {
+    oldSheet = await prismadb.sheet.findUnique({
+      where: {
+        id: idSheet,
+      },
+    });
+  }
+
   const sheet = await prismadb.sheet.upsert({
     create: {
       text: messagesFormated ?? messages,
@@ -53,11 +64,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
       userApiLimitId: user.id,
     },
     update: {
-      title: title,
+      title: title == "" ? oldSheet?.title : title,
       text: messagesFormated ?? messages,
       level: level,
       subject: subject,
-      keywords: keysWords,
+      keywords: keysWords == "" ? oldSheet?.keywords : keysWords,
     },
     where: {
       id: idSheet ?? ".",
