@@ -12,6 +12,22 @@ export const metadata: Metadata = {
   title: "EduFiche | Votre générateur de fiche de révision",
   description:
     "EduFiche vous permet de générer des fiches de révision en un clic !",
+  openGraph: {
+    title: "EduFiche | Votre générateur de fiche de révision",
+    description:
+      "EduFiche vous permet de générer des fiches de révision en un clic !",
+    url: "https://edu-fiche.fr",
+    siteName: "Edu-Fiche",
+    images: [
+      {
+        url: "/public/assets/images/edufiche.png",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
 };
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
