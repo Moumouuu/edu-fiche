@@ -77,7 +77,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [X] Save sheet & consultation
 - [ ] Sharing 
   - [ ] Share some example of sheet with the world (window page)
-  - [ ] Share sheet with public url
+  - [X] Share sheet with public url
   
 - [x] Generate exercices
   - [X] Allow users to choose between different types of exercices (QCM / Open question / Yes-No / ...)
