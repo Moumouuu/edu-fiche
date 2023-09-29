@@ -7,6 +7,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import AuthContext from "./context/auth-context";
 import "./globals.css";
+import GoogleAnalytics from "@/components/google-analytics";
 
 export const metadata: Metadata = {
   title: "EduFiche | Votre générateur de fiche de révision",
@@ -44,6 +45,8 @@ export default async function RootLayout({
         <body className={roboto.className}>
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              {/* Global Site Tag (gtag.js) - Google Analytics */}
+              <GoogleAnalytics/>
               {children}
             </ThemeProvider>
           </AuthContext>
