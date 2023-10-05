@@ -1,14 +1,5 @@
 "use client";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -16,16 +7,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FaExchangeAlt } from "react-icons/fa";
-import { DialogClose } from "@radix-ui/react-dialog";
-import FormUpdateSheet from "../form/form-update-sheet";
 import { Badge } from "../ui/badge";
 
 import { Sheet } from "@prisma/client";
-import Link from "next/link";
 import { Button } from "../ui/button";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Page({ sheet }: { sheet: Sheet }) {

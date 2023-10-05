@@ -23,7 +23,7 @@ export default function NavbarDesk({
   const itemsMenu = [
     {
       name: "Fiche de révision",
-      href: "/",
+      href: "/app",
       icon: "https://cdn.lordicon.com/isugonwi.json",
       premium: false,
       isActive: "/" === path,

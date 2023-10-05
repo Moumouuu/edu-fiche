@@ -34,7 +34,6 @@ import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
-  //todo scroll overflow
   const [sheets, setSheets] = useState(s);
   const router = useRouter();
 

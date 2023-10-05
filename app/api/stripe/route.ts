@@ -9,8 +9,6 @@ const settingsUrl = absoluteUrl("/settings");
 
 export async function GET() {
   try {
-    //const { userId } = auth();
-    //const user = await currentUser();
     const data = await getServerSession();
     const user = data?.user;
     const userEmail = data?.user?.email;

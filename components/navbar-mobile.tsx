@@ -27,7 +27,7 @@ export default function NavbarMobile({
   const itemsMenu = [
     {
       name: "Fiche de révision",
-      href: "/",
+      href: "/app",
       icon: "https://cdn.lordicon.com/isugonwi.json",
       premium: false,
     },

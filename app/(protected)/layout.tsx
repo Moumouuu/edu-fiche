@@ -2,7 +2,12 @@ import { apiUserLimit } from "@/actions/apiUserLimit";
 import Nav from "@/components/nav";
 import { checkSubscription } from "@/lib/subscription";
 import { getServerSession } from "next-auth/next";
+import { Rubik } from "next/font/google";
 import { redirect } from "next/navigation";
+
+const font = Rubik({ subsets: ['latin'] })
+
+
 export default async function ProtectedLayout({
   children,
 }: {
@@ -17,9 +22,9 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="fr">
       <body>
-        <main className="flex ">
+        <main className={font.className + " flex"}>
           <Nav userLimit={userLimit} isPro={isPro} />
           {children}
         </main>
