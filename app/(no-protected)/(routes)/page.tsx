@@ -127,10 +127,10 @@ export default async function Home() {
               <div className="flex flex-col">
                 <p className="text-xl text-slate-200">Alice Dupont</p>
                 <p className="text-md text-slate-400">
-                  "Cette application est tout simplement révolutionnaire ! Elle
+                  &quot;Cette application est tout simplement révolutionnaire ! Elle
                   m&apos;a permis de créer des fiches de révision et des exercices en
                   un clin d&apos;œil. L&apos;IA derrière tout ça est vraiment
-                  impressionnante. Bravo à l&apos;équipe de développement !"
+                  impressionnante. Bravo à l&apos;équipe de développement !&quot;
                 </p>
                 <div className="mt-2">
                   <BadgeShine>Étudiante en informatique</BadgeShine>
@@ -147,10 +147,10 @@ export default async function Home() {
                 <div className="flex flex-col">
                   <p className="text-xl text-slate-200">Martin Lefebvre</p>
                   <p className="text-md text-slate-400">
-                    "Je suis bluffé par les capacités de cette application. Elle
+                  &quot;Je suis bluffé par les capacités de cette application. Elle
                     a rendu mes études tellement plus faciles en générant des
                     fiches de révision personnalisées et des exercices adaptés à
-                    mon niveau. Je la recommande à tous les étudiants !"
+                    mon niveau. Je la recommande à tous les étudiants !&quot;
                   </p>
                   <div className="mt-2">
                     <BadgeShine>Étudiant en médecine</BadgeShine>
@@ -166,12 +166,12 @@ export default async function Home() {
                 <div className="flex flex-col">
                   <p className="text-xl text-slate-200">Sarah Tremblay</p>
                   <p className="text-md text-slate-400">
-                    "Cette application est un véritable atout pour les
+                  &quot;Cette application est un véritable atout pour les
                     étudiants. Elle simplifie la préparation aux examens en
                     créant des fiches de révision détaillées et des exercices
                     variés. J&apos;ai remarqué une nette amélioration dans mes
                     performances académiques depuis que je l&apos;utilise. Un
-                    must-have !"
+                    must-have !&quot;
                   </p>
                   <div className="mt-2">
                     <BadgeShine>Étudiante en droit</BadgeShine>
