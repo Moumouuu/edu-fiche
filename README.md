@@ -75,8 +75,8 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 - [x] Generate sheet
 - [X] Save sheet & consultation
-- [ ] Sharing 
-  - [ ] Share some example of sheet with the world (window page)
+- [x] Sharing 
+  - [x] Share some example of sheet with the world (window page)
   - [X] Share sheet with public url
   
 - [x] Generate exercices
@@ -88,8 +88,8 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [X] Auto login after register
 - [ ] Form feedback
     
-- [ ] Make window page (allow to promote ur services) (optional)
-- [ ] Improving prompt (optional)
+- [x] Make window page (allow to promote ur services) (optional)
+- [] Improving prompt (optional)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
