@@ -128,9 +128,9 @@ export default async function Home() {
                 <p className="text-xl text-slate-200">Alice Dupont</p>
                 <p className="text-md text-slate-400">
                   "Cette application est tout simplement révolutionnaire ! Elle
-                  m'a permis de créer des fiches de révision et des exercices en
-                  un clin d'œil. L'IA derrière tout ça est vraiment
-                  impressionnante. Bravo à l'équipe de développement !"
+                  m&apos;a permis de créer des fiches de révision et des exercices en
+                  un clin d&apos;œil. L&apos;IA derrière tout ça est vraiment
+                  impressionnante. Bravo à l&apos;équipe de développement !"
                 </p>
                 <div className="mt-2">
                   <BadgeShine>Étudiante en informatique</BadgeShine>
@@ -169,8 +169,8 @@ export default async function Home() {
                     "Cette application est un véritable atout pour les
                     étudiants. Elle simplifie la préparation aux examens en
                     créant des fiches de révision détaillées et des exercices
-                    variés. J'ai remarqué une nette amélioration dans mes
-                    performances académiques depuis que je l'utilise. Un
+                    variés. J&apos;ai remarqué une nette amélioration dans mes
+                    performances académiques depuis que je l&apos;utilise. Un
                     must-have !"
                   </p>
                   <div className="mt-2">
