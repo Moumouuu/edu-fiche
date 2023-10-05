@@ -98,12 +98,13 @@ export default async function Home() {
         <div className="flex flex-col md:flex-row items-center justify-center my-5">
             {lastestSheets.length > 0 ? lastestSheets.map((sheet) => (
                 <CardSpotlight
+                key={sheet.id}
                     title={sheet.title === "Untitled" ? "Sans titre" : sheet.title}
                     description={sheet.text.slice(0, 100) + `...`}
                     icon="https://cdn.lordicon.com/isugonwi.json"
                 />
             )) : (
-                <p className="text-center">Aucune fiche n'a été généré pour le moment</p>
+                <p className="text-center">Aucune fiche n&apos;a été généré pour le moment</p>
             )}
         </div>
       </div>
