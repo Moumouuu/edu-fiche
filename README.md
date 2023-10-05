@@ -89,7 +89,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [ ] Form feedback
     
 - [x] Make window page (allow to promote ur services) (optional)
-- [] Improving prompt (optional)
+- [ ] Improving prompt (optional)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
