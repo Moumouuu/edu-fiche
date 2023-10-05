@@ -57,6 +57,16 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "border-width": {
+          "from": {
+            "width": "10px",
+            "opacity": "0"
+          },
+          "to": {
+            "width": "100px",
+            "opacity": "1"
+          }
+        },
         "background-shine": {
           "from": {
             "backgroundPosition": "0 0"
@@ -75,9 +85,11 @@ module.exports = {
         },
       },
       animation: {
+        "border-width": "border-width 3s infinite alternate",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "background-shine": "background-shine 4s linear infinite"
+        "background-shine": "background-shine 2s linear infinite"
+
 
       },
       
