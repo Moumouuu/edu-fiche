@@ -8,7 +8,7 @@ export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
-export const MAX_FREE_TRIAL = 3;
+export const MAX_FREE_TRIAL = 10;
 
 export const studentLevel = [
   { value: "Collège | 6e", label: "Collège | 6e" },
