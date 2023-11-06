@@ -115,7 +115,7 @@ export default function NavbarMobile({
               <div className="flex flex-col my-3">
                 <span>{userLimit ?? 0}/{MAX_FREE_TRIAL} free generation</span>
                 <Progress
-                  value={userLimit ? userLimit * 10 * 3.33 : 0}
+                  value={userLimit ? userLimit * 10 : 0}
                   className="border"
                 />
               </div>
