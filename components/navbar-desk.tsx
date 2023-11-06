@@ -8,6 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PremiumButton } from "./premium-button";
 import { UserProfile } from "./user-profile";
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 
 export default function NavbarDesk({
   userLimit,
@@ -106,7 +107,7 @@ export default function NavbarDesk({
         <div className="flex flex-col">
           {!isPro && (
             <div className="flex flex-col my-3">
-              <span>{userLimit ?? 0}/3 free generation</span>
+              <span>{userLimit ?? 0}/{MAX_FREE_TRIAL} free generation</span>
               <Progress
                 value={userLimit ? userLimit * 10 * 3.33 : 0}
                 className="border"
