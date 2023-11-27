@@ -49,4 +49,5 @@ export const subjects = [
   {value: "SES", label: "SES"},
   {value: "Economie", label: "Economie"},
   {value: "Informatique", label: "Informatique"},
+  {value: "Droit", label: "Droit"},
 ];

@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -57,23 +57,31 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-50% - var(--gap)/2))" },
+        },
+        grid: {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
         "border-width": {
-          "from": {
-            "width": "10px",
-            "opacity": "0"
+          from: {
+            width: "10px",
+            opacity: "0",
           },
-          "to": {
-            "width": "100px",
-            "opacity": "1"
-          }
+          to: {
+            width: "100px",
+            opacity: "1",
+          },
         },
         "background-shine": {
-          "from": {
-            "backgroundPosition": "0 0"
+          from: {
+            backgroundPosition: "0 0",
           },
-          "to": {
-            "backgroundPosition": "-200% 0"
-          }
+          to: {
+            backgroundPosition: "-200% 0",
+          },
         },
         "accordion-down": {
           from: { height: 0 },
@@ -85,15 +93,14 @@ module.exports = {
         },
       },
       animation: {
+        marquee: "marquee var(--duration) linear infinite",
+        grid: "grid 15s linear infinite",
         "border-width": "border-width 3s infinite alternate",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "background-shine": "background-shine 2s linear infinite"
-
-
+        "background-shine": "background-shine 2s linear infinite",
       },
-      
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
