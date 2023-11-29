@@ -3,15 +3,13 @@
 import RetroGrid from "@/components/magicui/retro-grid";
 import { LuPartyPopper } from "react-icons/lu";
 import { Badge } from "./ui/badge";
-import Link from "next/link";
-import { Button } from "./ui/button";
 
 const BannerHomepage = () => {
   return (
-    <div className="relative flex flex-col h-full w-full items-center justify-center overflow-hidden rounded-lg bg-background p-36 shadow-2xl">
+    <div className="relative flex flex-col h-full w-full items-center justify-center overflow-hidden rounded-lg bg-background px-2 py-20 lg:p-20 shadow-2xl">
       <Badge
         variant="outline"
-        className="mb-5 flex items-center p-3 whitespace-nowrap"
+        className="mb-5 flex items-center text-center p-3 "
       >
         <LuPartyPopper size={30} />
         <span className="text-sm lg:text-lg ml-3">

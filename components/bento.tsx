@@ -133,7 +133,7 @@ const features = [
 
 export async function Bento() {
   return (
-    <div className="relative flex justify-center w-full py-20">
+    <div className="relative flex justify-center w-full px-2 py-20 lg:p-20">
       <BentoGrid className="lg:w-[80%] mx-2">
         {features.map((feature, idx) => (
           <BentoCard key={idx} {...feature} />

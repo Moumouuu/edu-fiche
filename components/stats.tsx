@@ -8,12 +8,12 @@ const Stats = async () => {
   const numberOfSheet = await prismadb.sheet.count();
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg bg-background p-36 shadow-2xl">
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg bg-background px-2 py-20 lg:p-20 shadow-2xl">
       <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white flex flex-col">
-        <span className="uppercase text-7xl font-bold bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent">
+        <span className="uppercase text-6xl font-bold bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent">
           Merci !
         </span>
-        <span className="text-5xl mt-5">
+        <span className="text-4xl mt-5">
           Vous êtes plus de{" "}
           <NumberTicker
             className="inline bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent"

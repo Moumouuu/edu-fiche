@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CiCircleCheck } from "react-icons/ci";
+import { LuPartyPopper } from "react-icons/lu";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
@@ -37,7 +38,7 @@ export function Cards() {
   ];
 
   return (
-    <div className="w-full p-2 lg:p-36">
+    <div className="w-full px-2 py-20 lg:p-20">
       <div className="text-center mb-10">
         <h1 className="text-6xl font-bold">
           C&apos;est presque{" "}
@@ -59,7 +60,7 @@ export function Cards() {
         }
       >
         <MagicCard
-          size={400}
+          size={700}
           className="flex w-full cursor-pointer flex-col items-start justify-center overflow-hidden bg-[radial-gradient(var(--mask-size)_circle_at_var(--mouse-x)_var(--mouse-y),#22c55e,#2563eb_50%,transparent_100%)] p-8 lg:p-20 shadow-2xl"
         >
           <p className="z-10 whitespace-nowrap text-4xl font-medium text-gray-800 dark:text-gray-200">
@@ -67,7 +68,9 @@ export function Cards() {
           </p>
           <span className="text-8xl my-4">0€</span>
           <p className="text-muted-foreground text-lg mb-4">
-            Vous préférez manger des MacDo ? Pas de soucis, vous pouvez utiliser EduFiche gratuitement. Vous avez accès à 10 générations de fiche gratuitement.
+            Vous préférez manger des MacDo ? Pas de soucis, vous pouvez utiliser
+            EduFiche gratuitement. Vous avez accès à 10 générations de fiche
+            gratuitement.
           </p>
           <Link href="/app" className="w-full">
             <Button variant={"premium"} className="w-full">
@@ -88,7 +91,7 @@ export function Cards() {
           <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         </MagicCard>
         <MagicCard
-          size={400}
+          size={700}
           className="flex w-full cursor-pointer flex-col items-start justify-center overflow-hidden bg-[radial-gradient(var(--mask-size)_circle_at_var(--mouse-x)_var(--mouse-y),#22c55e,#2563eb_50%,transparent_100%)]  p-8 lg:p-20 shadow-2xl"
         >
           <p className="z-10 whitespace-nowrap text-4xl font-medium text-gray-800 dark:text-gray-200">
@@ -102,7 +105,8 @@ export function Cards() {
             un <span className="underline">accès à vie.</span>
           </p>
           <Button variant={"premium"} onClick={onSubscribe} className="w-full">
-            Passer premium
+            <LuPartyPopper size={25} />
+            <span className="ml-2"> Passer premium</span>
           </Button>
 
           <Separator className="my-4" />
