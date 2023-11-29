@@ -1,15 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Title from "../title";
-import { Separator } from "../ui/separator";
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { MdDeleteForever } from "react-icons/md";
-import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
-import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
-import { Sheet } from "@prisma/client";
 import {
   Dialog,
   DialogContent,
@@ -27,11 +17,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FaExchangeAlt } from "react-icons/fa";
+import { Sheet } from "@prisma/client";
 import { DialogClose } from "@radix-ui/react-dialog";
-import FormUpdateSheet from "../form/form-update-sheet";
+import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
+import { FaExchangeAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
+import FormUpdateSheet from "../form/form-update-sheet";
+import Title from "../title";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { copySharingLink } from "@/lib/utils";
 
 export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
   const [sheets, setSheets] = useState(s);
@@ -46,7 +47,6 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
   }, [s]);
 
   const deleteSheet = async (sheetId: String) => {
-    setSheets(sheets.filter((sheet: Sheet) => sheet.id !== sheetId));
     try {
       await axios.delete(`/api/sheet/${sheetId}`);
     } catch (error) {
@@ -69,12 +69,7 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
     );
   };
 
-  const copySharingLink = (sheet: Sheet) => {
-    navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_URL}/sheet/${sheet.id}`
-    );
-    toast.success("Lien copié dans le presse-papier !");
-  };
+
 
   return (
     <div className="w-full h-[100vh] overflow-y-scroll flex flex-col p-4 mt-14 md:mt-0">

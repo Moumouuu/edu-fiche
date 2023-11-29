@@ -5,7 +5,7 @@ import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 
-const settingsUrl = absoluteUrl("/settings");
+const settingsUrl = absoluteUrl("settings");
 
 export async function GET() {
   try {

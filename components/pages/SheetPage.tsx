@@ -13,6 +13,7 @@ import { Sheet } from "@prisma/client";
 import { Button } from "../ui/button";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
+import { copySharingLink } from "@/lib/utils";
 
 export default function Page({ sheet }: { sheet: Sheet }) {
   const formatKeywords = (keywords: string) => {
@@ -28,13 +29,6 @@ export default function Page({ sheet }: { sheet: Sheet }) {
         ))}
       </div>
     );
-  };
-
-  const copySharingLink = (sheet: Sheet) => {
-    navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_URL}/sheet/${sheet.id}`
-    );
-    toast.success("Lien copié dans le presse-papier !");
   };
 
   return (

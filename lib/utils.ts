@@ -1,12 +1,21 @@
+import { Sheet } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
+import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
+  return `${process.env.NEXT_PUBLIC_APP_URL}/${path}`;
 }
+
+export const copySharingLink = (sheet: Sheet) => {
+  navigator.clipboard.writeText(
+    `${process.env.NEXT_PUBLIC_URL}/sheet/${sheet.id}`
+  );
+  toast.success("Lien copié dans le presse-papier !");
+};
 
 export const MAX_FREE_TRIAL = 3;
 
@@ -37,7 +46,6 @@ export const studentLevel = [
 ];
 
 export const subjects = [
-
   { value: "Mathématiques", label: "Mathématiques" },
   { value: "Physique-Chimie", label: "Physique-Chimie" },
   { value: "SVT", label: "SVT" },
@@ -46,8 +54,8 @@ export const subjects = [
   { value: "Philosophie", label: "Philosophie" },
   { value: "Anglais", label: "Anglais" },
   { value: "Espagnol", label: "Espagnol" },
-  {value: "SES", label: "SES"},
-  {value: "Economie", label: "Economie"},
-  {value: "Informatique", label: "Informatique"},
-  {value: "Droit", label: "Droit"},
+  { value: "SES", label: "SES" },
+  { value: "Economie", label: "Economie" },
+  { value: "Informatique", label: "Informatique" },
+  { value: "Droit", label: "Droit" },
 ];
