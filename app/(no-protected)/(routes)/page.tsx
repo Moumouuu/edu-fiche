@@ -1,5 +1,6 @@
 import BannerHomepage from "@/components/banner-homepage";
 import { Bento } from "@/components/bento";
+import { Cards } from "@/components/cards";
 import Footer from "@/components/footer";
 import NavHomepage from "@/components/nav-homepage";
 import Reviews from "@/components/reviews";
@@ -19,6 +20,7 @@ export default async function Home() {
       <BannerHomepage />
       <Reviews />
       <Bento />
+      <Cards/>
       <Stats />
       <Footer />
     </div>

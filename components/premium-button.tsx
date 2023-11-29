@@ -40,7 +40,7 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
   if (isPro) {
     return (
       <Button variant="premium" disabled>
-        You have a premium account
+        Vous êtes Premium !
       </Button>
     );
   }
