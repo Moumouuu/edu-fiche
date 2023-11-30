@@ -11,8 +11,15 @@ export const runtime = "edge";
 
 export async function POST(req: Request) {
   // Extract the `messages` from the body of the request
-  const { messages, level, subject, keysWords, userLimit, isSubscribed, typeOfExercice } =
-    await req.json();
+  const {
+    messages,
+    level,
+    subject,
+    keysWords,
+    userLimit,
+    isSubscribed,
+    typeOfExercice,
+  } = await req.json();
 
   if (!isSubscribed) throw new Error("User is not subscribed");
 

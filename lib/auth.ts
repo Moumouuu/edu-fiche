@@ -4,15 +4,14 @@ import bcrypt from "bcrypt";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+
 export const authOptions: NextAuthOptions = {
-  // @ts-ignore
-  //adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
   pages: {
     signIn: "/sign-in",
-    signOut: "/sign-in",
+    signOut: "/",
   },
   providers: [
     GoogleProvider({
@@ -62,10 +61,6 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       console.log("fire signin Callback");
       return true;
-    },
-    async redirect({ url, baseUrl }) {
-      console.log("fire redirect Callback");
-      return baseUrl;
     },
     async session({ session, token }) {
       return session;

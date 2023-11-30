@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "../ui/badge";
 
-import useClipboard from "@/app/hooks/useClipBoard";
+import useClipboard from "@/app/hooks/use-clip-board";
 import { Sheet } from "@prisma/client";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 
 export default function Page({ sheet }: { sheet: Sheet }) {
   const { copyToClipboard } = useClipboard();
+
   const formatKeywords = (keywords: string) => {
     // split keywords by space example : "maths physique" => ["maths", "physique"]
     // and remove empty string

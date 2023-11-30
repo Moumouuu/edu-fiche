@@ -1,4 +1,4 @@
-import { Github, LifeBuoy, LogOut, Settings, User } from "lucide-react";
+import { Github, LogOut, Settings, User } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -38,7 +38,10 @@ export function UserProfile() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/settings" className="flex justify-between items-center w-full">
+            <Link
+              href="/settings"
+              className="flex justify-between items-center w-full"
+            >
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
@@ -53,10 +56,7 @@ export function UserProfile() {
             <span>Mon GitHub</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <LifeBuoy className="mr-2 h-4 w-4" />
-          <span>Support</span>
-        </DropdownMenuItem>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {

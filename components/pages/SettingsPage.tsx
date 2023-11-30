@@ -1,24 +1,13 @@
 "use client";
-import { PremiumButton } from "@/components/premium-button";
+import useStripeSubscribe from "@/app/hooks/use-stripe-subscribe";
+import { PremiumModal } from "@/components/premium-modal";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import { useState } from "react";
-export default function SettingsPage({ isSubscribed} : { isSubscribed: boolean}) {
-  const [loading, setLoading] = useState(false);
-
-  const onClickPremiumButton = async () => {
-    try {
-      setLoading(true);
-
-      const response = await axios.get("/api/stripe");
-
-      window.location.href = response.data.url;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+export default function SettingsPage({
+  isSubscribed,
+}: {
+  isSubscribed: boolean;
+}) {
+  const { subscribeToStripe, loading } = useStripeSubscribe();
 
   return (
     <div className="md:p-4 px-4 py-14 flex flex-col">
@@ -28,14 +17,14 @@ export default function SettingsPage({ isSubscribed} : { isSubscribed: boolean})
         <Button
           variant={"premium"}
           className="my-4"
-          onClick={onClickPremiumButton}
-          disabled={loading}
+          onClick={subscribeToStripe}
+          disabled={loading || isSubscribed}
         >
           Gérer votre abonnement
         </Button>
       ) : (
         // isPro is false obviously
-        <PremiumButton isPro={isSubscribed}/>
+        <PremiumModal isPro={isSubscribed} />
       )}
     </div>
   );

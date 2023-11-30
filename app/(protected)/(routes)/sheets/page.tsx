@@ -25,9 +25,5 @@ export default async function Page() {
     orderBy: { createdAt: "desc" },
   });
 
-  return (
-    <div>
-      <MySheetPage sheets={sheets} />
-    </div>
-  );
+  return <MySheetPage sheets={sheets} />;
 }

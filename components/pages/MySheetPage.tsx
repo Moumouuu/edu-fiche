@@ -1,6 +1,6 @@
 "use client";
 
-import useClipboard from "@/app/hooks/useClipBoard";
+import useClipboard from "@/app/hooks/use-clip-board";
 import {
   Dialog,
   DialogContent,
@@ -26,8 +26,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
-import { FaExchangeAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { RiEdit2Line as RxUpdate } from "react-icons/ri";
 import FormUpdateSheet from "../form/form-update-sheet";
 import Title from "../title";
 import { Badge } from "../ui/badge";
@@ -114,13 +114,14 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <Button
                       variant={"ghost"}
+                      className="w-full flex justify-start"
                       onClick={() =>
                         copyToClipboard(
                           `${process.env.NEXT_PUBLIC_APP_URL}/sheet/${sheet.id}`
                         )
                       }
                     >
-                      <AiOutlineShareAlt size={30} className={"mr-2"} />
+                      <AiOutlineShareAlt size={25} className="mr-2" />
                       Partager
                     </Button>
                   </DropdownMenuItem>
@@ -129,12 +130,11 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                     <Dialog>
                       <DialogTrigger>
                         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                          <Button variant={"ghost"}>
-                            <MdDeleteForever
-                              size={30}
-                              color="red"
-                              className={"mr-2"}
-                            />
+                          <Button
+                            variant={"ghost"}
+                            className="w-full flex justify-start"
+                          >
+                            <MdDeleteForever size={25} className="mr-2" />
                             Supprimer
                           </Button>
                         </DropdownMenuItem>
@@ -160,11 +160,7 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                             variant="destructive"
                             onClick={() => deleteSheet(sheet.id)}
                           >
-                            <MdDeleteForever
-                              size={30}
-                              color="red"
-                              className={"mr-2"}
-                            />
+                            <MdDeleteForever size={25} className={"mr-2"} />
                             Supprimer
                           </Button>
                         </DialogFooter>
@@ -173,11 +169,14 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                     <Dialog>
                       <DialogTrigger>
                         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                          <Button variant={"ghost"}>
-                            <FaExchangeAlt
-                              size={30}
+                          <Button
+                            className="w-full flex justify-start"
+                            variant={"ghost"}
+                          >
+                            <RxUpdate
+                              size={25}
+                              color={"white"}
                               className={"mr-2"}
-                              color="green"
                             />
                             Modifier
                           </Button>

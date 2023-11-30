@@ -16,12 +16,12 @@ import { Separator } from "../ui/separator";
 import { signIn } from "next-auth/react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { set, useForm } from "react-hook-form";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function UserAuthForm() {
   const [isLoading, setIsLloading] = useState(false);
@@ -66,14 +66,12 @@ export default function UserAuthForm() {
   const onSubmitLogin = async (data: FormValuesLogin) => {
     setIsLloading(true);
     try {
-      const res = await signIn("credentials", {
+      await signIn("credentials", {
         redirect: false,
         email: data.email,
         password: data.password,
+        callbackUrl: "/app",
       });
-      if (res?.ok) {
-        router.push("/");
-      }
       setIsLloading(false);
     } catch (err) {
       console.log("[LOGIN_ERROR]" + err);
@@ -84,16 +82,14 @@ export default function UserAuthForm() {
   const onSubmitRegister = async (data: FormValuesRegister) => {
     setIsLloading(true);
     try {
-      const resRegister = await axios.post("/api/account", data);
+      await axios.post("/api/account", data);
       try {
         const res = await signIn("credentials", {
           redirect: false,
           email: data.email,
           password: data.password,
+          callbackUrl: "/app",
         });
-        if (res?.ok) {
-          router.push("/");
-        }
         setIsLloading(false);
       } catch (err) {
         console.log("[LOGIN_ERROR_AFTER_REGISTER]" + err);
@@ -105,7 +101,7 @@ export default function UserAuthForm() {
   };
 
   return (
-    <Tabs defaultValue="sign-in" className="w-[400px]" >
+    <Tabs defaultValue="sign-in" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="sign-in">Sign-in</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
@@ -164,7 +160,7 @@ export default function UserAuthForm() {
             <Button
               variant={"outline"}
               onClick={() => {
-                signIn("google");
+                signIn("google", { callbackUrl: "/app" });
               }}
             >
               <AiFillGoogleCircle size={30} />

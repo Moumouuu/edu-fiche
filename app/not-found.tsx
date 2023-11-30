@@ -15,7 +15,9 @@ export default function NotFound() {
           <p className="text-xl">the page you are looking for not avaible!</p>
 
           <Link href="/">
-            <Button className="my-4" variant="premium">Go to Home</Button>
+            <Button className="my-4" variant="premium">
+              Go to Home
+            </Button>
           </Link>
         </div>
       </div>

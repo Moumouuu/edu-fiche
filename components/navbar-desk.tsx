@@ -6,7 +6,7 @@ import { MAX_FREE_TRIAL, cn, itemsMenu } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PremiumButton } from "./premium-button";
+import { PremiumModal } from "./premium-modal";
 import { UserProfile } from "./user-profile";
 
 export default function NavbarDesk({
@@ -24,16 +24,20 @@ export default function NavbarDesk({
     <div className="w-[300px] border-r h-[100vh] p-4">
       <div className="mb-8">
         <div className="flex ">
-          <span className="text-3xl flex items-center">
+          <div className="flex items-center">
             <Image
               src="/assets/images/edu-fiche-logo.png"
-              width={65}
-              height={65}
-              alt="Logo edu-fiche"
-              className="mr-3"
+              alt="EduFiche"
+              width={50}
+              height={50}
             />
-            EduFiche
-          </span>
+            <h1 className="hidden md:block text-xl md:text-2xl ml-2">
+              Edu
+              <span className="font-semibold text-2xl md:text-3xl text-transparent bg-gradient-to-br from-green-400 to-blue-600 bg-clip-text">
+                Fiche
+              </span>
+            </h1>
+          </div>
         </div>
       </div>
       <div className="h-[90%] flex flex-col justify-between">
@@ -92,7 +96,7 @@ export default function NavbarDesk({
               />
             </div>
           )}
-          <PremiumButton isPro={isPro} />
+          <PremiumModal isPro={isPro} />
           <div className="flex w-full justify-between items-center mt-2">
             <UserProfile />
             <ModeToggle />

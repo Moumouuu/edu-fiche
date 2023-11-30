@@ -1,11 +1,11 @@
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeProvider } from "@/app/providers/theme-provider";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import AuthContext from "./context/auth-context";
+import AuthContext from "./providers/auth-context";
 import "./globals.css";
 import GoogleAnalytics from "@/components/google-analytics";
 

@@ -5,8 +5,7 @@ import { getServerSession } from "next-auth/next";
 import { Rubik } from "next/font/google";
 import { redirect } from "next/navigation";
 
-const font = Rubik({ subsets: ['latin'] })
-
+const font = Rubik({ subsets: ["latin"] });
 
 export default async function ProtectedLayout({
   children,

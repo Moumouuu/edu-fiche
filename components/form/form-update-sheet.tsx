@@ -1,8 +1,5 @@
 "use client";
 
-import { Sheet } from "@prisma/client";
-import { Input } from "../ui/input";
-import { useForm } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -11,13 +8,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { studentLevel, subjects } from "@/lib/utils";
-import { useState } from "react";
-import axios from "axios";
-import { Label } from "../ui/label";
-import { DialogFooter } from "../ui/dialog";
+import { Sheet } from "@prisma/client";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { Button } from "../ui/button";
+import { DialogFooter } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 export default function FormUpdateSheet({
   sheet,
@@ -26,14 +26,12 @@ export default function FormUpdateSheet({
   sheet: Sheet;
   setSheets: any;
 }) {
-
   const [level, setLevel] = useState<string | undefined>(undefined);
   const [subject, setSubject] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const { register, handleSubmit } = useForm();
 
-  const { register, handleSubmit} = useForm();
- 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
@@ -54,10 +52,12 @@ export default function FormUpdateSheet({
           s.id === sheet.id
             ? {
                 ...s,
-                title: ((data.title == "" ? null : data.title) ?? sheet.title),
+                title: (data.title == "" ? null : data.title) ?? sheet.title,
                 level: level ?? sheet.level,
                 subject: subject ?? sheet.subject,
-                keywords: ((data.keywords == "" ? null : data.keywords) ?? sheet.keywords),
+                keywords:
+                  (data.keywords == "" ? null : data.keywords) ??
+                  sheet.keywords,
               }
             : s
         )
@@ -134,13 +134,20 @@ export default function FormUpdateSheet({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="secondary" className="my-2">Annuler</Button>
+            <Button variant="secondary" className="my-2">
+              Annuler
+            </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button type="submit" variant="default" className="my-2" disabled={isLoading}>
+            <Button
+              type="submit"
+              variant="default"
+              className="my-2"
+              disabled={isLoading}
+            >
               Confirmer
             </Button>
-            </DialogClose>
+          </DialogClose>
         </DialogFooter>
       </form>
     </>

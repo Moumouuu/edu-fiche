@@ -9,12 +9,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
-import { PremiumButton } from "./premium-button";
+import { PremiumModal } from "./premium-modal";
 import { UserProfile } from "./user-profile";
-import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
 
 export default function NavbarMobile({
   userLimit,
@@ -35,16 +35,20 @@ export default function NavbarMobile({
       <SheetContent side={"left"}>
         <SheetHeader className="mb-8">
           <SheetTitle>
-            <span className="text-3xl flex items-center">
+            <div className="flex items-center">
               <Image
                 src="/assets/images/edu-fiche-logo.png"
+                alt="EduFiche"
                 width={50}
                 height={50}
-                alt="Logo edu-fiche"
-                className="mr-3"
               />
-              EduFiche
-            </span>
+              <h1 className="text-xl md:text-2xl ml-2">
+                Edu
+                <span className="font-semibold text-2xl md:text-3xl text-transparent bg-gradient-to-br from-green-400 to-blue-600 bg-clip-text">
+                  Fiche
+                </span>
+              </h1>
+            </div>
           </SheetTitle>
         </SheetHeader>
         <div className="h-[90%] flex flex-col justify-between">
@@ -92,7 +96,9 @@ export default function NavbarMobile({
           <div className="flex flex-col">
             {!isPro && (
               <div className="flex flex-col my-3">
-                <span>{userLimit ?? 0}/{MAX_FREE_TRIAL} free generation</span>
+                <span>
+                  {userLimit ?? 0}/{MAX_FREE_TRIAL} free generation
+                </span>
                 <Progress
                   value={userLimit ? userLimit * 10 : 0}
                   className="border"
@@ -100,7 +106,7 @@ export default function NavbarMobile({
               </div>
             )}
 
-            <PremiumButton isPro={isPro} />
+            <PremiumModal isPro={isPro} />
             <div className="flex w-full justify-between items-center mt-2">
               <UserProfile />
               <ModeToggle />

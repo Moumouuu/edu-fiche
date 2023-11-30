@@ -14,13 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
+import { MAX_FREE_TRIAL, studentLevel, subjects } from "@/lib/utils";
 import { useChat } from "ai/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ResponseModal } from "../response-modal";
-import { studentLevel, subjects } from "@/lib/utils";
 
 export default function SheetPage({
   userLimit,

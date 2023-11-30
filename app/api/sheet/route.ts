@@ -3,7 +3,7 @@ import prismadb from "@/lib/prismadb";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   // title & idSheet is only for update
   const { messages, level, subject, keysWords, idSheet, title } =
     await req.json();

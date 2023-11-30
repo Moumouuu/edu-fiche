@@ -1,5 +1,6 @@
 "use client";
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
+import useStripeSubscribe from "@/app/hooks/use-stripe-subscribe";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,26 +11,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 
-export function PremiumButton({ isPro }: { isPro: boolean }) {
-  const [loading, setLoading] = useState(false);
+export function PremiumModal({ isPro }: { isPro: boolean }) {
   const [isMounted, setIsMounted] = useState(false);
-  const { isOpen, open, close } = usePremiumModal();
-
-  const onSubscribe = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("/api/stripe");
-
-      window.location.href = response.data.url;
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { isOpen, open } = usePremiumModal();
+  const { subscribeToStripe, loading } = useStripeSubscribe();
 
   useEffect(() => {
     setIsMounted(true);
@@ -122,7 +110,7 @@ export function PremiumButton({ isPro }: { isPro: boolean }) {
             disabled={loading}
             type="submit"
             variant={"premium"}
-            onClick={onSubscribe}
+            onClick={subscribeToStripe}
           >
             Passer Premium
           </Button>
