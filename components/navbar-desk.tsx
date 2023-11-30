@@ -2,7 +2,7 @@
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { MAX_FREE_TRIAL, cn, itemsMenu } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,31 +18,8 @@ export default function NavbarDesk({
 }) {
   // TODO : icon color change in function of theme
   const path = usePathname();
-  const { open, isOpen } = usePremiumModal();
+  const { open } = usePremiumModal();
 
-  const itemsMenu = [
-    {
-      name: "Fiche de révision",
-      href: "/app",
-      icon: "https://cdn.lordicon.com/isugonwi.json",
-      premium: false,
-      isActive: "/" === path,
-    },
-    {
-      name: "Générateur d'exercices",
-      href: "/exercices",
-      icon: "https://cdn.lordicon.com/kipaqhoz.json",
-      premium: true,
-      isActive: "/exercices" === path,
-    },
-    {
-      name: "Mes fiches",
-      href: "/sheets",
-      icon: "https://cdn.lordicon.com/hpivxauj.json",
-      premium: false,
-      isActive: "/sheets" === path,
-    },
-  ];
   return (
     <div className="w-[300px] border-r h-[100vh] p-4">
       <div className="mb-8">
@@ -71,7 +48,7 @@ export default function NavbarDesk({
                 <div
                   className={cn(
                     "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
-                    item.isActive && "bg-primary/10"
+                    item.href === path && "bg-primary/10"
                   )}
                 >
                   {/* @ts-ignore */}
@@ -88,7 +65,7 @@ export default function NavbarDesk({
                 <div
                   className={cn(
                     "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
-                    item.isActive && "bg-primary/10"
+                    item.href === path && "bg-primary/10"
                   )}
                 >
                   {/* @ts-ignore */}
@@ -106,15 +83,17 @@ export default function NavbarDesk({
         <div className="flex flex-col">
           {!isPro && (
             <div className="flex flex-col my-3">
-              <span>{userLimit ?? 0}/3 free generation</span>
+              <span>
+                {userLimit ?? 0}/{MAX_FREE_TRIAL} free generation
+              </span>
               <Progress
-                value={userLimit ? userLimit * 10 * 3.33 : 0}
+                value={userLimit ? userLimit * 10 : 0}
                 className="border"
               />
             </div>
           )}
           <PremiumButton isPro={isPro} />
-          <div className="flex w-full justify-between items-center">
+          <div className="flex w-full justify-between items-center mt-2">
             <UserProfile />
             <ModeToggle />
           </div>

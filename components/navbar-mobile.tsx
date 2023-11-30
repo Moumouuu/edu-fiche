@@ -14,6 +14,7 @@ import Link from "next/link";
 import { CgMenuGridO } from "react-icons/cg";
 import { PremiumButton } from "./premium-button";
 import { UserProfile } from "./user-profile";
+import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
 
 export default function NavbarMobile({
   userLimit,
@@ -23,27 +24,6 @@ export default function NavbarMobile({
   isPro: boolean;
 }) {
   const { open } = usePremiumModal();
-
-  const itemsMenu = [
-    {
-      name: "Fiche de révision",
-      href: "/app",
-      icon: "https://cdn.lordicon.com/isugonwi.json",
-      premium: false,
-    },
-    {
-      name: "Générateur d'exercices",
-      href: "/exercices",
-      icon: "https://cdn.lordicon.com/kipaqhoz.json",
-      premium: true,
-    },
-    {
-      name: "Mes fiches",
-      href: "/sheets",
-      icon: "https://cdn.lordicon.com/hpivxauj.json",
-      premium: false,
-    },
-  ];
 
   return (
     <Sheet>
@@ -112,16 +92,16 @@ export default function NavbarMobile({
           <div className="flex flex-col">
             {!isPro && (
               <div className="flex flex-col my-3">
-                <span>{userLimit ?? 0}/3 free generation</span>
+                <span>{userLimit ?? 0}/{MAX_FREE_TRIAL} free generation</span>
                 <Progress
-                  value={userLimit ? userLimit * 10 * 3.33 : 0}
+                  value={userLimit ? userLimit * 10 : 0}
                   className="border"
                 />
               </div>
             )}
 
             <PremiumButton isPro={isPro} />
-            <div className="flex w-full justify-between items-center">
+            <div className="flex w-full justify-between items-center mt-2">
               <UserProfile />
               <ModeToggle />
             </div>

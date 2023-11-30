@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "../ui/badge";
 
+import useClipboard from "@/app/hooks/useClipBoard";
 import { Sheet } from "@prisma/client";
-import { Button } from "../ui/button";
+import { Toaster } from "react-hot-toast";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
-import toast, { Toaster } from "react-hot-toast";
-import { copySharingLink } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 export default function Page({ sheet }: { sheet: Sheet }) {
+  const { copyToClipboard } = useClipboard();
   const formatKeywords = (keywords: string) => {
     // split keywords by space example : "maths physique" => ["maths", "physique"]
     // and remove empty string
@@ -58,7 +59,11 @@ export default function Page({ sheet }: { sheet: Sheet }) {
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 <Button
                   variant={"ghost"}
-                  onClick={() => copySharingLink(sheet)}
+                  onClick={() =>
+                    copyToClipboard(
+                      `${process.env.NEXT_PUBLIC_APP_URL}/sheet/${sheet.id}`
+                    )
+                  }
                 >
                   <AiOutlineShareAlt size={30} className={"mr-2"} />
                   Partager

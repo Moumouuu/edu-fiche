@@ -1,5 +1,6 @@
 "use client";
 
+import useClipboard from "@/app/hooks/useClipBoard";
 import {
   Dialog,
   DialogContent,
@@ -23,7 +24,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
 import { FaExchangeAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -32,10 +33,10 @@ import Title from "../title";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { copySharingLink } from "@/lib/utils";
 
 export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
   const [sheets, setSheets] = useState(s);
+  const { copyToClipboard } = useClipboard();
   const router = useRouter();
 
   useEffect(() => {
@@ -68,8 +69,6 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
       </div>
     );
   };
-
-
 
   return (
     <div className="w-full h-[100vh] overflow-y-scroll flex flex-col p-4 mt-14 md:mt-0">
@@ -115,7 +114,11 @@ export default function MySheetPage({ sheets: s }: { sheets: Sheet[] }) {
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <Button
                       variant={"ghost"}
-                      onClick={() => copySharingLink(sheet)}
+                      onClick={() =>
+                        copyToClipboard(
+                          `${process.env.NEXT_PUBLIC_APP_URL}/sheet/${sheet.id}`
+                        )
+                      }
                     >
                       <AiOutlineShareAlt size={30} className={"mr-2"} />
                       Partager

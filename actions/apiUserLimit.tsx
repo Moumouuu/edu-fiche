@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import prismadb from "@/lib/prismadb";
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 
 export async function apiUserLimit() {
@@ -45,7 +46,7 @@ export async function apiUserLimitIncrement() {
 
   if (!userApiLimit) return;
 
-  if (userApiLimit?.count === 3) return Error("UserApiLimit reached");
+  if (userApiLimit?.count === MAX_FREE_TRIAL) return Error("UserApiLimit reached");
 
   const userApiLimitUpdated = await prismadb.userApiLimit.update({
     where: {

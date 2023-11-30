@@ -1,6 +1,5 @@
 import { Sheet } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
-import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -10,14 +9,28 @@ export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}/${path}`;
 }
 
-export const copySharingLink = (sheet: Sheet) => {
-  navigator.clipboard.writeText(
-    `${process.env.NEXT_PUBLIC_URL}/sheet/${sheet.id}`
-  );
-  toast.success("Lien copié dans le presse-papier !");
-};
+export const itemsMenu = [
+  {
+    name: "Fiche de révision",
+    href: "/app",
+    icon: "https://cdn.lordicon.com/isugonwi.json",
+    premium: false,
+  },
+  {
+    name: "Générateur d'exercices",
+    href: "/exercices",
+    icon: "https://cdn.lordicon.com/kipaqhoz.json",
+    premium: true,
+  },
+  {
+    name: "Mes fiches",
+    href: "/sheets",
+    icon: "https://cdn.lordicon.com/hpivxauj.json",
+    premium: false,
+  },
+];
 
-export const MAX_FREE_TRIAL = 3;
+export const MAX_FREE_TRIAL = 10;
 
 export const studentLevel = [
   { value: "Collège | 6e", label: "Collège | 6e" },
