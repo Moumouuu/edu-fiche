@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
 
+import { createSheet } from "@/actions/createSheet";
+import { incrementFreeTrial } from "@/actions/incrementFreeTrial";
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { useResponseModal } from "@/app/hooks/use-response-modal";
 import { Button } from "@/components/ui/button";
@@ -16,9 +18,9 @@ import {
 } from "@/components/ui/select";
 import { MAX_FREE_TRIAL, studentLevel, subjects } from "@/lib/utils";
 import { useChat } from "ai/react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { ResponseModal } from "../response-modal";
 
 export default function SheetPage({
@@ -58,32 +60,15 @@ export default function SheetPage({
       open();
       if (!error && !isLoading) {
         incrementFreeTrial();
-        createSheet();
+        createSheet(messages, {
+          level,
+          subject,
+          keysWords,
+        });
         router.refresh();
       }
     }
   }, [messages, isLoading, error]);
-
-  const incrementFreeTrial = async () => {
-    try {
-      await axios.post("/api/free-trial/increment");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const createSheet = async () => {
-    try {
-      await axios.post("/api/sheet", {
-        level,
-        subject,
-        keysWords: keysWords,
-        messages,
-      });
-    } catch (err) {
-      console.log(`[ERROR_CREATE_SHEET] : ${err}`);
-    }
-  };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
@@ -92,6 +77,7 @@ export default function SheetPage({
 
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center">
+      <Toaster />
       <div>
         {/* @ts-ignore */}
         <lord-icon

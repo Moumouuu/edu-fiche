@@ -38,13 +38,13 @@ export default function Page({ sheet }: { sheet: Sheet }) {
       <Toaster />
       <div
         key={sheet.id}
-        className="h-full flex flex-col p-5 m-5 mt-16 md:mt-5 bg-primary/10 hover:bg-primary/20 transition duration-200 ease-in-out rounded"
+        className="h-screen overflow-y-scroll flex flex-col p-3 mt-16"
       >
         <div className="flex w-full justify-between mb-3 items-center">
           <span className="text-2xl md:text3xl">{sheet.title}</span>
           <span className="text-xl">{`${sheet.createdAt.getDate()}/${sheet.createdAt.getMonth()}/${sheet.createdAt.getFullYear()}`}</span>
         </div>
-        <span className="text-lg">{sheet.text}</span>
+        <p className="text-lg whitespace-pre-wrap">{sheet.text}</p>
         <div>{formatKeywords(sheet.keywords)}</div>
 
         <div className=" flex w-full justify-end items-center mt-4">

@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   if (!userApiLimit) throw new Error("No user connected");
 
-  if (userApiLimit?.count === MAX_FREE_TRIAL && !isSubscribed)
+  if (userApiLimit.count === MAX_FREE_TRIAL && !isSubscribed)
     return Error("UserApiLimit reached");
 
   if (!isSubscribed) {

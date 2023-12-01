@@ -1,3 +1,4 @@
+import useClipboard from "@/app/hooks/use-clip-board";
 import {
   Dialog,
   DialogContent,
@@ -25,6 +26,8 @@ export function ResponseModal({
   userLimit: number | undefined;
   title: string;
 }) {
+  const { copyToClipboard } = useClipboard();
+
   if (!isSubscribed && userLimit === MAX_FREE_TRIAL) {
     return (
       <span className="m-3">
@@ -44,20 +47,19 @@ export function ResponseModal({
             </span>
           </DialogTitle>
           <DialogDescription>
-            Votre fiche est automatiquement sauvegardée ! Vous pouvez la consulter a tout moment.
+            Votre fiche est automatiquement sauvegardée ! Vous pouvez la
+            consulter a tout moment.
           </DialogDescription>
         </DialogHeader>
         <div className="p-3 ">
-          <p className="text-sm md:text-lg">
+          <p className="text-sm md:text-lg whitespace-pre-wrap">
             {content[content.length - 1]?.content}
           </p>
           {!isLoading && (
             <Button
               variant={"default"}
               onClick={() =>
-                navigator.clipboard.writeText(
-                  content[content.length - 1]?.content
-                )
+                copyToClipboard(content[content.length - 1]?.content)
               }
               className="mt-3 flex items-center"
             >

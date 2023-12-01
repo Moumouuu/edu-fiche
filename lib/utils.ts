@@ -29,7 +29,7 @@ export const itemsMenu = [
   },
 ];
 
-export const MAX_FREE_TRIAL = 10;
+export const MAX_FREE_TRIAL = 5;
 
 export const studentLevel = [
   { value: "Collège | 6e", label: "Collège | 6e" },

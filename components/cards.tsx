@@ -14,7 +14,7 @@ export async function Cards() {
           </span>{" "}
           pour vous !
         </h1>
-        <h3 className="mt-6 text-xl font-semibold text-muted-foreground">
+        <h3 className="my-6 text-xl font-semibold text-muted-foreground">
           Améliorez votre expérience avec notre abonnement premium ! Soutenez
           directement le développement, l&apos;unique étudiant derrière ce
           projet. Rejoignez-nous maintenant !

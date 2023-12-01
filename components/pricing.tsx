@@ -1,5 +1,6 @@
 "use client";
 import { MagicCard, MagicContainer } from "@/components/magicui/magic-card";
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 import Link from "next/link";
 import { CiCircleCheck } from "react-icons/ci";
 import { LuPartyPopper } from "react-icons/lu";
@@ -9,8 +10,8 @@ import { Separator } from "./ui/separator";
 
 export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
   const freeLabels = [
-    "Vous avez accès à 10 générations de fiche gratuitement.",
-    "Toutes les 5 générations de fiche vous gagnez un EduCoin. Vous pouvez les utiliser pour acheter des générations de Quiz.",
+    `Vous avez accès à ${MAX_FREE_TRIAL} générations de fiche gratuitement.`,
+    "Accès à 1 Quiz gratuitement.",
     "Vous pouvez consulter vos fiches de révision sur tous vos appareils.",
     "Vous avez accès à l'annuaire du Web.",
   ];
