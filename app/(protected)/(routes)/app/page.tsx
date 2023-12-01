@@ -5,7 +5,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "EduFiche | Fiche de révision",
-  description: "Page de génération de fiche de révision de l'application EduFiche",
+  description:
+    "Page de génération de fiche de révision de l'application EduFiche",
 };
 
 export default async function Home() {

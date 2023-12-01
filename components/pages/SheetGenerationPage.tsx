@@ -9,19 +9,14 @@ import { incrementFreeTrial } from "@/actions/incrementFreeTrial";
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { useResponseModal } from "@/app/hooks/use-response-modal";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { MAX_FREE_TRIAL, studentLevel, subjects } from "@/lib/utils";
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { ResponseModal } from "../response-modal";
+import { SelectLevel } from "../select-level";
+import { SelectSubject } from "../select-subject";
 
 export default function SheetPage({
   userLimit,
@@ -76,7 +71,7 @@ export default function SheetPage({
   };
 
   return (
-    <div className="h-[100vh] flex flex-col items-center justify-center">
+    <div className="h-screen flex flex-col items-center justify-center">
       <Toaster />
       <div>
         {/* @ts-ignore */}
@@ -95,32 +90,9 @@ export default function SheetPage({
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
           {/* select for level */}
-          <Select onValueChange={(e) => setLevel(e)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Niveau" />
-            </SelectTrigger>
-            <SelectContent>
-              {studentLevel.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
+          <SelectLevel onValueChange={(e) => setLevel(e)} />
           {/* select for subject */}
-          <Select onValueChange={(e) => setSubject(e)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Matière" />
-            </SelectTrigger>
-            <SelectContent>
-              {subjects.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <SelectSubject onValueChange={(e) => setSubject(e)} />
         </div>
 
         {/* keywords */}
