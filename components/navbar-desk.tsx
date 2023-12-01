@@ -16,7 +16,6 @@ export default function NavbarDesk({
   userLimit: number | undefined;
   isPro: boolean;
 }) {
-  // TODO : icon color change in function of theme
   const path = usePathname();
   const { open } = usePremiumModal();
 
@@ -51,7 +50,7 @@ export default function NavbarDesk({
               >
                 <div
                   className={cn(
-                    "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
+                    "flex items-center w-full hover:bg-primary/10 p-3 rounded",
                     item.href === path && "bg-primary/10"
                   )}
                 >
@@ -59,7 +58,7 @@ export default function NavbarDesk({
                   <lord-icon
                     src={item.icon}
                     trigger="hover"
-                    colors="primary:#fff"
+                    colors={"primary:#fff"}
                   />
                   <span className="ml-2"> {item.name}</span>
                 </div>
@@ -68,7 +67,7 @@ export default function NavbarDesk({
               <Link href={item.href} key={item.name} className="my-3">
                 <div
                   className={cn(
-                    "flex items-center w-full hover:bg-primary/10 p-1 py-3 rounded",
+                    "flex items-center w-full hover:bg-primary/10 p-3 rounded-lg",
                     item.href === path && "bg-primary/10"
                   )}
                 >
@@ -76,7 +75,7 @@ export default function NavbarDesk({
                   <lord-icon
                     src={item.icon}
                     trigger="hover"
-                    colors="primary:#fff"
+                    colors={"primary:#fff"}
                   />
                   <span className="ml-2"> {item.name}</span>
                 </div>
@@ -91,7 +90,7 @@ export default function NavbarDesk({
                 {userLimit ?? 0}/{MAX_FREE_TRIAL} free generation
               </span>
               <Progress
-                value={userLimit ? userLimit * 10 : 0}
+                value={userLimit ? userLimit * 20 : 0}
                 className="border"
               />
             </div>

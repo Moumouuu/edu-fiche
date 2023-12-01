@@ -16,8 +16,9 @@ export const itemsMenu = [
     premium: false,
   },
   {
-    name: "Générateur d'exercices",
-    href: "/exercices",
+    // TODO
+    name: "Générateur de Quiz (BETA)",
+    href: "/quiz",
     icon: "https://cdn.lordicon.com/kipaqhoz.json",
     premium: true,
   },
@@ -25,6 +26,18 @@ export const itemsMenu = [
     name: "Mes fiches",
     href: "/sheets",
     icon: "https://cdn.lordicon.com/hpivxauj.json",
+    premium: false,
+  },
+  {
+    name: "Annuaire du WEB (BETA)",
+    href: "/directory",
+    icon: "https://cdn.lordicon.com/kkvxgpti.json",
+    premium: false,
+  },
+  {
+    name: "Paramètres",
+    href: "/settings",
+    icon: "https://cdn.lordicon.com/lecprnjb.json",
     premium: false,
   },
 ];
@@ -59,7 +72,6 @@ export const studentLevel = [
 
 export const subjects = [
   { value: "Mathématiques", label: "Mathématiques" },
-  { value: "Physique-Chimie", label: "Physique-Chimie" },
   { value: "SVT", label: "SVT" },
   { value: "Français", label: "Français" },
   { value: "Histoire-Géographie", label: "Histoire-Géographie" },
@@ -70,4 +82,19 @@ export const subjects = [
   { value: "Economie", label: "Economie" },
   { value: "Informatique", label: "Informatique" },
   { value: "Droit", label: "Droit" },
+  { value: "Chimie", label: "Chimie" },
+  { value: "Biologie", label: "Biologie" },
+  { value: "Géologie", label: "Géologie" },
+  { value: "Physique", label: "Physique" },
+  { value: "Langue et littérature", label: "Langue et littérature" },
+  { value: "Arts plastiques", label: "Arts plastiques" },
+  { value: "Musique", label: "Musique" },
+  { value: "Éducation physique et sportive (EPS)", label: "EPS" },
+  { value: "Technologie", label: "Technologie" },
+  { value: "Sciences sociales", label: "Sciences sociales" },
+  { value: "Psychologie", label: "Psychologie" },
+  { value: "Sociologie", label: "Sociologie" },
+  { value: "Langues étrangères appliquées (LEA)", label: "LEA" },
+  { value: "Médecine", label: "Médecine" },
+  { value: "Architecture", label: "Architecture" },
 ];

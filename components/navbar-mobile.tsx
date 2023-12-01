@@ -62,7 +62,7 @@ export default function NavbarMobile({
                 >
                   <div
                     className={
-                      "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded"
+                      "flex items-center w-full hover:bg-white/10 p-3 rounded"
                     }
                   >
                     {/* @ts-ignore */}
@@ -78,7 +78,7 @@ export default function NavbarMobile({
                 <Link href={item.href} key={item.name} className="my-3">
                   <div
                     className={
-                      "flex items-center w-full hover:bg-white/10 p-1 py-3 rounded"
+                      "flex items-center w-full hover:bg-white/10 p-3 rounded"
                     }
                   >
                     {/* @ts-ignore */}
@@ -100,7 +100,7 @@ export default function NavbarMobile({
                   {userLimit ?? 0}/{MAX_FREE_TRIAL} free generation
                 </span>
                 <Progress
-                  value={userLimit ? userLimit * 10 : 0}
+                  value={userLimit ? userLimit * 20 : 0}
                   className="border"
                 />
               </div>

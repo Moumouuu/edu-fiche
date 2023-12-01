@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
+import GoogleAnalytics from "@/components/google-analytics";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import AuthContext from "./providers/auth-context";
 import "./globals.css";
-import GoogleAnalytics from "@/components/google-analytics";
+import AuthContext from "./providers/auth-context";
 
 export const metadata: Metadata = {
   title: "EduFiche | Votre générateur de fiche de révision",
@@ -46,7 +46,7 @@ export default async function RootLayout({
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {/* Global Site Tag (gtag.js) - Google Analytics */}
-              <GoogleAnalytics/>
+              <GoogleAnalytics />
               {children}
             </ThemeProvider>
           </AuthContext>

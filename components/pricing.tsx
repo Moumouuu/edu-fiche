@@ -50,7 +50,7 @@ export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
             <div>
               <CiCircleCheck color="green" size="30" />
             </div>
-            <span className="ml-2">{label}</span>
+            <span className="ml-2 text-left">{label}</span>
           </div>
         ))}
 
@@ -85,7 +85,7 @@ export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
             <div>
               <CiCircleCheck color="green" size="30" />
             </div>
-            <span className="ml-2">{label}</span>
+            <span className="ml-2 text-left">{label}</span>
           </div>
         ))}
 

@@ -13,7 +13,7 @@ export function Faq() {
       </h1>
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-left">
             Quand vais-je recevoir mes avantages après mon passage Premium ?
           </AccordionTrigger>
           <AccordionContent>
@@ -23,7 +23,7 @@ export function Faq() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>Puis-je être remboursé ?</AccordionTrigger>
+          <AccordionTrigger className="text-left">Puis-je être remboursé ?</AccordionTrigger>
           <AccordionContent>
             Malheureusement, étant donné que les avantages sont numériques, nous
             ne pouvons pas vous rembourser. Cependant, vous pouvez nous
@@ -38,7 +38,7 @@ export function Faq() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-left">
             Comment fonctionne l&apos;outil de génération de fiches de révision
             ?
           </AccordionTrigger>
@@ -48,7 +48,7 @@ export function Faq() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
-          <AccordionTrigger>
+          <AccordionTrigger className="text-left">
             Les fiches peuvent t&apos;elles contenir des erreurs ?
           </AccordionTrigger>
           <AccordionContent>
