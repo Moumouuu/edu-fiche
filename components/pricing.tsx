@@ -1,15 +1,13 @@
 "use client";
-import useStripeSubscribe from "@/app/hooks/use-stripe-subscribe";
 import { MagicCard, MagicContainer } from "@/components/magicui/magic-card";
 import Link from "next/link";
 import { CiCircleCheck } from "react-icons/ci";
 import { LuPartyPopper } from "react-icons/lu";
+import PremiumButton from "./premium-button";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
-  const { subscribeToStripe, loading } = useStripeSubscribe();
-
   const freeLabels = [
     "Vous avez accès à 10 générations de fiche gratuitement.",
     "Toutes les 5 générations de fiche vous gagnez un EduCoin. Vous pouvez les utiliser pour acheter des générations de Quiz.",
@@ -71,17 +69,13 @@ export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
           étudiant qui a besoin de vous ! Le paiement est unique et vous avez un{" "}
           <span className="underline">accès à vie.</span>
         </p>
-        <Button
-          disabled={loading || isSubscribed}
-          variant={"premium"}
-          onClick={subscribeToStripe}
-          className="w-full"
-        >
+
+        <PremiumButton className="w-full">
           <LuPartyPopper size={25} />
           <span className="ml-2">
             {isSubscribed ? "Vous êtes Premium" : "Passer premium"}
           </span>
-        </Button>
+        </PremiumButton>
 
         <Separator className="my-4" />
 
