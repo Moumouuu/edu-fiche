@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 export default async function Page({ params }: { params: { id: string } }) {
   const sheet = await prismadb.sheet.findUnique({
     where: { id: params.id },
+    include: { userApiLimit: true },
   });
 
   if (!sheet) return redirect("/not-found");

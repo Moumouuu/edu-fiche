@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  // title & idSheet is only for update
-  const { messages, level, subject, keysWords, idSheet, title } =
+  // idSheet is only for update
+  const { messages, level, subject, keysWords, idSheet } =
     await req.json();
   const session = await getServerSession(authOptions);
 
@@ -64,7 +64,6 @@ export async function POST(req: NextRequest) {
       userApiLimitId: user.id,
     },
     update: {
-      title: title == "" ? oldSheet?.title : title,
       text: messagesFormated ?? messages,
       level: level,
       subject: subject,

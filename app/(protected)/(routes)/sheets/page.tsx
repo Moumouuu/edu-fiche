@@ -1,4 +1,4 @@
-import MySheetPage from "@/components/pages/MySheetPage";
+import SheetPage from "@/components/pages/SheetsPage";
 import prismadb from "@/lib/prismadb";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
@@ -22,8 +22,9 @@ export default async function Page() {
 
   const sheets = await prismadb.sheet.findMany({
     where: { userApiLimitId: userApiLimit.id },
+    include: { userApiLimit: true },
     orderBy: { createdAt: "desc" },
   });
 
-  return <MySheetPage sheets={sheets} />;
+  return <SheetPage sheets={sheets} />;
 }

@@ -57,7 +57,7 @@ export default function NavbarMobile({
               item.premium && !isPro ? (
                 <div
                   key={item.name}
-                  className="my- cursor-pointer"
+                  className="my-3 cursor-pointer"
                   onClick={open}
                 >
                   <div
@@ -97,7 +97,7 @@ export default function NavbarMobile({
             {!isPro && (
               <div className="flex flex-col my-3">
                 <span>
-                  {userLimit ?? 0}/{MAX_FREE_TRIAL} free generation
+                  {userLimit ?? 0}/{MAX_FREE_TRIAL} générations gratuites
                 </span>
                 <Progress
                   value={userLimit ? userLimit * 20 : 0}

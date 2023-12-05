@@ -21,10 +21,10 @@ import { Label } from "../ui/label";
 
 export default function FormUpdateSheet({
   sheet,
-  setSheets,
+  setSheet,
 }: {
   sheet: Sheet;
-  setSheets: any;
+  setSheet: any;
 }) {
   const [level, setLevel] = useState<string | undefined>(undefined);
   const [subject, setSubject] = useState<string | undefined>(undefined);
@@ -36,7 +36,6 @@ export default function FormUpdateSheet({
     setIsLoading(true);
     try {
       await axios.post(`/api/sheet`, {
-        title: data.title,
         idSheet: sheet.id,
         level: level ?? sheet.level,
         subject: subject ?? sheet.subject,
@@ -47,21 +46,12 @@ export default function FormUpdateSheet({
     } catch (error) {
       console.log("[ERROR UPDATE SHEET] : ", error);
     } finally {
-      setSheets((sheets: Sheet[]) =>
-        sheets.map((s: Sheet) =>
-          s.id === sheet.id
-            ? {
-                ...s,
-                title: (data.title == "" ? null : data.title) ?? sheet.title,
-                level: level ?? sheet.level,
-                subject: subject ?? sheet.subject,
-                keywords:
-                  (data.keywords == "" ? null : data.keywords) ??
-                  sheet.keywords,
-              }
-            : s
-        )
-      );
+      setSheet((sheet: Sheet) => ({
+        ...sheet,
+        level: level ?? sheet.level,
+        subject: subject ?? sheet.subject,
+        keywords: data.keywords ?? sheet.keywords,
+      }));
       setIsLoading(false);
     }
   };
@@ -70,17 +60,6 @@ export default function FormUpdateSheet({
     <>
       <Toaster />
       <form onSubmit={handleSubmit(onSubmit)} className="p-4">
-        <Label className="text-md" htmlFor="title">
-          Titre de la fiche
-        </Label>
-        <Input
-          id="title"
-          placeholder="Titre de la fiche"
-          defaultValue={sheet.title}
-          {...register("title")}
-          className="mb-3"
-        />
-
         <Label className="text-md" htmlFor="title">
           Mots clés de la fiche
         </Label>
@@ -93,13 +72,14 @@ export default function FormUpdateSheet({
         />
 
         <div className="flex flex-col md:flex-row w-full justify-center my-5">
-          <div className="flex flex-col">
-            <Label className="text-md" htmlFor="level">
+          <div className="flex flex-col flex-1">
+            <Label className="text-md ml-2" htmlFor="level">
               Niveau scolaire
             </Label>
             {/* select for level */}
+            {/* todo : refactor with selectLevel components */}
             <Select onValueChange={(e) => setLevel(e)}>
-              <SelectTrigger className="w-[180px]" id="level">
+              <SelectTrigger className="w-auto mb-3" id="level">
                 <SelectValue placeholder={sheet.level} />
               </SelectTrigger>
               <SelectContent>
@@ -112,13 +92,14 @@ export default function FormUpdateSheet({
             </Select>
           </div>
 
-          <div className="flex flex-col ">
-            <Label className="text-md" htmlFor="subject">
+          <div className="flex flex-col flex-1">
+            <Label className="text-md ml-2" htmlFor="subject">
               Matière de la fiche
             </Label>
             {/* select for subject */}
+            {/* todo : refactor with selectSubjects components */}
             <Select onValueChange={(e) => setSubject(e)}>
-              <SelectTrigger className="w-[180px]" id="subject">
+              <SelectTrigger className="w-auto mb-3" id="subject">
                 <SelectValue placeholder={sheet.subject} />
               </SelectTrigger>
               <SelectContent>
