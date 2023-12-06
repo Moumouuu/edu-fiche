@@ -1,6 +1,7 @@
 "use client";
 import { PremiumModal } from "@/components/premium-modal";
 import PremiumButton from "../premium-button";
+
 export default function SettingsPage({
   isSubscribed,
 }: {

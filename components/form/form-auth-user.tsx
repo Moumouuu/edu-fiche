@@ -1,4 +1,15 @@
 "use client";
+
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
+import { AiFillGoogleCircle } from "react-icons/ai";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,22 +21,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import z from "zod";
-import { Separator } from "../ui/separator";
-
-import { signIn } from "next-auth/react";
-import { AiFillGoogleCircle } from "react-icons/ai";
-
 import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Separator } from "../ui/separator";
 
 export default function UserAuthForm() {
   const [isLoading, setIsLloading] = useState(false);
-  const router = useRouter();
   const schemaLogin = z.object({
     email: z
       .string()

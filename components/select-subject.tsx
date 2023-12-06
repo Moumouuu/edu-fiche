@@ -16,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
 import { capitalizeFirstLetter, cn, subjects } from "@/lib/utils";
 
 export function SelectSubject({
@@ -49,11 +50,7 @@ export function SelectSubject({
                 key={subject.value}
                 value={subject.value}
                 onSelect={(currentValue) => {
-                  setValue(
-                    currentValue === value
-                      ? ""
-                      : currentValue
-                  );
+                  setValue(currentValue === value ? "" : currentValue);
                   onValueChange(capitalizeFirstLetter(currentValue));
                   setOpen(false);
                 }}

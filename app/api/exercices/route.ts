@@ -1,6 +1,8 @@
-import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
+
+import { MAX_FREE_TRIAL } from "@/lib/utils";
+
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

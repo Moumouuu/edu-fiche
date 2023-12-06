@@ -1,9 +1,10 @@
-import prisma from "@/lib/prismadb";
 
 import bcrypt from "bcrypt";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+
+import prisma from "@/lib/prismadb";
 
 export const authOptions: NextAuthOptions = {
   session: {

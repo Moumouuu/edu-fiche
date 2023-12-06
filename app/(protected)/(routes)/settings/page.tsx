@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import SettingsPage from "@/components/pages/SettingsPage";
 import { checkSubscription } from "@/lib/subscription";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "EduFiche | Paramètres",

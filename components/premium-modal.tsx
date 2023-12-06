@@ -1,5 +1,9 @@
 "use client";
+
+import { useEffect, useState } from "react";
+
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,7 +14,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
 import PremiumButton from "./premium-button";
 import { Separator } from "./ui/separator";
 

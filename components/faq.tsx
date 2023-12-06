@@ -23,7 +23,9 @@ export function Faq() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger className="text-left">Puis-je être remboursé ?</AccordionTrigger>
+          <AccordionTrigger className="text-left">
+            Puis-je être remboursé ?
+          </AccordionTrigger>
           <AccordionContent>
             Malheureusement, étant donné que les avantages sont numériques, nous
             ne pouvons pas vous rembourser. Cependant, vous pouvez nous

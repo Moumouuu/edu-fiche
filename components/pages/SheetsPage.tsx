@@ -1,6 +1,9 @@
-import { SheetWithAuthor } from "@/app/types/sheet";
-import { capitalizeFirstLetter } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
+
+import { SheetWithAuthor } from "@/app/types/sheet";
+
+import { capitalizeFirstLetter } from "@/lib/utils";
+
 import SheetCard from "../sheet-card";
 import Title from "../title";
 import { Separator } from "../ui/separator";

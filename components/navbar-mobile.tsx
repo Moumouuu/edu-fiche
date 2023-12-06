@@ -1,4 +1,8 @@
 "use client";
+
+import Image from "next/image";
+import Link from "next/link";
+
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
@@ -9,12 +13,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
-import { CgMenuGridO } from "react-icons/cg";
 import { PremiumModal } from "./premium-modal";
 import { UserProfile } from "./user-profile";
+
+import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
+
+import { CgMenuGridO } from "react-icons/cg";
 
 export default function NavbarMobile({
   userLimit,

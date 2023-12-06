@@ -1,8 +1,9 @@
-import SheetPage from "@/components/pages/SheetsPage";
-import prismadb from "@/lib/prismadb";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
+
+import SheetPage from "@/components/pages/SheetsPage";
+import prismadb from "@/lib/prismadb";
 
 export const metadata: Metadata = {
   title: "EduFiche | Mes fiches",

@@ -1,13 +1,17 @@
 "use client";
-import { usePremiumModal } from "@/app/hooks/use-premium-modal";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Progress } from "@/components/ui/progress";
-import { MAX_FREE_TRIAL, cn, itemsMenu } from "@/lib/utils";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
+
+import { ModeToggle } from "@/components/mode-toggle";
+import { Progress } from "@/components/ui/progress";
 import { PremiumModal } from "./premium-modal";
 import { UserProfile } from "./user-profile";
+
+import { MAX_FREE_TRIAL, cn, itemsMenu } from "@/lib/utils";
 
 export default function NavbarDesk({
   userLimit,

@@ -1,4 +1,7 @@
 import { Github, LogOut, Settings, User } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 
 import {
   DropdownMenu,
@@ -10,10 +13,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 
 export function UserProfile() {
   const { data: session } = useSession();

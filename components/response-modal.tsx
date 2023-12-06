@@ -1,4 +1,7 @@
+import { Message } from "ai";
+
 import useClipboard from "@/app/hooks/use-clip-board";
+
 import {
   Dialog,
   DialogContent,
@@ -6,11 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
-import { Message } from "ai";
 import { FaCopy } from "react-icons/fa";
 import { Button } from "./ui/button";
 
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 export function ResponseModal({
   open,
   content,

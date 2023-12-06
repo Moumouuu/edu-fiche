@@ -1,12 +1,16 @@
 "use client";
-import { MagicCard, MagicContainer } from "@/components/magicui/magic-card";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
+
 import Link from "next/link";
-import { CiCircleCheck } from "react-icons/ci";
-import { LuPartyPopper } from "react-icons/lu";
+
+import { MagicCard, MagicContainer } from "@/components/magicui/magic-card";
 import PremiumButton from "./premium-button";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
+
+import { MAX_FREE_TRIAL } from "@/lib/utils";
+
+import { CiCircleCheck } from "react-icons/ci";
+import { LuPartyPopper } from "react-icons/lu";
 
 export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
   const freeLabels = [

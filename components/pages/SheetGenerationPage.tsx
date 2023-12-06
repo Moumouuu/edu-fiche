@@ -1,20 +1,23 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import SubTitle from "../subTitle";
-import Title from "../title";
-
 import { createSheet } from "@/actions/createSheet";
 import { incrementFreeTrial } from "@/actions/incrementFreeTrial";
-import { usePremiumModal } from "@/app/hooks/use-premium-modal";
-import { useResponseModal } from "@/app/hooks/use-response-modal";
-import { Button } from "@/components/ui/button";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+
+import { usePremiumModal } from "@/app/hooks/use-premium-modal";
+import { useResponseModal } from "@/app/hooks/use-response-modal";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ResponseModal } from "../response-modal";
+import SubTitle from "../subTitle";
+import Title from "../title";
+
+import { MAX_FREE_TRIAL } from "@/lib/utils";
+
 import { SelectLevel } from "../select-level";
 import { SelectSubject } from "../select-subject";
 

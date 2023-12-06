@@ -1,7 +1,8 @@
-import { promptGenerateSheet } from "@/lib/prompts";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
+
+import { promptGenerateSheet } from "@/lib/prompts";
+import { MAX_FREE_TRIAL } from "@/lib/utils";
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({

@@ -1,12 +1,12 @@
 import { authOptions } from "@/lib/auth";
-import prismadb from "@/lib/prismadb";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
+import prismadb from "@/lib/prismadb";
+
 export async function POST(req: NextRequest) {
   // idSheet is only for update
-  const { messages, level, subject, keysWords, idSheet } =
-    await req.json();
+  const { messages, level, subject, keysWords, idSheet } = await req.json();
   const session = await getServerSession(authOptions);
 
   if (!session) {

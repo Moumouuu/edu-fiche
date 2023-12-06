@@ -11,6 +11,10 @@ export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}/${path}`;
 }
 
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export function toStringUser(user: UserApiLimit) {
   // split email to get username before @ (ex: "john" from "john@gmail") & set first letter to uppercase
   return capitalizeFirstLetter(user.userEmail.split("@")[0]);
@@ -20,10 +24,6 @@ export const formatKeywords = (keywords: string) => {
   // split keywords by space example : "maths physique" => ["maths", "physique"]
   // and remove empty string
   return keywords.split(" ").filter((k) => k !== "");
-};
-
-export const capitalizeFirstLetter = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 export const itemsMenu = [

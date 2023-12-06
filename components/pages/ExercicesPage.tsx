@@ -1,12 +1,14 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import SubTitle from "../subTitle";
-import Title from "../title";
+import { useChat } from "ai/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { useResponseModal } from "@/app/hooks/use-response-modal";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -14,10 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useChat } from "ai/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { ResponseModal } from "../response-modal";
+import SubTitle from "../subTitle";
+import Title from "../title";
+
 import { studentLevel, subjects } from "@/lib/utils";
 
 export default function ExercicesPage({
@@ -43,7 +45,6 @@ export default function ExercicesPage({
         typeOfExercice: typeOfExercice,
       },
     });
-
 
   const { open, isOpen } = useResponseModal();
   const { open: openSubscriptionModal } = usePremiumModal();
@@ -119,12 +120,13 @@ export default function ExercicesPage({
               <SelectValue placeholder="Type Question" />
             </SelectTrigger>
             <SelectContent>
-                <SelectItem value={"QCM"}>QCM</SelectItem>
-                <SelectItem value={"Question ouverte"}>Question ouverte</SelectItem>
-                <SelectItem value={"YES/NO"}>Oui / Non </SelectItem>
+              <SelectItem value={"QCM"}>QCM</SelectItem>
+              <SelectItem value={"Question ouverte"}>
+                Question ouverte
+              </SelectItem>
+              <SelectItem value={"YES/NO"}>Oui / Non </SelectItem>
             </SelectContent>
           </Select>
-
         </div>
 
         {/* keywords */}

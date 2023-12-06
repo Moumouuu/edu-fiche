@@ -16,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
 import { capitalizeFirstLetter, cn, studentLevel } from "@/lib/utils";
 
 export function SelectLevel({
@@ -49,11 +50,7 @@ export function SelectLevel({
                 key={level.value}
                 value={level.value}
                 onSelect={(currentValue) => {
-                  setValue(
-                    currentValue === value
-                      ? ""
-                      : currentValue
-                  );
+                  setValue(currentValue === value ? "" : currentValue);
                   onValueChange(capitalizeFirstLetter(currentValue));
                   setOpen(false);
                 }}

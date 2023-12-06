@@ -4,11 +4,11 @@ import React, { useRef, useState } from "react";
 const CardSpotlight = ({
   title,
   description,
-    icon,
+  icon,
 }: {
   title: string;
   description: string;
-    icon: string;
+  icon: string;
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -62,13 +62,12 @@ const CardSpotlight = ({
       <div className="flex flex-col">
         {/* @ts-ignore */}
         <lord-icon
-                    src={icon}
-                    trigger="loop"
-                    delay="2000"
-                    colors="primary:#fff"
-                    style={{ width: "40px", height: "40px" }}
-
-                  />
+          src={icon}
+          trigger="loop"
+          delay="2000"
+          colors="primary:#fff"
+          style={{ width: "40px", height: "40px" }}
+        />
         <p className="text-xl text-slate-200 mt-3">{title}</p>
         <p className="text-md text-slate-400">{description}</p>
       </div>

@@ -1,9 +1,11 @@
-import { apiUserLimit } from "@/actions/apiUserLimit";
-import Nav from "@/components/nav";
-import { checkSubscription } from "@/lib/subscription";
 import { getServerSession } from "next-auth/next";
 import { Rubik } from "next/font/google";
 import { redirect } from "next/navigation";
+
+import { apiUserLimit } from "@/actions/apiUserLimit";
+import { checkSubscription } from "@/lib/subscription";
+
+import Nav from "@/components/nav";
 
 const font = Rubik({ subsets: ["latin"] });
 

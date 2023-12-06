@@ -1,9 +1,9 @@
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
-import { getServerSession } from "next-auth";
 
 const settingsUrl = absoluteUrl("settings");
 

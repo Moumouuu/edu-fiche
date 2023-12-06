@@ -1,9 +1,10 @@
+import { getServerSession } from "next-auth";
+import { NextRequest } from "next/server";
+
 import { authOptions } from "@/lib/auth";
 import prismadb from "@/lib/prismadb";
 import { checkSubscription } from "@/lib/subscription";
 import { MAX_FREE_TRIAL } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);

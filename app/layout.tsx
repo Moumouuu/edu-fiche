@@ -1,13 +1,15 @@
-import { ThemeProvider } from "@/app/providers/theme-provider";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
 import GoogleAnalytics from "@/components/google-analytics";
 import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+
+import { ThemeProvider } from "@/app/providers/theme-provider";
+import AuthContext from "@/app/providers/auth-context";
+
 import "./globals.css";
-import AuthContext from "./providers/auth-context";
 
 export const metadata: Metadata = {
   title: "EduFiche | Votre générateur de fiche de révision",

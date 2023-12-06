@@ -1,7 +1,8 @@
+import { Metadata } from "next";
+
 import { apiUserLimit } from "@/actions/apiUserLimit";
 import SheetPage from "@/components/pages/SheetGenerationPage";
 import { checkSubscription } from "@/lib/subscription";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "EduFiche | Fiche de révision",

@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import BannerHomepage from "@/components/banner-homepage";
 import { Bento } from "@/components/bento";
 import { Cards } from "@/components/cards";
@@ -6,7 +8,6 @@ import Footer from "@/components/footer";
 import NavHomepage from "@/components/nav-homepage";
 import Reviews from "@/components/reviews";
 import Stats from "@/components/stats";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "EduFiche | Générateur de Fiche de révision",

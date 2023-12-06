@@ -1,4 +1,8 @@
 "use client";
+
+import { Toaster } from "react-hot-toast";
+import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,13 +12,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 
 import useClipboard from "@/app/hooks/use-clip-board";
+
 import { SheetWithAuthor } from "@/app/types/sheet";
+
 import { formatKeywords, toStringUser } from "@/lib/utils";
-import { Toaster } from "react-hot-toast";
-import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
-import { Button } from "../ui/button";
 
 export default function Page({ sheet }: { sheet: SheetWithAuthor }) {
   const { copyToClipboard } = useClipboard();

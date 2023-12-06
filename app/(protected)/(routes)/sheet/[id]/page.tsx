@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
+
 import SheetPage from "@/components/pages/SheetPage";
 import prismadb from "@/lib/prismadb";
-import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const sheet = await prismadb.sheet.findUnique({
