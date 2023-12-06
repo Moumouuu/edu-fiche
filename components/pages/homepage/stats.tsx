@@ -1,7 +1,7 @@
 import GridPattern from "@/components/magicui/grid-pattern";
 import prismadb from "@/lib/prismadb";
 import { cn } from "@/lib/utils";
-import NumberTicker from "./magicui/number-ticket";
+import NumberTicker from "../../magicui/number-ticket";
 
 const Stats = async () => {
   const numberOfUsers = await prismadb.userApiLimit.count();

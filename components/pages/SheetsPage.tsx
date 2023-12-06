@@ -4,9 +4,9 @@ import { SheetWithAuthor } from "@/app/types/sheet";
 
 import { capitalizeFirstLetter } from "@/lib/utils";
 
-import SheetCard from "../sheet-card";
 import Title from "../title";
 import { Separator } from "../ui/separator";
+import SheetCard from "./app/sheet-card";
 
 export default function SheetsPage({ sheets }: { sheets: SheetWithAuthor[] }) {
   const uniqueSubjects = Array.from(

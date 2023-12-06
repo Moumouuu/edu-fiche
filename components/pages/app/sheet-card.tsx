@@ -23,9 +23,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatKeywords, toStringUser } from "@/lib/utils";
-import FormUpdateSheet from "./form/form-update-sheet";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import FormUpdateSheet from "../../form/form-update-sheet";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
 
 import { SheetWithAuthor } from "@/app/types/sheet";
 

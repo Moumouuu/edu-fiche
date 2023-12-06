@@ -16,9 +16,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ResponseModal } from "../response-modal";
 import SubTitle from "../subTitle";
 import Title from "../title";
+import { SheetResponseModal } from "./app/sheet-response-modal";
 
 import { studentLevel, subjects } from "@/lib/utils";
 
@@ -143,7 +143,7 @@ export default function ExercicesPage({
         </Button>
       </form>
 
-      <ResponseModal
+      <SheetResponseModal
         title={"Exercice"}
         open={isOpen}
         content={messages}

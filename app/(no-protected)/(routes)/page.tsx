@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 
-import BannerHomepage from "@/components/banner-homepage";
-import { Bento } from "@/components/bento";
-import { Cards } from "@/components/cards";
-import { Faq } from "@/components/faq";
-import Footer from "@/components/footer";
-import NavHomepage from "@/components/nav-homepage";
-import Reviews from "@/components/reviews";
-import Stats from "@/components/stats";
+import HeroBanner from "@/components/pages/homepage/hero-banner";
+import { Bento } from "@/components/pages/homepage/bento";
+import { Cards } from "@/components/pages/homepage/cards";
+import { Faq } from "@/components/pages/homepage/faq";
+import Footer from "@/components/pages/homepage/footer";
+import NavHomepage from "@/components/pages/homepage/nav-homepage";
+import Reviews from "@/components/pages/homepage/reviews";
+import Stats from "@/components/pages/homepage/stats";
 
 export const metadata: Metadata = {
   title: "EduFiche | Générateur de Fiche de révision",
@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <div className="w-full">
       <NavHomepage />
-      <BannerHomepage />
+      <HeroBanner />
       <Reviews />
       <Bento />
       <Cards />

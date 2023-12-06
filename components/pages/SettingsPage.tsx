@@ -1,5 +1,5 @@
 "use client";
-import { PremiumModal } from "@/components/premium-modal";
+import { PremiumModal } from "@/components/pages/app/premium-modal";
 import PremiumButton from "../premium-button";
 
 export default function SettingsPage({

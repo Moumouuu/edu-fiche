@@ -14,8 +14,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import PremiumButton from "./premium-button";
-import { Separator } from "./ui/separator";
+import PremiumButton from "../../premium-button";
+import { Separator } from "../../ui/separator";
 
 export function PremiumModal({ isPro }: { isPro: boolean }) {
   const [isMounted, setIsMounted] = useState(false);

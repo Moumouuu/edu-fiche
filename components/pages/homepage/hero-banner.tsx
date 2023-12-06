@@ -2,9 +2,9 @@
 
 import RetroGrid from "@/components/magicui/retro-grid";
 import { LuPartyPopper } from "react-icons/lu";
-import { Badge } from "./ui/badge";
+import { Badge } from "../../ui/badge";
 
-const BannerHomepage = () => {
+const HeroBanner = () => {
   return (
     <div className="relative flex flex-col h-full w-full items-center justify-center overflow-hidden rounded-lg bg-background px-2 py-20 lg:p-20 shadow-2xl">
       <Badge
@@ -30,4 +30,4 @@ const BannerHomepage = () => {
   );
 };
 
-export default BannerHomepage;
+export default HeroBanner;

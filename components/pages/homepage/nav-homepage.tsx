@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ModeToggle } from "./mode-toggle";
-import { Button } from "./ui/button";
+import { ModeToggle } from "../../mode-toggle";
+import { Button } from "../../ui/button";
 
 export default function NavHomepage() {
   return (

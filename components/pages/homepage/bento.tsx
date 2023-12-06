@@ -17,7 +17,7 @@ import {
   GlobeIcon,
   InputIcon,
 } from "@radix-ui/react-icons";
-import DotPattern from "./magicui/dot-pattern";
+import DotPattern from "../../magicui/dot-pattern";
 
 const files = [
   {

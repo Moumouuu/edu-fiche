@@ -7,7 +7,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 import { authOptions } from "@/lib/auth";
 
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import AuthContext from "@/app/providers/auth-context";
+import AuthContext from "@/app/providers/auth-provider";
 
 import "./globals.css";
 

@@ -12,14 +12,14 @@ import { useResponseModal } from "@/app/hooks/use-response-modal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ResponseModal } from "../response-modal";
 import SubTitle from "../subTitle";
 import Title from "../title";
+import { SheetResponseModal } from "./app/sheet-response-modal";
 
 import { MAX_FREE_TRIAL } from "@/lib/utils";
 
-import { SelectLevel } from "../select-level";
-import { SelectSubject } from "../select-subject";
+import { SelectLevel } from "./app/select-level";
+import { SelectSubject } from "./app/select-subject";
 
 export default function SheetPage({
   userLimit,
@@ -113,7 +113,7 @@ export default function SheetPage({
         </Button>
       </form>
 
-      <ResponseModal
+      <SheetResponseModal
         title={"Fiche de révision"}
         open={isOpen}
         content={messages}

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { apiUserLimit } from "@/actions/apiUserLimit";
 import { checkSubscription } from "@/lib/subscription";
 
-import Nav from "@/components/nav";
+import Nav from "@/components/pages/app/nav";
 
 const font = Rubik({ subsets: ["latin"] });
 

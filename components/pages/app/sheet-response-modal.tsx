@@ -10,10 +10,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { FaCopy } from "react-icons/fa";
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 
 import { MAX_FREE_TRIAL } from "@/lib/utils";
-export function ResponseModal({
+export function SheetResponseModal({
   open,
   content,
   isLoading,
