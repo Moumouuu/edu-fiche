@@ -1,24 +1,15 @@
-"use client";
-import { PremiumModal } from "@/components/pages/app/premium-modal";
-import PremiumButton from "../premium-button";
+import { Toaster } from "react-hot-toast";
+import Feedback from "./settings/feedback";
+import HeaderSettings from "./settings/headerSettings";
+import Payment from "./settings/payment";
 
-export default function SettingsPage({
-  isSubscribed,
-}: {
-  isSubscribed: boolean;
-}) {
+export default function SettingsPage() {
   return (
-    <div className="md:p-4 px-4 py-14 flex flex-col">
-      <h1 className="text-xl md:text-3xl ">Settings</h1>
-      <span className="text-primary/70">Gère ton compte.</span>
-      {isSubscribed ? (
-        <PremiumButton className="my-4" disabled={isSubscribed}>
-          Gérer votre abonnement
-        </PremiumButton>
-      ) : (
-        // isPro is false obviously
-        <PremiumModal isPro={isSubscribed} />
-      )}
+    <div className="md:p-4 px-4 py-14 flex flex-col w-full">
+      <Toaster />
+      <HeaderSettings />
+      <Payment />
+      <Feedback />
     </div>
   );
 }

@@ -9,6 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Settings() {
-  const isSubscribed = await checkSubscription();
-  return <SettingsPage isSubscribed={isSubscribed} />;
+  return <SettingsPage />;
 }

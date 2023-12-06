@@ -9,5 +9,5 @@ export default function Title({
   text: string;
   className?: string;
 }) {
-  return <h1 className={cn(className, "text-2xl md:text-4xl my-2")}>{text}</h1>;
+  return <h1 className={cn(className, "text-2xl md:text-4xl my-2 font-medium")}>{text}</h1>;
 }

@@ -25,10 +25,13 @@ export default function SheetsPage({ sheets }: { sheets: SheetWithAuthor[] }) {
 
       {uniqueSubjects.map((subject) => (
         <div key={subject} className="mb-4">
-          <Title
-            className="text-center underline"
-            text={capitalizeFirstLetter(subject)}
-          />
+          <div className="flex justify-center">
+            <Title
+              className="text-center py-1 px-10 bg-gradient-to-br from-green-400 rounded-md to-blue-600 uppercase"
+              text={capitalizeFirstLetter(subject)}
+            />
+          </div>
+
           <div className="flex overflow-x-auto">
             {/* Utilisez la classe flex pour les aligner côte à côte */}
             {sheets

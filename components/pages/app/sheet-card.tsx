@@ -61,7 +61,7 @@ export default function SheetCard({ sheet: s }: { sheet: SheetWithAuthor }) {
   return (
     <div
       key={sheet.id}
-      className="flex flex-col justify-between p-5 m-3 border rounded-lg min-w-[50%] max-w-[50%]"
+      className="flex flex-col justify-between p-5 m-3 border rounded-lg min-w-[100%] max-w-[100%] lg:min-w-[50%] lg:max-w-[50%]"
     >
       <div className="flex flex-col w-full mb-3">
         <div className="flex items-center w-full justify-between mb-1">
@@ -174,8 +174,11 @@ export default function SheetCard({ sheet: s }: { sheet: SheetWithAuthor }) {
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle className="text-2xl mb-4">
-                      Modification de la fiche de révision
+                    <DialogTitle className="text-2xl">
+                      <span className="p-1 bg-gradient-to-br from-green-400 rounded-md to-blue-600 uppercase">
+                        Modification
+                      </span>{" "}
+                      de la fiche de révision
                     </DialogTitle>
                     <DialogDescription>
                       Vous pouvez modifier le titre, le sujet, le niveau et les
