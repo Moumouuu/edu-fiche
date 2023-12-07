@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -35,6 +34,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { AiOutlineMore, AiOutlineShareAlt } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { RiEdit2Line as RxUpdate } from "react-icons/ri";
+import { SheetModal } from "./sheet-modal";
 
 export default function SheetCard({ sheet: s }: { sheet: SheetWithAuthor }) {
   const [sheet, setSheet] = useState(s);
@@ -92,9 +92,7 @@ export default function SheetCard({ sheet: s }: { sheet: SheetWithAuthor }) {
       </p>
 
       <div className=" flex w-full justify-between items-center mt-4">
-        <Link href={`/sheet/${sheet.id}`}>
-          <Button>Consulter</Button>
-        </Link>
+        <SheetModal sheet={sheet} />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

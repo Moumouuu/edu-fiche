@@ -7,23 +7,12 @@ import PremiumButton from "../../premium-button";
 import { Button } from "../../ui/button";
 import { Separator } from "../../ui/separator";
 
-import { MAX_FREE_TRIAL } from "@/lib/utils";
+import { MAX_FREE_TRIAL, freeLabels, premiumLabels } from "@/lib/utils";
 
 import { CiCircleCheck } from "react-icons/ci";
 import { LuPartyPopper } from "react-icons/lu";
 
-const freeLabels = [
-  `Vous avez accès à ${MAX_FREE_TRIAL} générations de fiche gratuitement.`,
-  "Accès à 1 Quiz gratuitement.",
-  "Vous pouvez consulter vos fiches de révision sur tous vos appareils.",
-  "Vous avez accès à l'annuaire du Web.",
-];
 
-const premiumLabels = [
-  "Vous pouvez générez des fiches de révision à l'infini.",
-  "Vous pouvez générer des Quiz à l'infini.",
-  "Les mêmes avantages que les utilisateurs gratuits.",
-];
 
 export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
   return (

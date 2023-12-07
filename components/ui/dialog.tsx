@@ -9,6 +9,7 @@ import { useResponseModal } from "@/app/hooks/use-response-modal";
 import { cn } from "@/lib/utils";
 
 const Dialog = DialogPrimitive.Root;
+const DialogClose = DialogPrimitive.Close;
 
 const DialogTrigger = DialogPrimitive.Trigger;
 
@@ -45,7 +46,7 @@ const DialogContent = React.forwardRef<
   const handleClose = () => {
     close();
     closeResponse();
-  }
+  };
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -129,6 +130,7 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,

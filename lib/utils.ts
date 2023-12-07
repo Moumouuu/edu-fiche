@@ -26,6 +26,10 @@ export const formatKeywords = (keywords: string) => {
   return keywords.split(" ").filter((k) => k !== "");
 };
 
+export const formatDate = (date: Date) => {
+  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+};
+
 export const itemsMenu = [
   {
     name: "Fiche de révision",
@@ -112,4 +116,17 @@ export const subjects = [
   { value: "Langues étrangères appliquées (LEA)", label: "LEA" },
   { value: "Médecine", label: "Médecine" },
   { value: "Architecture", label: "Architecture" },
+];
+
+export const freeLabels = [
+  `Vous avez accès à ${MAX_FREE_TRIAL} générations de fiche gratuitement.`,
+  "Accès à 1 Quiz gratuitement.",
+  "Vous pouvez consulter vos fiches de révision sur tous vos appareils.",
+  "Vous avez accès à l'annuaire du Web.",
+];
+
+export const premiumLabels = [
+  "Vous pouvez générez des fiches de révision à l'infini.",
+  "Vous pouvez générer des Quiz à l'infini.",
+  "Les mêmes avantages que les utilisateurs gratuits.",
 ];

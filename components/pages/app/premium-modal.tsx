@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 
+import { premiumLabels } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CiCircleCheck } from "react-icons/ci";
 import PremiumButton from "../../premium-button";
 import { Separator } from "../../ui/separator";
 
@@ -47,7 +50,7 @@ export function PremiumModal({ isPro }: { isPro: boolean }) {
           <DialogTitle className="flex items-center justify-center">
             <span className="mr-4 text-xl md:text-3xl">
               Passer{" "}
-              <span className="font-extrabold text-transparent uppercase bg-clip-text bg-gradient-to-r from-green-400 to-blue-600">
+              <span className="py-1 bg-gradient-to-br from-green-400 rounded-md to-blue-600 uppercase">
                 Premium
               </span>
             </span>
@@ -61,50 +64,23 @@ export function PremiumModal({ isPro }: { isPro: boolean }) {
             />
           </DialogTitle>
           <DialogDescription className="text-center">
-            Vous souhaitez passer Premium ? C&apos;est par ici ! Vous
-            béneficirez d&apos;un accès illimité à toutes les fonctionnalités.
+            C&apos;est le prix d&apos;un menu au McDo, mais vous soutenez un
+            étudiant qui a besoin de vous ! Le paiement est unique et vous avez
+            un <span className="underline">accès à vie</span> .
           </DialogDescription>
         </DialogHeader>
 
         <Separator />
 
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
-            <ul>
-              <li className="flex items-center mb-3 ">
-                <span className="mr-2">
-                  {/* @ts-ignore */}
-                  <lord-icon
-                    src="https://cdn.lordicon.com/hiqmdfkt.json"
-                    trigger="loop"
-                    delay="2000"
-                    colors="primary:#4ade80,secondary:#2563eb"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                </span>{" "}
-                Accès illimité à
-                <span className="ml-2 font-bold text-transparent text-md md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
-                  toutes les fonctionnalités
-                </span>
-              </li>
-              <li className="flex items-center mb-3">
-                <span className="mr-2 text-2xl">
-                  {/* @ts-ignore */}
-                  <lord-icon
-                    src="https://cdn.lordicon.com/hursldrn.json"
-                    trigger="loop"
-                    colors="primary:#4ade80,secondary:#2563eb"
-                    state="loop"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                </span>{" "}
-                Accès à des
-                <span className="ml-2 font-bold text-transparent text-md md:text-xl uppercase bg-clip-text bg-gradient-to-l from-green-400 to-blue-600">
-                  fonctionnalités exclusives
-                </span>
-              </li>
-            </ul>
-          </div>
+          {premiumLabels.map((label, i) => (
+            <div key={i} className="flex items-center my-2">
+              <div>
+                <CiCircleCheck color="green" size="30" />
+              </div>
+              <span className="ml-2 text-left">{label}</span>
+            </div>
+          ))}
         </div>
 
         <DialogFooter>
