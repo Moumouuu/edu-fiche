@@ -105,7 +105,6 @@ export default function NavbarMobile({
                 </span>
                 <Progress
                   value={userLimit ? userLimit * 20 : 0}
-                  className="border"
                 />
               </div>
             )}

@@ -93,10 +93,7 @@ export default function NavbarDesk({
               <span>
                 {userLimit ?? 0}/{MAX_FREE_TRIAL} générations gratuites
               </span>
-              <Progress
-                value={userLimit ? userLimit * 20 : 0}
-                className="border"
-              />
+              <Progress value={userLimit ? userLimit * 20 : 0} />
             </div>
           )}
           <PremiumModal isPro={isPro} />
