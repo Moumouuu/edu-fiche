@@ -17,14 +17,14 @@ const Stats = async () => {
           Vous êtes plus de{" "}
           <NumberTicker
             className="inline bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent"
-            value={numberOfUsers}
+            value={numberOfUsers ?? 0}
           />{" "}
           à utiliser EduFiche !
           <br />
           Et vous avez généré plus de{" "}
           <NumberTicker
             className="inline bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent"
-            value={numberOfSheet}
+            value={numberOfSheet ?? 0}
           />{" "}
           fiches de révision !
         </span>
