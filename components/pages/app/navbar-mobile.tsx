@@ -36,7 +36,7 @@ export default function NavbarMobile({
           <CgMenuGridO size={20} />
         </div>
       </SheetTrigger>
-      <SheetContent side={"left"}>
+      <SheetContent side={"left"} className="h-screen overflow-y-auto">
         <SheetHeader className="mb-8">
           <SheetTitle>
             <div className="flex items-center">
