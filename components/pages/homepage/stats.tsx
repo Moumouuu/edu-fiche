@@ -17,7 +17,8 @@ const Stats = async () => {
           Vous êtes plus de{" "}
           <NumberTicker
             className="inline bg-gradient-to-b from-green-400 to-blue-600 bg-clip-text text-transparent"
-            value={numberOfUsers ?? 0}
+            value={numberOfUsers ?? 0
+            }
           />{" "}
           à utiliser EduFiche !
           <br />
