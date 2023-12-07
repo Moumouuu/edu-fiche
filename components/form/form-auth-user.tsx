@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { Separator } from "../ui/separator";
 
 export default function UserAuthForm() {
@@ -88,11 +89,17 @@ export default function UserAuthForm() {
     try {
       await axios.post("/api/account", data);
       try {
-        await signIn("credentials", {
+        const res = await signIn("credentials", {
           redirect: false,
           email: data.email,
           password: data.password,
         });
+        if (res?.error) {
+          // user already exists
+          toast.error("Cet utilisateur existe déjà.");
+          console.log("[LOGIN_ERROR_AFTER_REGISTER]" + res.error);
+          return;
+        }
         setIsLloading(false);
         router.push("/app");
       } catch (err) {

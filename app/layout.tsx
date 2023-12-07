@@ -6,9 +6,10 @@ import Script from "next/script";
 import GoogleAnalytics from "@/components/google-analytics";
 import { authOptions } from "@/lib/auth";
 
-import { ThemeProvider } from "@/app/providers/theme-provider";
 import AuthContext from "@/app/providers/auth-provider";
+import { ThemeProvider } from "@/app/providers/theme-provider";
 
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default async function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
+          <Toaster />
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {/* Global Site Tag (gtag.js) - Google Analytics */}

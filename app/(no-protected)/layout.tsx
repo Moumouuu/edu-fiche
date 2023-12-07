@@ -7,11 +7,5 @@ export default async function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="fr">
-      <body>
-        <main className={font.className}>{children}</main>
-      </body>
-    </html>
-  );
+  return <main className={font.className}>{children}</main>;
 }

@@ -23,13 +23,9 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <html lang="fr">
-      <body>
         <main className={font.className + " flex"}>
           <Nav userLimit={userLimit} isPro={isPro} />
           {children}
         </main>
-      </body>
-    </html>
   );
 }

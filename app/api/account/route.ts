@@ -10,6 +10,18 @@ export async function POST(req: NextRequest) {
     return new NextResponse("Missing email or password", { status: 400 });
   }
 
+  const userAlreadyExist = await prismadb.userApiLimit.findUnique({
+    where: {
+      userEmail: email,
+    },
+  });
+
+  if (userAlreadyExist) {
+    return NextResponse.json({
+      error: "User already exist",
+    });
+  }
+
   const newUserApiLimit = await prismadb.userApiLimit.create({
     data: {
       userEmail: email,
