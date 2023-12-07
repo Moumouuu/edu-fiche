@@ -22,10 +22,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 
 export default function UserAuthForm() {
   const [isLoading, setIsLloading] = useState(false);
+  const router = useRouter();
+
   const schemaLogin = z.object({
     email: z
       .string()
@@ -70,13 +73,14 @@ export default function UserAuthForm() {
         redirect: false,
         email: data.email,
         password: data.password,
-        callbackUrl: "/app",
       });
       setIsLloading(false);
+      router.push("/app");
     } catch (err) {
       console.log("[LOGIN_ERROR]" + err);
+    } finally {
+      setIsLloading(false);
     }
-    setIsLloading(false);
   };
 
   const onSubmitRegister = async (data: FormValuesRegister) => {
@@ -84,20 +88,21 @@ export default function UserAuthForm() {
     try {
       await axios.post("/api/account", data);
       try {
-        const res = await signIn("credentials", {
+        await signIn("credentials", {
           redirect: false,
           email: data.email,
           password: data.password,
-          callbackUrl: "/app",
         });
         setIsLloading(false);
+        router.push("/app");
       } catch (err) {
         console.log("[LOGIN_ERROR_AFTER_REGISTER]" + err);
       }
     } catch (err) {
       console.log("[REGISTER_ERROR]" + err);
+    } finally {
+      setIsLloading(false);
     }
-    setIsLloading(false);
   };
 
   return (
