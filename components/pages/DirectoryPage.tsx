@@ -2,14 +2,19 @@
 
 import { getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
 import { Pagination } from "@/app/types/pagination";
-import { Sheet } from "@prisma/client";
+import { SheetWithAuthor } from "@/app/types/sheet";
 import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import SheetCard from "./app/sheet-card";
+import Title from "../title";
+import { Separator } from "@radix-ui/react-separator";
+import LoadingCard from "../loading-card";
 
-const STEP = 2;
+const STEP = 3;
 
 export default function DirectoryPage() {
   // fetch sheets from api avec infinite scroll
-  const [sheets, setSheets] = useState<Sheet[]>([]);
+  const [sheets, setSheets] = useState<SheetWithAuthor[]>([]);
   const [pagination, setPagination] = useState<Pagination>({
     start: 0,
     end: STEP,
@@ -22,8 +27,8 @@ export default function DirectoryPage() {
   const fetchSheets = async () => {
     const res = await getSheetsWithLimit(pagination);
     if (res.error) return;
-
-    setSheets((prev) => [...prev, ...sheets]);
+    console.log(res);
+    setSheets((prev) => [...prev, ...res]);
 
     // update pagination
     setPagination((prev) => ({
@@ -33,8 +38,33 @@ export default function DirectoryPage() {
   };
 
   return (
-    <div className="w-full h-screen overflow-y-scroll flex flex-col p-4 mt-14 md:mt-0">
-      Helllo world
+    <div
+      id="scrollableDiv"
+      className="w-full h-screen overflow-auto flex flex-col p-4 mt-14 md:mt-0"
+    >
+      <Title text="Annuaire du WEB" />
+      <span className="text-md md:text-lg text-black dark:text-muted-foreground italic">
+        Vous pouvez retrouver ici toutes les fiches de révisions de la planète !
+        Vous pouvez les consulter et les partager avec vos amis.
+      </span>
+      <Separator className="my-4" />
+
+      <InfiniteScroll
+        dataLength={sheets.length}
+        next={fetchSheets}
+        hasMore={true}
+        loader={<LoadingCard />}
+        scrollableTarget="scrollableDiv"
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay ! Vous avez tout vu</b>
+          </p>
+        }
+      >
+        {sheets.map((sheet: SheetWithAuthor, index) => (
+          <SheetCard key={index} sheet={sheet} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 }

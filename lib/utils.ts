@@ -26,7 +26,10 @@ export const formatKeywords = (keywords: string) => {
   return keywords.split(" ").filter((k) => k !== "");
 };
 
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date | string) => {
+  if (typeof date === "string") {
+    date = new Date(date);
+  }
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 };
 

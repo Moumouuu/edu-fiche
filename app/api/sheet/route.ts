@@ -92,6 +92,9 @@ export async function GET(req: NextRequest) {
   }
 
   const sheets = await prismadb.sheet.findMany({
+    include: {
+      userApiLimit: true,
+    },
     skip: Number(start),
     take: Number(end) - Number(start),
     orderBy: {

@@ -1,7 +1,9 @@
 import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "@/lib/auth";
 
 import prismadb from "@/lib/prismadb";
+import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
@@ -36,4 +38,24 @@ export async function POST(req: NextRequest) {
   return new NextResponse("User created", {
     status: 200,
   });
+}
+
+export async function GET(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  const email = session?.user?.email;
+
+  if (!email) {
+    return new NextResponse("Missing id", { status: 400 });
+  }
+
+  const user = await prismadb.userApiLimit.findUnique({
+    where: {
+      userEmail: String(email),
+    },
+  });
+  if (!user) {
+    return new NextResponse("User not found", { status: 404 });
+  }
+
+  return new NextResponse(JSON.stringify(user));
 }
