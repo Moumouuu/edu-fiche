@@ -19,11 +19,11 @@ import {
 
 import { capitalizeFirstLetter, cn, studentLevel } from "@/lib/utils";
 
-export function SelectLevel({
-  onValueChange,
-}: {
+interface StudentLevelProps {
   onValueChange: (value: string) => void;
-}) {
+}
+
+export function SelectLevel({ onValueChange }: StudentLevelProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 

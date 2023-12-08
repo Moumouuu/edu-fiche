@@ -14,7 +14,7 @@ export default function SheetsPage({ sheets }: { sheets: SheetWithAuthor[] }) {
   );
 
   return (
-    <div className="w-full h-screen overflow-y-scroll flex flex-col p-4 mt-14 md:mt-0">
+    <div className="w-full h-screen overflow-y-scroll flex flex-col p-4 mt-14 lg:mt-0">
       <Title text="Vos fiches de révisions" />
       <span className="text-md md:text-lg text-black dark:text-muted-foreground italic">
         Ici vous pouvez retrouver toutes vos fiches de révisions. Vous pouvez

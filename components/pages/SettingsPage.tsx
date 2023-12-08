@@ -5,7 +5,7 @@ import Payment from "./settings/payment";
 
 export default function SettingsPage() {
   return (
-    <div className="md:p-4 px-4 py-14 flex flex-col w-full">
+    <div className="p-4 mt-14 lg:mt-0 flex flex-col w-full">
       <HeaderSettings />
       <Payment />
       <Feedback />

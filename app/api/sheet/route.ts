@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
+import { FiltersBar } from "@/actions/getSheetsWithLimit";
 
 export async function POST(req: NextRequest) {
   // idSheet is only for update
@@ -85,7 +86,13 @@ export async function GET(req: NextRequest) {
   const start = req.nextUrl.searchParams.get("start");
   const end = req.nextUrl.searchParams.get("end");
 
-  console.log(start, end);
+  const filters: FiltersBar = {
+    content: req.nextUrl.searchParams.get("content") ?? "",
+    level: req.nextUrl.searchParams.get("level") ?? "",
+    subject: req.nextUrl.searchParams.get("subject") ?? "",
+  };
+
+  console.log(filters);
 
   if (!start || !end) {
     return NextResponse.json({ error: "Error getting sheets" });
@@ -94,6 +101,25 @@ export async function GET(req: NextRequest) {
   const sheets = await prismadb.sheet.findMany({
     include: {
       userApiLimit: true,
+    },
+    where: {
+      AND: [
+        {
+          text: {
+            contains: filters.content,
+          },
+        },
+        {
+          level: {
+            contains: filters.level,
+          },
+        },
+        {
+          subject: {
+            contains: filters.subject,
+          },
+        },
+      ],
     },
     skip: Number(start),
     take: Number(end) - Number(start),

@@ -1,14 +1,23 @@
 import axios from "axios";
-import { Sheet } from "@prisma/client";
 
 import { Pagination } from "@/app/types/pagination";
 
-export const getSheetsWithLimit = async (pagination: Pagination) => {
+export type FiltersBar = {
+  content: string | undefined;
+  level: string;
+  subject: string;
+};
+
+export const getSheetsWithLimit = async (
+  pagination: Pagination,
+  filters?: FiltersBar
+) => {
   try {
     const res = await axios.get("/api/sheet", {
       params: {
         start: pagination.start,
         end: pagination.end,
+        ...filters,
       },
     });
     return res.data;

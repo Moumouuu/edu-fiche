@@ -11,10 +11,10 @@ export default function Nav({
 }) {
   return (
     <>
-      <div className="block md:hidden">
+      <div className="block lg:hidden">
         <NavbarMobile userLimit={userLimit} isPro={isPro} />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <NavbarDesk userLimit={userLimit} isPro={isPro} />
       </div>
     </>
