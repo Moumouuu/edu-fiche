@@ -8,6 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -59,41 +60,41 @@ export default function NavbarMobile({
           <div className="flex flex-col">
             {itemsMenu.map((item) =>
               item.premium && !isPro ? (
-                <div
-                  key={item.name}
-                  className="my-3 cursor-pointer"
-                  onClick={open}
-                >
-                  <div
-                    className={
-                      "flex items-center w-full hover:bg-white/10 p-3 rounded"
-                    }
-                  >
-                    {/* @ts-ignore */}
-                    <lord-icon
-                      src={item.icon}
-                      trigger="hover"
-                      colors="primary:#fff"
-                    />
-                    <span className="ml-2"> {item.name}</span>
+                <SheetClose asChild key={item.name}>
+                  <div className="my-3 cursor-pointer" onClick={open}>
+                    <div
+                      className={
+                        "flex items-center w-full hover:bg-white/10 p-3 rounded"
+                      }
+                    >
+                      {/* @ts-ignore */}
+                      <lord-icon
+                        src={item.icon}
+                        trigger="hover"
+                        colors="primary:#fff"
+                      />
+                      <span className="ml-2"> {item.name}</span>
+                    </div>
                   </div>
-                </div>
+                </SheetClose>
               ) : (
-                <Link href={item.href} key={item.name} className="my-3">
-                  <div
-                    className={
-                      "flex items-center w-full hover:bg-white/10 p-3 rounded"
-                    }
-                  >
-                    {/* @ts-ignore */}
-                    <lord-icon
-                      src={item.icon}
-                      trigger="hover"
-                      colors="primary:#fff"
-                    />
-                    <span className="ml-2"> {item.name}</span>
-                  </div>
-                </Link>
+                <SheetClose asChild key={item.name}>
+                  <Link href={item.href} key={item.name} className="my-3">
+                    <div
+                      className={
+                        "flex items-center w-full hover:bg-white/10 p-3 rounded"
+                      }
+                    >
+                      {/* @ts-ignore */}
+                      <lord-icon
+                        src={item.icon}
+                        trigger="hover"
+                        colors="primary:#fff"
+                      />
+                      <span className="ml-2"> {item.name}</span>
+                    </div>
+                  </Link>
+                </SheetClose>
               )
             )}
           </div>
@@ -103,9 +104,7 @@ export default function NavbarMobile({
                 <span>
                   {userLimit ?? 0}/{MAX_FREE_TRIAL} générations gratuites
                 </span>
-                <Progress
-                  value={userLimit ? userLimit * 20 : 0}
-                />
+                <Progress value={userLimit ? userLimit * 20 : 0} />
               </div>
             )}
 

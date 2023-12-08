@@ -7,7 +7,7 @@ import {
 
 export function Faq() {
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-center px-2 py-20 lg:p-20">
+    <div id="faq" className="flex flex-col lg:flex-row justify-center items-center px-2 py-20 lg:p-20">
       <h1 className="text-6xl font-bold mr-3 mb-5 text-center lg:text-left">
         Les questions <span className="underline">fréquentes</span>
       </h1>
