@@ -28,8 +28,11 @@ import { Separator } from "@radix-ui/react-select";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
-import { IoMdSend } from "react-icons/io";
+import { IoMdMail, IoMdSend } from "react-icons/io";
+import { MdFeedback, MdOutlineFeedback } from "react-icons/md";
+import { RiRoadMapFill } from "react-icons/ri";
 
 const FormSchema = z.object({
   message: z.string().min(10, {
@@ -68,9 +71,25 @@ export default function Feedback() {
         l&apos;application.
       </span>
       <div>
+        <Link href="https://edufiche.featurebase.app/">
+          <Button variant="default">
+            Feedback
+            <MdFeedback className="ml-2" size="20" />
+          </Button>
+        </Link>
+        <Link href="https://edufiche.featurebase.app/roadmap">
+          <Button className="mx-2" variant="default">
+            Roadmap de l&apos;application
+            <RiRoadMapFill className="ml-2" size="20" />
+          </Button>
+        </Link>
+
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="default">Envoyer un Feedback</Button>
+            <Button variant="default">
+              Envoyer un Mail
+              <IoMdMail className="ml-2" size="20" />
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
