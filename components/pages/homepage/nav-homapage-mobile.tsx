@@ -78,11 +78,11 @@ export async function NavHomepageMobile() {
         </div>
         <SheetFooter className="flex flex-col">
           <Link href={"/app"}>
-            <Button className="m-1 w-full" variant={"default"}>
+            <Button className="m-1 flex-1" variant={"default"}>
               Essaie gratuit
             </Button>
           </Link>
-          <PremiumButton className="m-1 w-full">
+          <PremiumButton className="m-1 flex-1">
             <LuPartyPopper size={25} />
             <span className="ml-2">
               {isSubscribed ? "Vous êtes Premium" : "Passer premium"}

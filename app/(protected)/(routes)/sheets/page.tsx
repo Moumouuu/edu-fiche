@@ -13,10 +13,8 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await getServerSession();
 
-  if (!session) return redirect("/sign-in");
-
   const userApiLimit = await prismadb.userApiLimit.findUnique({
-    where: { userEmail: session.user?.email! },
+    where: { userEmail: session?.user?.email! },
   });
 
   if (!userApiLimit) return redirect("/sign-in");

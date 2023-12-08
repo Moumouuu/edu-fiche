@@ -80,3 +80,24 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json("Sheet successfully created");
 }
+
+export async function GET(req: NextRequest) {
+  const start = req.nextUrl.searchParams.get("start");
+  const end = req.nextUrl.searchParams.get("end");
+
+  console.log(start, end);
+
+  if (!start || !end) {
+    return NextResponse.json({ error: "Error getting sheets" });
+  }
+
+  const sheets = await prismadb.sheet.findMany({
+    skip: Number(start),
+    take: Number(end) - Number(start),
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return NextResponse.json(sheets);
+}
