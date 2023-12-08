@@ -93,10 +93,10 @@ export default function FilterBar({
     };
     // Reset pagination to fetch the first sheets with the new filters
     resetPagination();
-    // Fetch the sheets with the new filters & updates values (totalSheets) & sheets
-    updateSheetsWithLimit(filters);
     // Update the URL with the new filters
     updateSearchParam(filters);
+    // Fetch the sheets with the new filters & updates values (totalSheets) & sheets
+    updateSheetsWithLimit(filters);
   }
 
   const updateSheetsWithLimit = async (filters?: FiltersBar) => {
