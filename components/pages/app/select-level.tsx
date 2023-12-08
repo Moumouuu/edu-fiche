@@ -21,11 +21,11 @@ import { capitalizeFirstLetter, cn, studentLevel } from "@/lib/utils";
 
 interface StudentLevelProps {
   onValueChange: (value: string) => void;
+  value?: string;
 }
 
-export function SelectLevel({ onValueChange }: StudentLevelProps) {
+export function SelectLevel({ onValueChange, value }: StudentLevelProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -50,7 +50,6 @@ export function SelectLevel({ onValueChange }: StudentLevelProps) {
                 key={level.value}
                 value={level.value}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
                   onValueChange(capitalizeFirstLetter(currentValue));
                   setOpen(false);
                 }}

@@ -21,11 +21,12 @@ import { capitalizeFirstLetter, cn, subjects } from "@/lib/utils";
 
 export function SelectSubject({
   onValueChange,
+  value,
 }: {
   onValueChange: (value: string) => void;
+  value?: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -36,7 +37,7 @@ export function SelectSubject({
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value ? value : "Niveaux d'études"}
+          {value ? value : "Matière"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -50,7 +51,6 @@ export function SelectSubject({
                 key={subject.value}
                 value={subject.value}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
                   onValueChange(capitalizeFirstLetter(currentValue));
                   setOpen(false);
                 }}

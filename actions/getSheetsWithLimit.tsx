@@ -3,7 +3,7 @@ import axios from "axios";
 import { Pagination } from "@/app/types/pagination";
 
 export type FiltersBar = {
-  content: string | undefined;
+  content: string;
   level: string;
   subject: string;
 };

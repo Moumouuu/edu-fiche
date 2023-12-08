@@ -5,7 +5,6 @@ import { incrementFreeTrial } from "@/actions/incrementFreeTrial";
 import { useChat } from "ai/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
 
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { useResponseModal } from "@/app/hooks/use-response-modal";
@@ -92,9 +91,9 @@ export default function SheetPage({
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
           {/* select for level */}
-          <SelectLevel onValueChange={(e) => setLevel(e)} />
+          <SelectLevel value={level} onValueChange={(e) => setLevel(e)} />
           {/* select for subject */}
-          <SelectSubject onValueChange={(e) => setSubject(e)} />
+          <SelectSubject value={subject} onValueChange={(e) => setSubject(e)} />
         </div>
 
         {/* keywords */}

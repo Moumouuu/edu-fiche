@@ -2,8 +2,8 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-import prismadb from "@/lib/prismadb";
 import { FiltersBar } from "@/actions/getSheetsWithLimit";
+import prismadb from "@/lib/prismadb";
 
 export async function POST(req: NextRequest) {
   // idSheet is only for update
@@ -98,10 +98,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Error getting sheets" });
   }
 
-  const sheets = await prismadb.sheet.findMany({
-    include: {
-      userApiLimit: true,
-    },
+  //count sheets with filters
+  const count = await prismadb.sheet.count({
     where: {
       AND: [
         {
@@ -121,6 +119,35 @@ export async function GET(req: NextRequest) {
         },
       ],
     },
+  });
+
+  // get sheets with limit and filters
+  const sheets = await prismadb.sheet.findMany({
+    include: {
+      userApiLimit: true,
+    },
+    where: {
+      AND: [
+        {
+          text: {
+            contains: filters.content,
+            mode: "insensitive",
+          },
+        },
+        {
+          level: {
+            contains: filters.level,
+            mode: "insensitive",
+          },
+        },
+        {
+          subject: {
+            contains: filters.subject,
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
     skip: Number(start),
     take: Number(end) - Number(start),
     orderBy: {
@@ -128,5 +155,5 @@ export async function GET(req: NextRequest) {
     },
   });
 
-  return NextResponse.json(sheets);
+  return NextResponse.json({ sheets, totalOfSheets: count });
 }

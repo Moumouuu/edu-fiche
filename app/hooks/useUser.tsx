@@ -1,6 +1,5 @@
 import { UserApiLimit } from "@prisma/client";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default async function useUser() {

@@ -1,12 +1,9 @@
 import PremiumButton from "@/components/premium-button";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -57,7 +54,7 @@ export async function NavHomepageMobile() {
           </SheetClose>
           <SheetClose asChild>
             <Link
-              href={"#pricing"}
+              href={"#faq"}
               className="m-2 text-2xl text-muted-foreground hover:text-white/90 anim transition duration-200 ease-out"
             >
               FAQ

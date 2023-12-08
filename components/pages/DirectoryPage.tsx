@@ -1,26 +1,27 @@
 "use client";
 
-import { FiltersBar, getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
-import { Pagination } from "@/app/types/pagination";
-import { SheetWithAuthor } from "@/app/types/sheet";
-import React, { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import SheetCard from "./app/sheet-card";
-import Title from "../title";
-import LoadingCard from "../loading-card";
-import { Separator } from "../ui/separator";
-import { Filter } from "lucide-react";
-import FilterBar from "./directory/filter-bar";
-import usePagination from "@/app/hooks/use-pagination";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function DirectoryPage({
-  totalOfSheets,
-}: {
-  totalOfSheets: number;
-}) {
+import { FiltersBar, getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
+
+import usePagination from "@/app/hooks/use-pagination";
+import { useTotalOfSheets } from "@/app/hooks/use-total-of-sheets";
+
+import { SheetWithAuthor } from "@/app/types/sheet";
+
+import LoadingCard from "../loading-card";
+import Title from "../title";
+import { Separator } from "../ui/separator";
+import SheetCard from "./app/sheet-card";
+import FilterBar from "./directory/filter-bar";
+
+export default function DirectoryPage() {
   const [sheets, setSheets] = useState<SheetWithAuthor[]>([]);
+
   const { pagination, setPagination } = usePagination();
+  const { values: totalOfSheets, setValues } = useTotalOfSheets();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -34,15 +35,14 @@ export default function DirectoryPage({
       level: searchParams.get("level") ?? "",
       subject: searchParams.get("subject") ?? "",
     };
-    const res = await getSheetsWithLimit(pagination, filters);
-    if (res.error) return;
-    setSheets((prev) => [...prev, ...res]);
 
-    // update pagination
-    setPagination({
-      start: pagination.start,
-      end: pagination.end,
-    });
+    const resSheetsWithLimit = await getSheetsWithLimit(pagination, filters);
+    //update total of sheets with the total of sheet filtered
+    setValues(resSheetsWithLimit.totalOfSheets);
+    setSheets((prev) => [...prev, ...resSheetsWithLimit.sheets]);
+
+    // update pagination to fetch next sheets
+    setPagination();
   };
 
   return (
@@ -62,8 +62,8 @@ export default function DirectoryPage({
       <InfiniteScroll
         dataLength={sheets.length}
         next={fetchSheets}
-        scrollThreshold={0.5}
-        hasMore={sheets.length < totalOfSheets}
+        scrollThreshold={0.4}
+        hasMore={totalOfSheets === -1 ? true : sheets.length < totalOfSheets}
         loader={<LoadingCard />}
         scrollableTarget="scrollableDiv"
         endMessage={
