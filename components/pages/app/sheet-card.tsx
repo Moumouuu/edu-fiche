@@ -41,9 +41,11 @@ import { useSession } from "next-auth/react";
 export default function SheetCard({
   sheet: s,
   className,
+  nbWordsDisplay = 300,
 }: {
   sheet: SheetWithAuthor;
   className?: string;
+  nbWordsDisplay?: number;
 }) {
   const [sheet, setSheet] = useState(s);
   const { data: session } = useSession();
@@ -100,8 +102,8 @@ export default function SheetCard({
         </div>
       </div>
       <p className="whitespace-pre-wrap">
-        {sheet.text.length > 400
-          ? sheet.text.substring(0, 400) + "..."
+        {sheet.text.length > nbWordsDisplay
+          ? sheet.text.substring(0, nbWordsDisplay) + "..."
           : sheet.text}
       </p>
 

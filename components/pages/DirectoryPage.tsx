@@ -12,8 +12,11 @@ import LoadingCard from "../loading-card";
 
 const STEP = 3;
 
-export default function DirectoryPage() {
-  // fetch sheets from api avec infinite scroll
+export default function DirectoryPage({
+  totalOfSheets,
+}: {
+  totalOfSheets: number;
+}) {
   const [sheets, setSheets] = useState<SheetWithAuthor[]>([]);
   const [pagination, setPagination] = useState<Pagination>({
     start: 0,
@@ -52,18 +55,27 @@ export default function DirectoryPage() {
       <InfiniteScroll
         dataLength={sheets.length}
         next={fetchSheets}
-        hasMore={true}
+        hasMore={sheets.length < totalOfSheets}
         loader={<LoadingCard />}
         scrollableTarget="scrollableDiv"
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Yay ! Vous avez tout vu</b>
+            <b>Mince ! Il n&apos;y a plus de fiche</b>
           </p>
         }
       >
-        {sheets.map((sheet: SheetWithAuthor, index) => (
-          <SheetCard key={index} sheet={sheet} />
-        ))}
+        <div className="grid auto-rows-[550px] grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {sheets.map((sheet, i) => (
+            <SheetCard
+              key={i}
+              sheet={sheet}
+              nbWordsDisplay={i % 4 === 0 ? 500 : 300}
+              className={`row-span-1 rounded-xl border-2 border-slate-400/10 bg-neutral-100 p-4 dark:bg-neutral-900 ${
+                i % 4 === 0 && "col-span-2"
+              }`}
+            />
+          ))}
+        </div>
       </InfiniteScroll>
     </div>
   );
