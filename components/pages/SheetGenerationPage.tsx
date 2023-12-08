@@ -75,7 +75,6 @@ export default function SheetPage({
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
-      <Toaster />
       <div>
         {/* @ts-ignore */}
         <lord-icon

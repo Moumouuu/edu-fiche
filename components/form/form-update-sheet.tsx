@@ -61,7 +61,6 @@ export default function FormUpdateSheet({
 
   return (
     <>
-      <Toaster />
       <form onSubmit={handleSubmit(onSubmit)} className="p-4">
         <Label className="text-md" htmlFor="title">
           Mots clés de la fiche

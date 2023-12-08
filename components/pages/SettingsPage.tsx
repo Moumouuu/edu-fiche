@@ -6,7 +6,6 @@ import Payment from "./settings/payment";
 export default function SettingsPage() {
   return (
     <div className="md:p-4 px-4 py-14 flex flex-col w-full">
-      <Toaster />
       <HeaderSettings />
       <Payment />
       <Feedback />
