@@ -33,7 +33,7 @@ export default function NavbarMobile({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="p-4 absolute top-2 left-2">
+        <div className="p-4 fixed top-2 left-2">
           <CgMenuGridO size={20} />
         </div>
       </SheetTrigger>
