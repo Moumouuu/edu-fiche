@@ -1,12 +1,6 @@
 import axios from "axios";
 
-import { Pagination } from "@/app/types/pagination";
-
-export type FiltersBar = {
-  content: string;
-  level: string;
-  subject: string;
-};
+import { FiltersBar, Pagination } from "@/app/types/pagination";
 
 export const getSheetsWithLimit = async (
   pagination: Pagination,

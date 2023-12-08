@@ -4,13 +4,14 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { FiltersBar, getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
+import { getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
 
 import usePagination from "@/app/hooks/use-pagination";
 import { useTotalOfSheets } from "@/app/hooks/use-total-of-sheets";
 
 import { SheetWithAuthor } from "@/app/types/sheet";
 
+import { FiltersBar } from "@/app/types/pagination";
 import LoadingCard from "../loading-card";
 import Title from "../title";
 import { Separator } from "../ui/separator";

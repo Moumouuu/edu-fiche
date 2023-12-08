@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { FiltersBar, getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
+import { getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
 
 import usePagination from "@/app/hooks/use-pagination";
 import { useTotalOfSheets } from "@/app/hooks/use-total-of-sheets";
@@ -25,8 +25,10 @@ import { SheetWithAuthor } from "@/app/types/sheet";
 import { FaFilter } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
+import { FiltersBar } from "@/app/types/pagination";
 import { SelectLevel } from "../app/select-level";
 import { SelectSubject } from "../app/select-subject";
+import { FilterBarMobileContent } from "./filter-bar-mobile-content";
 
 export default function FilterBar({
   setSheets,
@@ -91,17 +93,22 @@ export default function FilterBar({
     };
     // Reset pagination to fetch the first sheets with the new filters
     resetPagination();
+    // Fetch the sheets with the new filters & updates values (totalSheets) & sheets
+    updateSheetsWithLimit(filters);
     // Update the URL with the new filters
     updateSearchParam(filters);
+  }
+
+  const updateSheetsWithLimit = async (filters?: FiltersBar) => {
     // Fetch the sheets with the new filters
     const res = await getSheetsWithLimit(pagination, filters);
     // Update the sheets with the new sheets
     setSheets(res.sheets);
     // Update total of sheets with the total of sheet filtered (used for infinite scroll)
     setValues(res.totalOfSheets);
-  }
+  };
 
-  // Reset filters and pagination
+  // Reset filters and pagination & refetch sheets
   const resetFilters = () => {
     form.reset();
     setLevel("");
@@ -111,49 +118,62 @@ export default function FilterBar({
       level: "",
       subject: "",
     });
+    updateSheetsWithLimit();
   };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-wrap justify-left lg:justify-center items-end w-full bg-primary-foreground rounded-lg p-5"
+        className="bg-primary-foreground rounded-lg p-5"
       >
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem className="mx-2">
-              <FormControl>
-                <Input
-                  className="w-[300px]"
-                  placeholder="Chercher dans le contenu d'une fiche"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+        <FilterBarMobileContent
+          form={form}
+          level={level}
+          resetFilters={resetFilters}
+          setLevel={setLevel}
+          setSubject={setSubject}
+          subject={subject}
+          onSubmit={onSubmit}
         />
-        <div className="mx-1">
-          <SelectLevel value={level} onValueChange={setLevel} />
-        </div>
-        <div className="mx-1">
-          <SelectSubject value={subject} onValueChange={setSubject} />
-        </div>
 
-        <Button className="mx-1" type="submit" variant={"default"}>
-          Filtrer
-          <FaFilter className="ml-2" />
-        </Button>
-        <Button
-          onClick={resetFilters}
-          className="mx-1"
-          type="submit"
-          variant={"destructive"}
-        >
-          <MdDelete size="20" color="white" />
-        </Button>
+        <div className="hidden lg:flex flex-wrap justify-left lg:justify-center items-end">
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem className="mx-2">
+                <FormControl>
+                  <Input
+                    className="w-[300px]"
+                    placeholder="Chercher dans le contenu d'une fiche"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="mx-1">
+            <SelectLevel value={level} onValueChange={setLevel} />
+          </div>
+          <div className="mx-1">
+            <SelectSubject value={subject} onValueChange={setSubject} />
+          </div>
+
+          <Button className="mx-1" type="submit" variant={"default"}>
+            Filtrer
+            <FaFilter className="ml-2" />
+          </Button>
+          <Button
+            onClick={resetFilters}
+            className="mx-1"
+            type="submit"
+            variant={"destructive"}
+          >
+            <MdDelete size="20" color="white" />
+          </Button>
+        </div>
       </form>
     </Form>
   );
