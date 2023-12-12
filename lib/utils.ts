@@ -45,7 +45,7 @@ export const itemsMenu = [
     name: "Générateur de Quiz (BETA)",
     href: "/quiz",
     icon: "https://cdn.lordicon.com/kipaqhoz.json",
-    premium: true,
+    premium: false,
   },
   {
     name: "Mes fiches",

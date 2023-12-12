@@ -1,75 +1,68 @@
 "use client";
 
 import { createSheet } from "@/actions/createSheet";
-import { incrementFreeTrial } from "@/actions/incrementFreeTrial";
 import { useChat } from "ai/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 import { useResponseModal } from "@/app/hooks/use-response-modal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
-import { SheetResponseModal } from "./app/quiz-response-modal";
 
+import { incrementFreeTrialSheet } from "@/actions/incrementFreeTrialSheet";
+import { useUserLimitSheet } from "@/app/hooks/use-user-limit-sheet";
 import { MAX_FREE_TRIAL } from "@/lib/utils";
-
 import { SelectLevel } from "./app/select-level";
 import { SelectSubject } from "./app/select-subject";
+import SheetResponseModal from "./app/sheet-response-modal";
 
-export default function SheetPage({
-  userLimit,
-  isSubscribed,
-}: {
-  userLimit: number | undefined;
-  isSubscribed: boolean;
-}) {
+export default function SheetPage({ isSubscribed }: { isSubscribed: boolean }) {
   const [level, setLevel] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [keysWords, setKeysWords] = useState<string>("");
+
+  const { count, increment } = useUserLimitSheet();
+  const { open, isOpen } = useResponseModal();
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
     useChat({
-      api: "/api/sheet/generate",
-      body: {
-        level: level,
-        subject: subject,
-        keysWords: keysWords,
-        userLimit: userLimit,
-        isSubscribed: isSubscribed,
-      },
-    });
-
-  const { open, isOpen } = useResponseModal();
-  const { open: openSubscriptionModal } = usePremiumModal();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (userLimit === MAX_FREE_TRIAL && !isSubscribed) {
-      return openSubscriptionModal();
-    }
-  }, [userLimit, isSubscribed, openSubscriptionModal]);
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      open();
-      if (!error && !isLoading) {
+      onFinish: (data: any) => {
         incrementFreeTrial();
-        createSheet(messages, {
+        createSheet(data, {
           level,
           subject,
           keysWords,
         });
-        router.refresh();
-      }
+      },
+      api: "/api/sheet/generate",
+      body: {
+        level: level,
+        userLimit: count,
+        subject: subject,
+        keysWords: keysWords,
+        isSubscribed: isSubscribed,
+      },
+    });
+
+  const canGenerate = isSubscribed || count < MAX_FREE_TRIAL;
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      open();
     }
-  }, [messages, isLoading, error]);
+  }, [messages, isLoading, error, open]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
     setKeysWords(e.target.value);
+  };
+
+  const incrementFreeTrial = () => {
+    // increment global count
+    increment();
+    // increment db count
+    incrementFreeTrialSheet();
   };
 
   return (
@@ -91,9 +84,16 @@ export default function SheetPage({
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
           {/* select for level */}
-          <SelectLevel value={level} onValueChange={(e) => setLevel(e)} />
+          <div className="mx-1">
+            <SelectLevel value={level} onValueChange={(e) => setLevel(e)} />
+          </div>
+          <div className="mx-1">
+            <SelectSubject
+              value={subject}
+              onValueChange={(e) => setSubject(e)}
+            />
+          </div>
           {/* select for subject */}
-          <SelectSubject value={subject} onValueChange={(e) => setSubject(e)} />
         </div>
 
         {/* keywords */}
@@ -106,7 +106,7 @@ export default function SheetPage({
         />
 
         {/* submit button */}
-        <Button className="mt-4" type="submit">
+        <Button disabled={!canGenerate} className="mt-4" type="submit">
           Générer
         </Button>
       </form>
@@ -116,9 +116,12 @@ export default function SheetPage({
         open={isOpen}
         content={messages}
         isLoading={isLoading}
-        isSubscribed={isSubscribed}
-        userLimit={userLimit}
       />
+      {!canGenerate && (
+        <span className="m-3">
+          Vous avez atteint la limite gratuite autorisée.
+        </span>
+      )}
     </div>
   );
 }

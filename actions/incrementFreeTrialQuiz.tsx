@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const incrementFreeTrial = async () => {
+export const incrementFreeTrialQuiz = async () => {
   try {
-    await axios.post("/api/free-trial/increment");
+    await axios.post("/api/freeTrial/increment/quiz");
     console.log("Free trial incremented successfully!");
   } catch (err) {
     console.log(err);

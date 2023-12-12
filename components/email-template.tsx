@@ -12,7 +12,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 }) => (
   <>
     <h1 className="text-2xl font-medium">
-      Nouveau Feedback utilisateur - {sender.userEmail} ({sender.count} fiches)
+      Nouveau Feedback utilisateur - {sender.userEmail} ({sender.sheetGenerated} fiches)
       - Création de compte :{sender.createdAt.toISOString()}
     </h1>
     <p>{message}</p>

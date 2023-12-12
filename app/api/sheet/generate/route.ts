@@ -14,9 +14,9 @@ export const runtime = "edge";
 
 export async function POST(req: Request) {
   const data = await req.json();
-  const { level, subject, keysWords, userLimit, isSubscribed } = data;
+  const { level, subject, keysWords, isSubscribed, userLimit } = data;
 
-  if (userLimit === MAX_FREE_TRIAL && !isSubscribed)
+  if (userLimit >= MAX_FREE_TRIAL && !isSubscribed)
     throw new Error("UserApiLimit reached");
 
   const prompt = promptGenerateSheet(subject, level, keysWords);

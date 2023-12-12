@@ -17,15 +17,16 @@ import {
 import { PremiumModal } from "./premium-modal";
 import { UserProfile } from "./user-profile";
 
-import { MAX_FREE_TRIAL, itemsMenu } from "@/lib/utils";
+import { MAX_FREE_TRIAL, MAX_FREE_TRIAL_QUIZ, itemsMenu } from "@/lib/utils";
 
+import { UserLimit } from "@/app/types/sheet";
 import { CgMenuGridO } from "react-icons/cg";
 
 export default function NavbarMobile({
   userLimit,
   isPro,
 }: {
-  userLimit: number | undefined;
+  userLimit: UserLimit;
   isPro: boolean;
 }) {
   const { open } = usePremiumModal();
@@ -100,11 +101,31 @@ export default function NavbarMobile({
           </div>
           <div className="flex flex-col">
             {!isPro && (
-              <div className="flex flex-col my-3">
-                <span>
-                  {userLimit ?? 0}/{MAX_FREE_TRIAL} générations gratuites
-                </span>
-                <Progress value={userLimit ? userLimit * 20 : 0} />
+              <div className="flex items-end  my-3">
+                <div className="flex flex-col mx-2 flex-1">
+                  <span>
+                    {userLimit.userLimitSheet ?? 0}/{MAX_FREE_TRIAL} Fiches
+                  </span>
+                  <Progress
+                    value={
+                      userLimit.userLimitSheet
+                        ? (userLimit.userLimitSheet * 100) / MAX_FREE_TRIAL
+                        : 0
+                    }
+                  />
+                </div>
+                <div className="flex flex-col mx-2 flex-1">
+                  <span>
+                    {userLimit.userLimitQuiz ?? 0}/{MAX_FREE_TRIAL_QUIZ} Quiz
+                  </span>
+                  <Progress
+                    value={
+                      userLimit.userLimitQuiz
+                        ? (userLimit.userLimitQuiz * 100) / MAX_FREE_TRIAL_QUIZ
+                        : 0
+                    }
+                  />
+                </div>
               </div>
             )}
 

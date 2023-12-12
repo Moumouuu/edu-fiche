@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { authOptions } from "@/lib/auth";
 import prismadb from "@/lib/prismadb";
 import { checkSubscription } from "@/lib/subscription";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
+import { MAX_FREE_TRIAL_QUIZ } from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -22,24 +22,23 @@ export async function POST(req: NextRequest) {
 
   if (!userApiLimit) throw new Error("No user connected");
 
-  if (userApiLimit.count === MAX_FREE_TRIAL && !isSubscribed)
+  if (userApiLimit.quizGenerated === MAX_FREE_TRIAL_QUIZ && !isSubscribed)
     return Error("UserApiLimit reached");
 
-  if (!isSubscribed) {
-    const userApiLimitUpdated = await prismadb.userApiLimit.update({
-      where: {
-        id: userApiLimit.id,
+  const userApiLimitUpdated = await prismadb.userApiLimit.update({
+    where: {
+      id: userApiLimit.id,
+    },
+    data: {
+      quizGenerated: {
+        increment: 1,
       },
-      data: {
-        count: {
-          increment: 1,
-        },
-      },
-    });
+    },
+  });
 
-    if (!userApiLimitUpdated)
-      throw new Error("[Free Trial] UserApiLimit not updated");
+  if (!userApiLimitUpdated) {
+    throw new Error("[Free Trial] UserApiLimit not updated");
   }
 
-  return true;
+  return NextResponse.json({ success: true });
 }

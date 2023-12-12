@@ -3,6 +3,7 @@ import OpenAI from "openai";
 
 import { promptGenerateQuiz } from "@/lib/prompts";
 import { MAX_FREE_TRIAL_QUIZ } from "@/lib/utils";
+import { NextResponse } from "next/server";
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
@@ -14,13 +15,11 @@ export const runtime = "edge";
 
 export async function POST(req: Request) {
   // Extract the `messages` from the body of the request
-  const { messages, level, subject, keysWords, userLimit, isSubscribed } =
+  const { messages, level, subject, keysWords, isSubscribed, userLimit } =
     await req.json();
 
-  if (!isSubscribed) throw new Error("User is not subscribed");
-
-  if (userLimit === MAX_FREE_TRIAL_QUIZ && !isSubscribed)
-    throw new Error("UserApiLimit reached");
+  if (userLimit >= MAX_FREE_TRIAL_QUIZ && !isSubscribed)
+    return NextResponse.json({ error: "UserApiLimit reached" });
 
   const prompt = promptGenerateQuiz(subject, level, keysWords);
 

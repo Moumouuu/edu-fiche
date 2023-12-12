@@ -15,21 +15,17 @@ type QuizStep = {
   answer: string;
 };
 
-import { MAX_FREE_TRIAL_QUIZ, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 export function QuizResponseModal({
   open,
   quiz,
   isLoading,
-  isSubscribed,
-  userLimit,
   title,
 }: {
   open: boolean;
   quiz: QuizStep[];
   isLoading: boolean;
-  isSubscribed: boolean;
-  userLimit: number | undefined;
   title: string;
 }) {
   const { close } = useResponseModal();
@@ -38,14 +34,6 @@ export function QuizResponseModal({
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
   const [end, setEnd] = useState<boolean>(false);
-
-  if (!isSubscribed && userLimit === MAX_FREE_TRIAL_QUIZ) {
-    return (
-      <span className="m-3">
-        Vous avez atteint la limite gratuite autorisée.
-      </span>
-    );
-  }
 
   const handleAnswer = (answer: string) => {
     if (answer === quiz[step].answer) {
@@ -83,12 +71,18 @@ export function QuizResponseModal({
           </DialogTitle>
           <DialogDescription>
             Votre Quiz est unique, vous ne pourrez plus le consulter si vous
-            fermez cette page.
+            fermez cette page. <span className="underline">Pour rappel</span> :
+            le Quiz peut contenir des erreurs !
           </DialogDescription>
         </DialogHeader>
         <div className="p-3 ">
           {isLoading ? (
-            <span>Loading...</span>
+            <div className="flex flex-col items-center ">
+              <Loader />
+              <span className="text-2xl text-center mt-6 font-semibold">
+                La génération du quiz est en cours (temps estimé : 1 minute).
+              </span>
+            </div>
           ) : end ? (
             <div className="flex flex-col items-center">
               {/* @ts-ignore */}
@@ -149,3 +143,14 @@ export function QuizResponseModal({
     </Dialog>
   );
 }
+
+export const Loader = () => {
+  // css of the animation in global.css
+  return (
+    <div className="loader">
+      <div className="box1"></div>
+      <div className="box2"></div>
+      <div className="box3"></div>
+    </div>
+  );
+};

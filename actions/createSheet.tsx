@@ -1,14 +1,14 @@
 import { Message } from "ai";
 import axios from "axios";
 
-export const createSheet = async (completion: Message[], data: any) => {
+export const createSheet = async (completion: Message, data: any) => {
   const { level, subject, keysWords } = data;
   try {
     await axios.post("/api/sheet", {
       level,
       subject,
       keysWords,
-      messages: completion,
+      message: completion,
     });
 
     console.log("Sheet created successfully!");

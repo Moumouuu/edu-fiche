@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import { apiUserLimit } from "@/actions/apiUserLimit";
 import QuizPage from "@/components/pages/QuizPage";
 import { checkSubscription } from "@/lib/subscription";
 
@@ -10,11 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const userLimit = await apiUserLimit();
   const isSubscribed = await checkSubscription();
   return (
     <div className="w-full">
-      <QuizPage userLimit={userLimit} isSubscribed={isSubscribed} />
+      <QuizPage isSubscribed={isSubscribed} />
     </div>
   );
 }

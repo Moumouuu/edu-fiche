@@ -1,6 +1,5 @@
 import { authOptions } from "@/lib/auth";
 import prismadb from "@/lib/prismadb";
-import { MAX_FREE_TRIAL } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 
 export async function apiUserLimit() {
@@ -25,18 +24,20 @@ export async function apiUserLimit() {
         userEmail: userEmail,
       },
     });
-    return newUserApiLimit?.count;
+    return newUserApiLimit?.sheetGenerated;
   }
 
-  return userApiLimit?.count;
+  return userApiLimit?.sheetGenerated;
 }
 
-export async function apiUserLimitIncrement() {
+export async function apiUserLimitQuiz() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) return ;
+  if (!session) return;
 
-  const userEmail = session?.user?.email;
+  if (!session?.user?.email) return;
+
+  const userEmail = session.user.email;
 
   const userApiLimit = await prismadb.userApiLimit.findFirst({
     where: {
@@ -44,20 +45,15 @@ export async function apiUserLimitIncrement() {
     },
   });
 
-  if (!userApiLimit) return;
-
-  if (userApiLimit?.count === MAX_FREE_TRIAL) return Error("UserApiLimit reached");
-
-  const userApiLimitUpdated = await prismadb.userApiLimit.update({
-    where: {
-      id: userApiLimit.id,
-    },
-    data: {
-      count: {
-        increment: 1,
+  // account create with google auth => need to create userApiLimit
+  if (!userApiLimit) {
+    const newUserApiLimit = await prismadb.userApiLimit.create({
+      data: {
+        userEmail: userEmail,
       },
-    },
-  });
+    });
+    return newUserApiLimit?.quizGenerated;
+  }
 
-  return userApiLimitUpdated?.count;
+  return userApiLimit?.quizGenerated;
 }

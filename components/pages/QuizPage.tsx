@@ -1,67 +1,66 @@
 "use client";
 
+import { Message } from "ai";
 import { useChat } from "ai/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import { usePremiumModal } from "@/app/hooks/use-premium-modal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
 import { QuizResponseModal } from "./app/quiz-response-modal";
-
-import { useResponseModal } from "@/app/hooks/use-response-modal";
-import { Message } from "ai";
 import { SelectLevel } from "./app/select-level";
 import { SelectSubject } from "./app/select-subject";
 
-export default function QuizPage({
-  userLimit,
-  isSubscribed,
-}: {
-  userLimit: number | undefined;
-  isSubscribed: boolean;
-}) {
+import { incrementFreeTrialQuiz } from "@/actions/incrementFreeTrialQuiz";
+
+import { useResponseModal } from "@/app/hooks/use-response-modal";
+import { useUserLimitQuiz } from "@/app/hooks/use-user-limit-quiz";
+
+import { MAX_FREE_TRIAL_QUIZ } from "@/lib/utils";
+
+export default function QuizPage({ isSubscribed }: { isSubscribed: boolean }) {
   const [quiz, setQuiz] = useState<[]>([]);
   const [level, setLevel] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [keysWords, setKeysWords] = useState<string>("");
+
+  const { count, increment } = useUserLimitQuiz();
+  const { isOpen, open } = useResponseModal();
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       onFinish: (data: Message) => {
         setQuiz(JSON.parse(data.content as any));
+        incrementFreeTrial();
       },
       api: "/api/quiz",
       body: {
         level: level,
         subject: subject,
+        userLimit: count,
         keysWords: keysWords,
-        userLimit: userLimit,
         isSubscribed: isSubscribed,
       },
     });
-  const { isOpen, open } = useResponseModal();
-  const { open: openSubscriptionModal } = usePremiumModal();
-  const router = useRouter();
+
+  const canGenerate = isSubscribed || count < MAX_FREE_TRIAL_QUIZ;
 
   useEffect(() => {
     if (messages.length > 0) {
       open();
     }
-  }, [messages]);
-
-  useEffect(() => {
-    if (!isSubscribed) {
-      openSubscriptionModal();
-      router.push("/app");
-    }
-  }, [isSubscribed, openSubscriptionModal]);
+  }, [messages, open]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
     setKeysWords(e.target.value);
+  };
+
+  const incrementFreeTrial = () => {
+    // increment global count
+    increment();
+    // increment db count
+    incrementFreeTrialQuiz();
   };
 
   return (
@@ -78,7 +77,7 @@ export default function QuizPage({
       </div>
 
       <Title text="Générateur de Quiz" />
-      <SubTitle text="Vous avez besoin de réviser ? Générez vos Quiz de math adapté à votre niveau en un clin d'oeil !" />
+      <SubTitle text="Avez-vous besoin de réviser ? Générez vos Quiz de math adaptés à votre niveau en un clin d'œil !" />
 
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
@@ -106,7 +105,7 @@ export default function QuizPage({
         />
 
         {/* submit button */}
-        <Button className="mt-4" type="submit">
+        <Button disabled={!canGenerate} className="mt-4" type="submit">
           Générer
         </Button>
       </form>
@@ -116,9 +115,12 @@ export default function QuizPage({
         title={"Quiz"}
         quiz={quiz}
         isLoading={isLoading}
-        isSubscribed={isSubscribed}
-        userLimit={userLimit}
       />
+      {!canGenerate && (
+        <span className="m-3">
+          Vous avez atteint la limite gratuite autorisée.
+        </span>
+      )}
     </div>
   );
 }

@@ -8,20 +8,21 @@ datasource db {
 }
 
 model UserApiLimit {
-  id           String   @id @default(uuid())
-  userEmail    String   @unique @map(name: "user_email")
-  userPassword String?  @map(name: "user_password")
-  count        Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  sheet        Sheet[]
+  id             String   @id @default(uuid())
+  userEmail      String   @unique @map(name: "user_email")
+  userPassword   String?  @map(name: "user_password")
+  sheetGenerated Int      @default(0)
+  quizGenerated  Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  sheet          Sheet[]
 }
 
 model UserSubscription {
-  id                     String    @id @default(cuid())
-  userEmail              String    @unique
-  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  id                   String  @id @default(cuid())
+  userEmail            String  @unique
+  stripeCustomerId     String? @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId String? @unique @map(name: "stripe_subscription_id")
   //stripePriceId          String?   @map(name: "stripe_price_id")
   //stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 }
@@ -30,9 +31,9 @@ model Sheet {
   id             String       @id @default(uuid())
   //title          String       @default("Untitled")
   text           String
-  level          String       
-  subject        String       
-  keywords       String       
+  level          String
+  subject        String
+  keywords       String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   userApiLimit   UserApiLimit @relation(fields: [userApiLimitId], references: [id])

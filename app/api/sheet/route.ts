@@ -7,14 +7,14 @@ import prismadb from "@/lib/prismadb";
 
 export async function POST(req: NextRequest) {
   // idSheet is only for update
-  const { messages, level, subject, keysWords, idSheet } = await req.json();
+  const { message, level, subject, keysWords, idSheet } = await req.json();
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.redirect("sign-in");
   }
 
-  if (!idSheet && messages.lenght === 0) {
+  if (!idSheet && !message.content) {
     return NextResponse.json("No messages to save");
   }
 
@@ -28,26 +28,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.redirect("sign-in");
   }
 
-  let messagesFormated;
-
-  // creation
-  if (!idSheet) {
-    messagesFormated = messages.map((message: any) => {
-      if (message.role === "assistant") {
-        return message.content;
-      }
-    });
-
-    // remove undefined (other than assistant messages)
-    messagesFormated.filter((message: any) => message !== undefined);
-
-    // get last message (assistant message)
-    messagesFormated = Object.values(messagesFormated).pop();
-  }
-
   let oldSheet;
 
-  //update case
+  // update case
   if (idSheet) {
     oldSheet = await prismadb.sheet.findUnique({
       where: {
@@ -58,14 +41,13 @@ export async function POST(req: NextRequest) {
 
   const sheet = await prismadb.sheet.upsert({
     create: {
-      text: messagesFormated ?? messages,
+      text: message.content,
       level: level,
       subject: subject,
       keywords: keysWords,
       userApiLimitId: user.id,
     },
     update: {
-      text: messagesFormated ?? messages,
       level: level,
       subject: subject,
       keywords: keysWords == "" ? oldSheet?.keywords : keysWords,
@@ -91,8 +73,6 @@ export async function GET(req: NextRequest) {
     level: req.nextUrl.searchParams.get("level") ?? "",
     subject: req.nextUrl.searchParams.get("subject") ?? "",
   };
-
-  console.log(filters);
 
   if (!start || !end) {
     return NextResponse.json({ error: "Error getting sheets" });
