@@ -9,20 +9,14 @@ import { useResponseModal } from "@/app/hooks/use-response-modal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import SubTitle from "../subTitle";
 import Title from "../title";
 import { SheetResponseModal } from "./app/sheet-response-modal";
 
-import { studentLevel, subjects } from "@/lib/utils";
+import { SelectLevel } from "./app/select-level";
+import { SelectSubject } from "./app/select-subject";
 
-export default function ExercicesPage({
+export default function QuizPage({
   userLimit,
   isSubscribed,
 }: {
@@ -32,17 +26,15 @@ export default function ExercicesPage({
   const [level, setLevel] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [keysWords, setKeysWords] = useState<string>("");
-  const [typeOfExercice, setTypeOfExercice] = useState<string>("");
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
-      api: "/api/exercices",
+      api: "/api/quiz",
       body: {
         level: level,
         subject: subject,
         keysWords: keysWords,
         userLimit: userLimit,
         isSubscribed: isSubscribed,
-        typeOfExercice: typeOfExercice,
       },
     });
 
@@ -53,7 +45,7 @@ export default function ExercicesPage({
   useEffect(() => {
     if (!isSubscribed) {
       openSubscriptionModal();
-      router.push("/");
+      router.push("/app");
     }
   }, [isSubscribed, openSubscriptionModal]);
 
@@ -69,7 +61,7 @@ export default function ExercicesPage({
   };
 
   return (
-    <div className="h-[100vh] flex flex-col items-center justify-center">
+    <div className="h-screen flex flex-col items-center justify-center">
       <div>
         {/* @ts-ignore */}
         <lord-icon
@@ -81,52 +73,20 @@ export default function ExercicesPage({
         />
       </div>
 
-      <Title text="Générateur d'exercices" />
-      <SubTitle text="Vous avez besoin de réviser ? Générez vos exercices de math adapté à votre niveau en un clin d'oeil !" />
+      <Title text="Générateur de Quiz" />
+      <SubTitle text="Vous avez besoin de réviser ? Générez vos Quiz de math adapté à votre niveau en un clin d'oeil !" />
 
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
         <div className="flex ">
           {/* select for level */}
-          <Select onValueChange={(e) => setLevel(e)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Niveau" />
-            </SelectTrigger>
-            <SelectContent>
-              {studentLevel.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
+          <div className="mx-1">
+            <SelectLevel onValueChange={(e) => setLevel(e)} />
+          </div>
           {/* select for subject */}
-          <Select onValueChange={(e) => setSubject(e)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Matière" />
-            </SelectTrigger>
-            <SelectContent>
-              {subjects.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
 
-          {/* select for type of exercice */}
-          <Select onValueChange={(e) => setTypeOfExercice(e)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Type Question" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={"QCM"}>QCM</SelectItem>
-              <SelectItem value={"Question ouverte"}>
-                Question ouverte
-              </SelectItem>
-              <SelectItem value={"YES/NO"}>Oui / Non </SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="mx-1">
+            <SelectSubject onValueChange={(e) => setSubject(e)} />
+          </div>
         </div>
 
         {/* keywords */}
@@ -137,12 +97,14 @@ export default function ExercicesPage({
           value={input}
           onChange={handleInput}
         />
+
         {/* submit button */}
         <Button className="mt-4" type="submit">
           Générer
         </Button>
       </form>
 
+      {/* TODO : refactor with modal quiz */}
       <SheetResponseModal
         title={"Exercice"}
         open={isOpen}

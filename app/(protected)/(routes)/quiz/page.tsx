@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 
 import { apiUserLimit } from "@/actions/apiUserLimit";
-import ExercicesPage from "@/components/pages/ExercicesPage";
+import QuizPage from "@/components/pages/QuizPage";
 import { checkSubscription } from "@/lib/subscription";
 
 export const metadata: Metadata = {
-  title: "EduFiche | Exercices",
-  description: "Page de génération d'exercices de l'application EduFiche",
+  title: "EduFiche | Quiz",
+  description: "Page de génération de Quiz de l'application EduFiche",
 };
 
 export default async function Home() {
@@ -14,7 +14,7 @@ export default async function Home() {
   const isSubscribed = await checkSubscription();
   return (
     <div className="w-full">
-      <ExercicesPage userLimit={userLimit} isSubscribed={isSubscribed} />
+      <QuizPage userLimit={userLimit} isSubscribed={isSubscribed} />
     </div>
   );
 }
