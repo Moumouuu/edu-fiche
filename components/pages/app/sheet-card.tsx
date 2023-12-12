@@ -92,7 +92,7 @@ export default function SheetCard({
         <div className="flex flex-wrap my-2">
           {formatKeywords(sheet.keywords).map((k: string, i: number) => {
             return (
-              <Badge key={i} variant={"secondary"} className="mr-2 ">
+              <Badge key={i} variant={"secondary"} className="m-1 ">
                 {k}
               </Badge>
             );

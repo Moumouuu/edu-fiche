@@ -2,8 +2,8 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-import prismadb from "@/lib/prismadb";
 import { FiltersBar } from "@/app/types/pagination";
+import prismadb from "@/lib/prismadb";
 
 export async function POST(req: NextRequest) {
   // idSheet is only for update

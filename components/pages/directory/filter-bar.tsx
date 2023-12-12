@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 
 import { getSheetsWithLimit } from "@/actions/getSheetsWithLimit";
 
-import usePagination from "@/app/hooks/use-pagination";
 import { useTotalOfSheets } from "@/app/hooks/use-total-of-sheets";
 
 import { SheetWithAuthor } from "@/app/types/sheet";
@@ -32,10 +31,13 @@ import { FilterBarMobileContent } from "./filter-bar-mobile-content";
 
 export default function FilterBar({
   setSheets,
+  pagination,
+  resetPagination,
 }: {
   setSheets: React.Dispatch<React.SetStateAction<SheetWithAuthor[]>>;
+  pagination: { start: number; end: number };
+  resetPagination: () => void;
 }) {
-  const { pagination, resetPagination } = usePagination();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -96,7 +98,7 @@ export default function FilterBar({
     // Update the URL with the new filters
     updateSearchParam(filters);
     // Fetch the sheets with the new filters & updates values (totalSheets) & sheets
-    updateSheetsWithLimit(filters);
+    await updateSheetsWithLimit(filters);
   }
 
   const updateSheetsWithLimit = async (filters?: FiltersBar) => {
@@ -111,8 +113,11 @@ export default function FilterBar({
   // Reset filters and pagination & refetch sheets
   const resetFilters = () => {
     form.reset();
+
     setLevel("");
     setSubject("");
+    resetPagination();
+
     updateSearchParam({
       content: "",
       level: "",

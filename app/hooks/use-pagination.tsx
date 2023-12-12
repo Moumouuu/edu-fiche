@@ -3,7 +3,7 @@ import { useReducer } from "react";
 // Définissez votre action type, par exemple 'SET_PAGINATION'
 const SET_PAGINATION = "SET_PAGINATION";
 const RESET_PAGINATION = "RESET_PAGINATION";
-const STEP = 2;
+const STEP = 15;
 
 // Définissez le type pour l'état de la pagination
 interface PaginationState {

@@ -21,7 +21,7 @@ import FilterBar from "./directory/filter-bar";
 export default function DirectoryPage() {
   const [sheets, setSheets] = useState<SheetWithAuthor[]>([]);
 
-  const { pagination, setPagination } = usePagination();
+  const { pagination, setPagination, resetPagination } = usePagination();
   const { values: totalOfSheets, setValues } = useTotalOfSheets();
   const searchParams = useSearchParams();
 
@@ -58,7 +58,11 @@ export default function DirectoryPage() {
       </span>
       <Separator className="my-4" />
 
-      <FilterBar setSheets={setSheets} />
+      <FilterBar
+        setSheets={setSheets}
+        pagination={pagination}
+        resetPagination={resetPagination}
+      />
 
       <InfiniteScroll
         dataLength={sheets.length}
