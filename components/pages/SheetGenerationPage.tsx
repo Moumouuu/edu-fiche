@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
-import { SheetResponseModal } from "./app/sheet-response-modal";
+import { SheetResponseModal } from "./app/quiz-response-modal";
 
 import { MAX_FREE_TRIAL } from "@/lib/utils";
 

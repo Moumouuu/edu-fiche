@@ -5,14 +5,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { usePremiumModal } from "@/app/hooks/use-premium-modal";
-import { useResponseModal } from "@/app/hooks/use-response-modal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SubTitle from "../subTitle";
 import Title from "../title";
-import { SheetResponseModal } from "./app/sheet-response-modal";
+import { QuizResponseModal } from "./app/quiz-response-modal";
 
+import { useResponseModal } from "@/app/hooks/use-response-modal";
+import { Message } from "ai";
 import { SelectLevel } from "./app/select-level";
 import { SelectSubject } from "./app/select-subject";
 
@@ -23,11 +24,15 @@ export default function QuizPage({
   userLimit: number | undefined;
   isSubscribed: boolean;
 }) {
+  const [quiz, setQuiz] = useState<[]>([]);
   const [level, setLevel] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [keysWords, setKeysWords] = useState<string>("");
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
+      onFinish: (data: Message) => {
+        setQuiz(JSON.parse(data.content as any));
+      },
       api: "/api/quiz",
       body: {
         level: level,
@@ -37,10 +42,15 @@ export default function QuizPage({
         isSubscribed: isSubscribed,
       },
     });
-
-  const { open, isOpen } = useResponseModal();
+  const { isOpen, open } = useResponseModal();
   const { open: openSubscriptionModal } = usePremiumModal();
   const router = useRouter();
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      open();
+    }
+  }, [messages]);
 
   useEffect(() => {
     if (!isSubscribed) {
@@ -48,12 +58,6 @@ export default function QuizPage({
       router.push("/app");
     }
   }, [isSubscribed, openSubscriptionModal]);
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      open();
-    }
-  }, [messages]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
@@ -80,12 +84,15 @@ export default function QuizPage({
         <div className="flex ">
           {/* select for level */}
           <div className="mx-1">
-            <SelectLevel onValueChange={(e) => setLevel(e)} />
+            <SelectLevel onValueChange={(e) => setLevel(e)} value={level} />
           </div>
           {/* select for subject */}
 
           <div className="mx-1">
-            <SelectSubject onValueChange={(e) => setSubject(e)} />
+            <SelectSubject
+              onValueChange={(e) => setSubject(e)}
+              value={subject}
+            />
           </div>
         </div>
 
@@ -104,11 +111,10 @@ export default function QuizPage({
         </Button>
       </form>
 
-      {/* TODO : refactor with modal quiz */}
-      <SheetResponseModal
-        title={"Exercice"}
+      <QuizResponseModal
         open={isOpen}
-        content={messages}
+        title={"Quiz"}
+        quiz={quiz}
         isLoading={isLoading}
         isSubscribed={isSubscribed}
         userLimit={userLimit}

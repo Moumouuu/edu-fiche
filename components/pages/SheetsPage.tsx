@@ -1,5 +1,3 @@
-import { Toaster } from "react-hot-toast";
-
 import { SheetWithAuthor } from "@/app/types/sheet";
 
 import { capitalizeFirstLetter } from "@/lib/utils";
