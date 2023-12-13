@@ -124,7 +124,7 @@ export default function SheetCard({
                 className="w-full flex justify-start"
                 onClick={() =>
                   copyToClipboard(
-                    `${process.env.NEXT_PUBLIC_APP_URL}/sheet/${sheet.id}`
+                    `${process.env.NEXT_PUBLIC_APP_URL}/sheets/?sheetId=${sheet.id}`
                   )
                 }
               >

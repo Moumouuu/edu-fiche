@@ -1,3 +1,4 @@
+"use client";
 import { SheetWithAuthor } from "@/app/types/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,42 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { formatDate, formatKeywords, toStringUser } from "@/lib/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export function SheetModal({ sheet }: { sheet: SheetWithAuthor }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const dialogIsOpen =
+    searchParams.has("sheetId") &&
+    searchParams.get("sheetId")?.toString() === sheet.id.toString();
+
+  const updateSearchParams = () => {
+    const updatedParams = new URLSearchParams(
+      Array.from(searchParams.entries())
+    );
+
+    if (
+      !updatedParams.has("sheetId") ||
+      updatedParams.get("sheetId")?.toString() !== sheet.id.toString()
+    ) {
+      updatedParams.set("sheetId", sheet.id);
+    } else {
+      updatedParams.delete("sheetId");
+    }
+
+    const updatedSearch = updatedParams.toString();
+
+    // Build the final query string
+    const query = updatedSearch ? `?${updatedSearch}` : "";
+
+    // Push the updated URL to the router
+    router.push(`${pathname}${query}`);
+  };
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={updateSearchParams} open={dialogIsOpen}>
       <DialogTrigger asChild>
         <Button variant="default">Consulter</Button>
       </DialogTrigger>
