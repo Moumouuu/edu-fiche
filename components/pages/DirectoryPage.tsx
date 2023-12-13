@@ -13,6 +13,7 @@ import { SheetWithAuthor } from "@/app/types/sheet";
 
 import { FiltersBar } from "@/app/types/pagination";
 import LoadingCard from "../loading-card";
+import NoSheets from "../no-sheets";
 import Title from "../title";
 import { Separator } from "../ui/separator";
 import SheetCard from "./app/sheet-card";
@@ -24,6 +25,8 @@ export default function DirectoryPage() {
   const { pagination, setPagination, resetPagination } = usePagination();
   const { values: totalOfSheets, setValues } = useTotalOfSheets();
   const searchParams = useSearchParams();
+
+  const hasMore = totalOfSheets === -1 ? true : sheets.length < totalOfSheets;
 
   useEffect(() => {
     fetchSheets();
@@ -68,14 +71,10 @@ export default function DirectoryPage() {
         dataLength={sheets.length}
         next={fetchSheets}
         scrollThreshold={0.4}
-        hasMore={totalOfSheets === -1 ? true : sheets.length < totalOfSheets}
+        hasMore={hasMore}
         loader={<LoadingCard />}
         scrollableTarget="scrollableDiv"
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Mince ! Vous avez tout consulté...</b>
-          </p>
-        }
+        endMessage={<NoSheets />}
       >
         <div className="grid auto-rows-[550px] grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
           {sheets.map((sheet, i) => (

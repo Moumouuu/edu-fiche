@@ -1,7 +1,6 @@
 import { SheetWithAuthor } from "@/app/types/sheet";
 
-import { capitalizeFirstLetter } from "@/lib/utils";
-
+import NoSheets from "../no-sheets";
 import Title from "../title";
 import { Separator } from "../ui/separator";
 import SheetCard from "./app/sheet-card";
@@ -29,14 +28,17 @@ export default function SheetsPage({ sheets }: { sheets: SheetWithAuthor[] }) {
             />
           </div>
 
-          <div className="flex overflow-x-auto">
-            {/* Utilisez la classe flex pour les aligner côte à côte */}
-            {sheets
-              .filter((sheet) => sheet.subject === subject)
-              .map((filteredSheet: SheetWithAuthor) => (
-                <SheetCard key={filteredSheet.id} sheet={filteredSheet} />
-              ))}
-          </div>
+          {sheets.length === 0 ? (
+            <NoSheets />
+          ) : (
+            <div className="flex overflow-x-auto">
+              {sheets
+                .filter((sheet) => sheet.subject === subject)
+                .map((filteredSheet: SheetWithAuthor) => (
+                  <SheetCard key={filteredSheet.id} sheet={filteredSheet} />
+                ))}
+            </div>
+          )}
         </div>
       ))}
     </div>
