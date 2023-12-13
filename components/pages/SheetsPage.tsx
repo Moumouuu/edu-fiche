@@ -25,7 +25,7 @@ export default function SheetsPage({ sheets }: { sheets: SheetWithAuthor[] }) {
           <div className="flex justify-center">
             <Title
               className="text-center py-1 px-10 bg-gradient-to-br from-green-400 rounded-md to-blue-600 uppercase"
-              text={capitalizeFirstLetter(subject)}
+              text={subject !== "" ? subject : "Autres"}
             />
           </div>
 

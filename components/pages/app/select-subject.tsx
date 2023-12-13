@@ -35,7 +35,7 @@ export function SelectSubject({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-auto md:w-[200px] justify-between"
         >
           {value ? value : "Matière"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

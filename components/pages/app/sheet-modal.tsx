@@ -28,8 +28,9 @@ export function SheetModal({ sheet }: { sheet: SheetWithAuthor }) {
             </span>
           </DialogTitle>
           <DialogDescription>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,
-            iusto.
+            Attention <span className="underline"> pour rappel</span> les fiches
+            peuvent contenir des erreurs. Il est donc important de les vérifier
+            avant de les utiliser.
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col">

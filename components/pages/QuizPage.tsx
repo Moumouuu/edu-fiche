@@ -80,7 +80,7 @@ export default function QuizPage({ isSubscribed }: { isSubscribed: boolean }) {
       <SubTitle text="Avez-vous besoin de réviser ? Générez vos Quiz de math adaptés à votre niveau en un clin d'œil !" />
 
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
-        <div className="flex ">
+        <div className="flex justify-center">
           {/* select for level */}
           <div className="mx-1">
             <SelectLevel onValueChange={(e) => setLevel(e)} value={level} />

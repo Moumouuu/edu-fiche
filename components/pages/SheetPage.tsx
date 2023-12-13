@@ -82,7 +82,7 @@ export default function SheetPage({ isSubscribed }: { isSubscribed: boolean }) {
       <SubTitle text="Générez votre fiche de révision en un instant ! Sélectionnez votre niveau d'études, la matière et les mots-clés de votre cours." />
 
       <form className="flex flex-col w-[90%] md:w-auto" onSubmit={handleSubmit}>
-        <div className="flex ">
+        <div className="flex justify-center">
           {/* select for level */}
           <div className="mx-1">
             <SelectLevel value={level} onValueChange={(e) => setLevel(e)} />
