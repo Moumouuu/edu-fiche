@@ -76,13 +76,13 @@ export default function DirectoryPage() {
         scrollableTarget="scrollableDiv"
         endMessage={<NoSheets />}
       >
-        <div className="grid auto-rows-[550px] grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid auto-rows-[550px] grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6">
           {sheets.map((sheet, i) => (
             <SheetCard
               key={i}
               sheet={sheet}
-              className={`row-span-1 rounded-xl border-2  ${
-                i % 4 === 0 && "lg:col-span-2"
+              className={`row-span-1 lg:col-span-2 rounded-xl border-2  ${
+                i % 3 === 0 && "lg:col-span-full 2xl:col-span-4"
               }`}
             />
           ))}
