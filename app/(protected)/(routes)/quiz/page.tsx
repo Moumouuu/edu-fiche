@@ -5,7 +5,8 @@ import { checkSubscription } from "@/lib/subscription";
 
 export const metadata: Metadata = {
   title: "EduFiche | Quiz",
-  description: "Page de génération de Quiz de l'application EduFiche",
+  description:
+    "Générer des Quiz en un clic ! Vos devoirs seront un jeu d'enfant !",
 };
 
 export default async function Home() {

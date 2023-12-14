@@ -13,18 +13,20 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EduFiche | Votre générateur de fiche de révision",
+  title:
+    "EduFiche | Votre générateur de fiche de révision automatique et gratuit",
   description:
-    "EduFiche vous permet de générer des fiches de révision en un clic !",
+    "Fin de soirée un peu trop arrosée ? EduFiche vous permet de générer automatiquement et gratuitement des fiches de révision en un clic !",
   openGraph: {
-    title: "EduFiche | Votre générateur de fiche de révision",
+    title:
+      "EduFiche | Votre générateur de fiche de révision automatique et gratuit",
     description:
-      "EduFiche vous permet de générer des fiches de révision en un clic !",
+      "Fin de soirée un peu trop arrosée ? EduFiche vous permet de générer automatiquement et gratuitement des fiches de révision en un clic !",
     url: "https://edu-fiche.fr",
-    siteName: "Edu-Fiche",
+    siteName: "EduFiche",
     images: [
       {
-        url: "/public/assets/images/edufiche.png",
+        url: "/assets/images/opengraph-edufiche.png",
         width: 800,
         height: 600,
       },

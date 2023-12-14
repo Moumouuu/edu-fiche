@@ -7,7 +7,8 @@ import prismadb from "@/lib/prismadb";
 
 export const metadata: Metadata = {
   title: "EduFiche | Mes fiches",
-  description: "Pages de consultation des fiches de l'application EduFiche",
+  description:
+    "Vos fiches de révision EduFiche. Vous pouvez les modifier et les consulter à tout moment.",
 };
 
 export default async function Page() {

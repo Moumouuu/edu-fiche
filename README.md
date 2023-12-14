@@ -74,22 +74,16 @@ Use this space to show useful examples of how a project can be used. Additional 
 ## Roadmap
 
 - [x] Generate sheet
-- [X] Save sheet & consultation
-- [x] Sharing 
-  - [x] Share some example of sheet with the world (window page)
-  - [X] Share sheet with public url
-  
-- [x] Generate exercices
-  - [X] Allow users to choose between different types of exercices (QCM / Open question / Yes-No / ...)
-  - [X] Show answers for exercices
-      
-- [X] Practices english (soon this feature will be remove)
-- [X] Add more level & subject
-- [X] Auto login after register
-- [ ] Form feedback
-    
-- [x] Make window page (allow to promote ur services) (optional)
-- [ ] Improving prompt (optional)
+- [x] Save sheet & consultation
+- [x] Sharing sheet with the world
+- [x] Register & Login
+- [x] Consultation sheets from all users
+- [x] Generate Quiz      
+- [x] Add more level & subject
+- [x] Auto login after register
+- [x] Form feedback
+- [x] Make window page 
+- [x] Improving prompt 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -144,7 +138,7 @@ Website : https://pluviaux.fr
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: public/assets/images//edufiche.png
+[product-screenshot]: public/assets/images/opengraph-edufiche.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Tailwind]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
