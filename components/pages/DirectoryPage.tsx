@@ -70,7 +70,7 @@ export default function DirectoryPage() {
       <InfiniteScroll
         dataLength={sheets.length}
         next={fetchSheets}
-        scrollThreshold={0.4}
+        scrollThreshold={0.7}
         hasMore={hasMore}
         loader={<LoadingCard />}
         scrollableTarget="scrollableDiv"
