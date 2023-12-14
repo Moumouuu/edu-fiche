@@ -27,8 +27,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/assets/images/opengraph-edufiche.png",
-        width: 800,
-        height: 600,
       },
     ],
     locale: "fr_FR",
