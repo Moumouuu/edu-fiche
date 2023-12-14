@@ -1,14 +1,71 @@
+import { UserApiLimit } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+export const MAX_FREE_TRIAL = 5;
+export const MAX_FREE_TRIAL_QUIZ = 1;
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
+  return `${process.env.NEXT_PUBLIC_APP_URL}/${path}`;
 }
 
-export const MAX_FREE_TRIAL = 10;
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export function toStringUser(user: UserApiLimit) {
+  // split email to get username before @ (ex: "john" from "john@gmail") & set first letter to uppercase
+  return capitalizeFirstLetter(user.userEmail.split("@")[0]);
+}
+
+export const formatKeywords = (keywords: string) => {
+  // split keywords by space example : "maths physique" => ["maths", "physique"]
+  // and remove empty string
+  return keywords.split(" ").filter((k) => k !== "");
+};
+
+export const formatDate = (date: Date | string) => {
+  if (typeof date === "string") {
+    date = new Date(date);
+  }
+  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+};
+
+export const itemsMenu = [
+  {
+    name: "Fiche de révision",
+    href: "/app",
+    icon: "https://cdn.lordicon.com/isugonwi.json",
+    premium: false,
+  },
+  {
+    name: "Générateur de Quiz (BETA)",
+    href: "/quiz",
+    icon: "https://cdn.lordicon.com/kipaqhoz.json",
+    premium: false,
+  },
+  {
+    name: "Mes fiches",
+    href: "/sheets",
+    icon: "https://cdn.lordicon.com/hpivxauj.json",
+    premium: false,
+  },
+  {
+    name: "Annuaire du WEB (BETA)",
+    href: "/directory",
+    icon: "https://cdn.lordicon.com/kkvxgpti.json",
+    premium: false,
+  },
+  {
+    name: "Paramètres",
+    href: "/settings",
+    icon: "https://cdn.lordicon.com/lecprnjb.json",
+    premium: false,
+  },
+];
 
 export const studentLevel = [
   { value: "Collège | 6e", label: "Collège | 6e" },
@@ -37,16 +94,43 @@ export const studentLevel = [
 ];
 
 export const subjects = [
-
   { value: "Mathématiques", label: "Mathématiques" },
-  { value: "Physique-Chimie", label: "Physique-Chimie" },
   { value: "SVT", label: "SVT" },
   { value: "Français", label: "Français" },
-  { value: "Histoire-Géographie", label: "Histoire-Géographie" },
+  { value: "Histoire-géographie", label: "Histoire-géographie" },
   { value: "Philosophie", label: "Philosophie" },
   { value: "Anglais", label: "Anglais" },
   { value: "Espagnol", label: "Espagnol" },
-  {value: "SES", label: "SES"},
-  {value: "Economie", label: "Economie"},
-  {value: "Informatique", label: "Informatique"},
+  { value: "SES", label: "SES" },
+  { value: "Economie", label: "Economie" },
+  { value: "Informatique", label: "Informatique" },
+  { value: "Droit", label: "Droit" },
+  { value: "Chimie", label: "Chimie" },
+  { value: "Biologie", label: "Biologie" },
+  { value: "Géologie", label: "Géologie" },
+  { value: "Physique", label: "Physique" },
+  { value: "Langue et littérature", label: "Langue et littérature" },
+  { value: "Arts plastiques", label: "Arts plastiques" },
+  { value: "Musique", label: "Musique" },
+  { value: "Éducation physique et sportive (EPS)", label: "EPS" },
+  { value: "Technologie", label: "Technologie" },
+  { value: "Sciences sociales", label: "Sciences sociales" },
+  { value: "Psychologie", label: "Psychologie" },
+  { value: "Sociologie", label: "Sociologie" },
+  { value: "Langues étrangères appliquées (LEA)", label: "LEA" },
+  { value: "Médecine", label: "Médecine" },
+  { value: "Architecture", label: "Architecture" },
+];
+
+export const freeLabels = [
+  `Vous avez accès à ${MAX_FREE_TRIAL} générations de fiche gratuitement.`,
+  "Accès à 1 Quiz gratuitement.",
+  "Vous pouvez consulter vos fiches de révision sur tous vos appareils.",
+  "Vous avez accès à l'annuaire du Web.",
+];
+
+export const premiumLabels = [
+  "Vous pouvez générez des fiches de révision à l'infini.",
+  "Vous pouvez générer des Quiz à l'infini.",
+  "Les mêmes avantages que les utilisateurs gratuits.",
 ];

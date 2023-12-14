@@ -1,19 +1,20 @@
-import prismadb from "@/lib/prismadb";
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
-  // title & idSheet is only for update
-  const { messages, level, subject, keysWords, idSheet, title } =
-    await req.json();
+import { FiltersBar } from "@/app/types/pagination";
+import prismadb from "@/lib/prismadb";
+
+export async function POST(req: NextRequest) {
+  // idSheet is only for update
+  const { message, level, subject, keysWords, idSheet } = await req.json();
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.redirect("sign-in");
   }
 
-  if (!idSheet && messages.lenght === 0) {
+  if (!idSheet && !message.content) {
     return NextResponse.json("No messages to save");
   }
 
@@ -27,26 +28,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect("sign-in");
   }
 
-  let messagesFormated;
-
-  // creation
-  if (!idSheet) {
-    messagesFormated = messages.map((message: any) => {
-      if (message.role === "assistant") {
-        return message.content;
-      }
-    });
-
-    // remove undefined (other than assistant messages)
-    messagesFormated.filter((message: any) => message !== undefined);
-
-    // get last message (assistant message)
-    messagesFormated = Object.values(messagesFormated).pop();
-  }
-
   let oldSheet;
 
-  //update case
+  // update case
   if (idSheet) {
     oldSheet = await prismadb.sheet.findUnique({
       where: {
@@ -57,15 +41,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   const sheet = await prismadb.sheet.upsert({
     create: {
-      text: messagesFormated ?? messages,
+      text: message.content,
       level: level,
       subject: subject,
       keywords: keysWords,
       userApiLimitId: user.id,
     },
     update: {
-      title: title == "" ? oldSheet?.title : title,
-      text: messagesFormated ?? messages,
       level: level,
       subject: subject,
       keywords: keysWords == "" ? oldSheet?.keywords : keysWords,
@@ -80,4 +62,78 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   return NextResponse.json("Sheet successfully created");
+}
+
+export async function GET(req: NextRequest) {
+  const start = req.nextUrl.searchParams.get("start");
+  const end = req.nextUrl.searchParams.get("end");
+
+  const filters: FiltersBar = {
+    content: req.nextUrl.searchParams.get("content") ?? "",
+    level: req.nextUrl.searchParams.get("level") ?? "",
+    subject: req.nextUrl.searchParams.get("subject") ?? "",
+  };
+
+  if (!start || !end) {
+    return NextResponse.json({ error: "Error getting sheets" });
+  }
+
+  //count sheets with filters
+  const count = await prismadb.sheet.count({
+    where: {
+      AND: [
+        {
+          text: {
+            contains: filters.content,
+          },
+        },
+        {
+          level: {
+            contains: filters.level,
+          },
+        },
+        {
+          subject: {
+            contains: filters.subject,
+          },
+        },
+      ],
+    },
+  });
+
+  // get sheets with limit and filters
+  const sheets = await prismadb.sheet.findMany({
+    include: {
+      userApiLimit: true,
+    },
+    where: {
+      AND: [
+        {
+          text: {
+            contains: filters.content,
+            mode: "insensitive",
+          },
+        },
+        {
+          level: {
+            contains: filters.level,
+            mode: "insensitive",
+          },
+        },
+        {
+          subject: {
+            contains: filters.subject,
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
+    skip: Number(start),
+    take: Number(end) - Number(start),
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return NextResponse.json({ sheets, totalOfSheets: count });
 }

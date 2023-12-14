@@ -1,11 +1,11 @@
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
-import { getServerSession } from "next-auth";
 
-const settingsUrl = absoluteUrl("/settings");
+const settingsUrl = absoluteUrl("settings");
 
 export async function GET() {
   try {
@@ -36,7 +36,7 @@ export async function GET() {
       success_url: settingsUrl,
       cancel_url: settingsUrl,
       payment_method_types: ["card"],
-      mode: "subscription",
+      mode: "payment",
       billing_address_collection: "auto",
       customer_email: userEmail,
       line_items: [
@@ -44,13 +44,11 @@ export async function GET() {
           price_data: {
             currency: "EUR",
             product_data: {
-              name: "EduFiche Pro",
-              description: "Unlimited Generations & Access all features",
+              name: "EduFiche Premium",
+              description:
+                "Unlimited Sheets & Quiz generation & access all features.",
             },
-            unit_amount: 399,
-            recurring: {
-              interval: "month",
-            },
+            unit_amount: 799,
           },
           quantity: 1,
         },

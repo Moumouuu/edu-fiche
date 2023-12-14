@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="page_404 text-black bg-white h-[100vh]">
+    <section className="page_404 text-black bg-white h-screen">
       <div className="text-center">
         <div className="four_zero_four_bg">
           <h1 className="">404</h1>
@@ -15,7 +15,9 @@ export default function NotFound() {
           <p className="text-xl">the page you are looking for not avaible!</p>
 
           <Link href="/">
-            <Button className="my-4" variant="premium">Go to Home</Button>
+            <Button className="my-4" variant="premium">
+              Go to Home
+            </Button>
           </Link>
         </div>
       </div>

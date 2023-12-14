@@ -1,4 +1,15 @@
 "use client";
+
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
+import { AiFillGoogleCircle } from "react-icons/ai";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,22 +21,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import z from "zod";
-import { Separator } from "../ui/separator";
-
-import { signIn } from "next-auth/react";
-import { AiFillGoogleCircle } from "react-icons/ai";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { set, useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { Separator } from "../ui/separator";
 
 export default function UserAuthForm() {
   const [isLoading, setIsLloading] = useState(false);
   const router = useRouter();
+
   const schemaLogin = z.object({
     email: z
       .string()
@@ -66,46 +70,50 @@ export default function UserAuthForm() {
   const onSubmitLogin = async (data: FormValuesLogin) => {
     setIsLloading(true);
     try {
-      const res = await signIn("credentials", {
+      await signIn("credentials", {
         redirect: false,
         email: data.email,
         password: data.password,
       });
-      if (res?.ok) {
-        router.push("/");
-      }
       setIsLloading(false);
+      router.push("/app");
     } catch (err) {
       console.log("[LOGIN_ERROR]" + err);
+    } finally {
+      setIsLloading(false);
     }
-    setIsLloading(false);
   };
 
   const onSubmitRegister = async (data: FormValuesRegister) => {
     setIsLloading(true);
     try {
-      const resRegister = await axios.post("/api/account", data);
+      await axios.post("/api/account", data);
       try {
         const res = await signIn("credentials", {
           redirect: false,
           email: data.email,
           password: data.password,
         });
-        if (res?.ok) {
-          router.push("/");
+        if (res?.error) {
+          // user already exists
+          toast.error("Cet utilisateur existe déjà.");
+          console.log("[LOGIN_ERROR_AFTER_REGISTER]" + res.error);
+          return;
         }
         setIsLloading(false);
+        router.push("/app");
       } catch (err) {
         console.log("[LOGIN_ERROR_AFTER_REGISTER]" + err);
       }
     } catch (err) {
       console.log("[REGISTER_ERROR]" + err);
+    } finally {
+      setIsLloading(false);
     }
-    setIsLloading(false);
   };
 
   return (
-    <Tabs defaultValue="sign-in" className="w-[400px]" >
+    <Tabs defaultValue="sign-in" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="sign-in">Sign-in</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
@@ -164,7 +172,7 @@ export default function UserAuthForm() {
             <Button
               variant={"outline"}
               onClick={() => {
-                signIn("google");
+                signIn("google", { callbackUrl: "/app" });
               }}
             >
               <AiFillGoogleCircle size={30} />

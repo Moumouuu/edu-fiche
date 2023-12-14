@@ -1,27 +1,32 @@
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import AuthContext from "./context/auth-context";
-import "./globals.css";
 import GoogleAnalytics from "@/components/google-analytics";
+import { authOptions } from "@/lib/auth";
+
+import AuthContext from "@/app/providers/auth-provider";
+import { ThemeProvider } from "@/app/providers/theme-provider";
+
+import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EduFiche | Votre générateur de fiche de révision",
+  title:
+    "EduFiche | Votre générateur de fiche de révision automatique et gratuit",
   description:
-    "EduFiche vous permet de générer des fiches de révision en un clic !",
+    "Fin de soirée un peu trop arrosée ? EduFiche vous permet de générer automatiquement et gratuitement des fiches de révision en un clic !",
   openGraph: {
-    title: "EduFiche | Votre générateur de fiche de révision",
+    title:
+      "EduFiche | Votre générateur de fiche de révision automatique et gratuit",
     description:
-      "EduFiche vous permet de générer des fiches de révision en un clic !",
+      "Fin de soirée un peu trop arrosée ? EduFiche vous permet de générer automatiquement et gratuitement des fiches de révision en un clic !",
     url: "https://edu-fiche.fr",
-    siteName: "Edu-Fiche",
+    siteName: "EduFiche",
     images: [
       {
-        url: "/public/assets/images/edufiche.png",
+        url: "/assets/images/opengraph-edufiche.png",
         width: 800,
         height: 600,
       },
@@ -43,10 +48,11 @@ export default async function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
+          <Toaster />
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {/* Global Site Tag (gtag.js) - Google Analytics */}
-              <GoogleAnalytics/>
+              <GoogleAnalytics />
               {children}
             </ThemeProvider>
           </AuthContext>
