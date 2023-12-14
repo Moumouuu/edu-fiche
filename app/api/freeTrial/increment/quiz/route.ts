@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
   if (!userApiLimit) throw new Error("No user connected");
 
-  if (userApiLimit.quizGenerated === MAX_FREE_TRIAL_QUIZ && !isSubscribed)
+  if (userApiLimit.quizGenerated >= MAX_FREE_TRIAL_QUIZ && !isSubscribed)
     return Error("UserApiLimit reached");
 
   const userApiLimitUpdated = await prismadb.userApiLimit.update({
