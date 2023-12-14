@@ -24,14 +24,17 @@ export function toStringUser(user: UserApiLimit) {
 export const formatKeywords = (keywords: string) => {
   // split keywords by space example : "maths physique" => ["maths", "physique"]
   // and remove empty string
-  return keywords.split(" ").filter((k) => k !== "");
+  return keywords
+    .split(" ")
+    .splice(0, 10)
+    .filter((k) => k !== "");
 };
 
 export const formatDate = (date: Date | string) => {
   if (typeof date === "string") {
     date = new Date(date);
   }
-  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 };
 
 export const itemsMenu = [
