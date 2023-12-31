@@ -21,8 +21,8 @@ const HeroBanner = () => {
         </span>
       </Badge>
       <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b  from-green-400 to-blue-600 bg-clip-text text-center text-5xl lg:text-6xl font-bold leading-none tracking-tighter text-transparent">
-        Boostez vos révisions avec des fiches intelligentes. Créez, partagez,
-        réussissez !
+        Générez instantanément des fiches de révision et des quiz grâce à
+        l&apos;IA !
       </h1>
 
       <RetroGrid />
