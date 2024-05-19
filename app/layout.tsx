@@ -8,7 +8,6 @@ import { authOptions } from "@/lib/auth";
 
 import AuthContext from "@/app/providers/auth-provider";
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import Head from "next/head";
 
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
@@ -54,11 +53,10 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <>
-      <Head>
-        <GoogleAnalytics />
-      </Head>
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
+          <GoogleAnalytics />
+
           <Toaster />
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
