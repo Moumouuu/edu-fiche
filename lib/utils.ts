@@ -45,7 +45,7 @@ export const itemsMenu = [
     premium: false,
   },
   {
-    name: "Générateur de Quiz (BETA)",
+    name: "Générateur de Quiz",
     href: "/quiz",
     icon: "https://cdn.lordicon.com/kipaqhoz.json",
     premium: false,
@@ -57,7 +57,7 @@ export const itemsMenu = [
     premium: false,
   },
   {
-    name: "Annuaire du WEB (BETA)",
+    name: "Annuaire du WEB",
     href: "/directory",
     icon: "https://cdn.lordicon.com/kkvxgpti.json",
     premium: false,
