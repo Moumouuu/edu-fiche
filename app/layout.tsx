@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 
-import GoogleAnalytics from "@/components/google-analytics";
 import { authOptions } from "@/lib/auth";
 
 import AuthContext from "@/app/providers/auth-provider";
@@ -55,8 +54,6 @@ export default async function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
-          <GoogleAnalytics />
-
           <Toaster />
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -65,6 +62,11 @@ export default async function RootLayout({
           </AuthContext>
         </body>
       </html>
+      <Script
+        async
+        src="http://umami-yck480o.5.75.226.51.sslip.io/script.js"
+        data-website-id="6a44a36d-e1a7-44ce-99a4-f80d00620193"
+      />
       <Script src="https://cdn.lordicon.com/bhenfmcm.js" />
     </>
   );
