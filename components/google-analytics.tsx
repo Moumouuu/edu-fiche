@@ -2,8 +2,6 @@
 import Script from "next/script";
 
 const GoogleAnalytics = () => {
-  //You can show in the console the GA_TRACKING_ID to confirm
-
   return (
     <>
       <Script
