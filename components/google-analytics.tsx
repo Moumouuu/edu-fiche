@@ -1,6 +1,4 @@
 "use client";
-
-import * as gtag from "@/gtag.js";
 import Script from "next/script";
 
 const GoogleAnalytics = () => {
@@ -9,23 +7,10 @@ const GoogleAnalytics = () => {
   return (
     <>
       <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-                      window.dataLayer = window.dataLayer || [];
-                      function gtag(){dataLayer.push(arguments);}
-                      gtag('js', new Date());
-                      gtag('config', '${gtag.GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                      });
-                    `,
-        }}
-      />
+        defer
+        src="http://umami-yck480o.5.75.226.51.sslip.io/script.js"
+        data-website-id="6a44a36d-e1a7-44ce-99a4-f80d00620193"
+      ></Script>
     </>
   );
 };
