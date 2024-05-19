@@ -64,7 +64,7 @@ export default async function RootLayout({
       </html>
       <Script
         async
-        src="http://umami-yck480o.5.75.226.51.sslip.io/script.js"
+        src="https://umami-yck480o.5.75.226.51.sslip.io/script.js"
         data-website-id="6a44a36d-e1a7-44ce-99a4-f80d00620193"
       />
       <Script src="https://cdn.lordicon.com/bhenfmcm.js" />
