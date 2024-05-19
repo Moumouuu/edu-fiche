@@ -32,6 +32,15 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  manifest: "/manifest.json",
+  authors: [
+    {
+      name: "Robin Pluviaux",
+      url: "https://pluviaux.fr",
+    },
+  ],
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
 };
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
