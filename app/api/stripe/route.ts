@@ -48,7 +48,7 @@ export async function GET() {
               description:
                 "Unlimited Sheets & Quiz generation & access all features.",
             },
-            unit_amount: 799,
+            unit_amount: 499,
           },
           quantity: 1,
         },
