@@ -59,7 +59,7 @@ export default function Pricing({ isSubscribed }: { isSubscribed: boolean }) {
             Premium
           </p>
 
-          <span className="text-8xl my-4">7.99€</span>
+          <span className="text-8xl my-4">4.99€</span>
           <p className="text-muted-foreground text-lg mb-4">
             C&apos;est le prix d&apos;un menu au McDo, mais vous soutenez un
             étudiant qui a besoin de vous ! Le paiement est unique et vous avez
