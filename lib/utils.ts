@@ -2,7 +2,7 @@ import { UserApiLimit } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export const MAX_FREE_TRIAL = 5;
+export const MAX_FREE_TRIAL = 2;
 export const MAX_FREE_TRIAL_QUIZ = 1;
 
 export function cn(...inputs: ClassValue[]) {
